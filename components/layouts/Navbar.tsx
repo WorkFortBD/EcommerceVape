@@ -1,75 +1,131 @@
 import React from "react";
+import Link from "next/link";
+import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
-type Props = {};
+export default function NavbarMain() {
+  const isLoggedIn = false;
 
-export default function Navbar({}: Props) {
   return (
-    <header>
-      <nav className="top-0 z-50">
-        <div className="container mx-auto">
-          <div className="flex justify-center items-center border-b p-5">
-            <div className="basis-1/6">
-              <a href="">
-                <img src="/images/DSLogo.svg" alt="Dukhan" className="w-40" />
-              </a>
-            </div>
-            <div className="basis-3/6">
-              <div className="">
-                <ul className="uppercase text-sm list-none flex justify-center items-center">
-                  <li className="inline-block mx-1 sm:mx-2 md:mx-4">
-                    <a href="" className="inline">
-                      Home
-                    </a>
-                  </li>
+    <Navbar fluid={false} rounded={false}>
+      <Navbar.Brand href="/">
+        <Link href="/">
+          <img
+            src="/images/logos/logo.svg"
+            className="mr-3 h-6 sm:h-9"
+            alt="SaudiShop"
+          />
+        </Link>
+      </Navbar.Brand>
 
-                  <li className="inline-block mx-1 sm:mx-2 md:mx-3">
-                    <a href="">Shope</a>
-                  </li>
+      <div className="flex md:order-2 items-center justify-center">
+        {isLoggedIn &&
+          <Dropdown
+            arrowIcon={false}
+            inline={true}
+            label={
+              <Avatar
+                alt="User settings"
+                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                rounded={true}
+              />
+            }
+          >
+            <Dropdown.Header>
+              <span className="block text-sm">Bonnie Green</span>
+              <span className="block truncate text-sm font-medium">
+                name@flowbite.com
+              </span>
+            </Dropdown.Header>
+            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>Earnings</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item>Sign out</Dropdown.Item>
+          </Dropdown>}
 
-                  <li className="inline-block mx-1 sm:mx-2 md:mx-3">
-                    <a href="" className="">
-                      Dukhanpakages
-                    </a>
-                  </li>
+        <a href="" className="mx-3 sm:mx-4 md:mx-6">
+          <FontAwesomeIcon
+            icon={faUser}
+            className="text-gray-500"
+            style={{ width: 22 }}
+          />
+        </a>
+        <a href="" className="mx-3 sm:mx-4 md:mx-6">
+          <FontAwesomeIcon
+            icon={faSearch}
+            className="text-gray-500"
+            style={{ width: 22 }}
+          />
+        </a>
+        <Link href="/wishlist" className="">
+          <FontAwesomeIcon
+            icon={faHeart}
+            className="text-gray-500 mx-3 sm:mx-4 md:mx-6 cursor-pointer"
+            style={{ width: 22 }}
+          />
+        </Link>
 
-                  <li className="inline-block mx-1 sm:mx-2 md:mx-3.5">
-                    <a href="" className="">
-                      Just In
-                    </a>
-                  </li>
+        <Link href="/cart">
+          <span className="mx-3 sm:mx-4 md:mx-6 mr-10 relative cursor-pointer">
+            <FontAwesomeIcon
+              icon={faShoppingCart}
+              className="text-gray-500"
+              style={{ width: 22 }}
+            />
+            <span className="bg-primary text-white pl-1.5 text-sm rounded-full h-5 w-5 absolute -top-3 -right-2">
+              0
+            </span>
+          </span>
+        </Link>
 
-                  <li className="inline-block mx-1 sm:mx-2 md:mx-3">
-                    <a href="" className="">
-                      Sale
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="flex flex-auto">
-              <a href="" className="mx-3 sm:mx-4 md:mx-6">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className="text-3xl text-gray-500"
-                />
-                {/* <i className="fa-regular fa-user text-3xl text-gray-500"></i> */}
-              </a>
-              <a href="" className="mx-3 sm:mx-4 md:mx-6">
-                <i className="fa-solid fa-magnifying-glass text-3xl text-gray-500"></i>
-              </a>
-              <a href="" className="mx-3 sm:mx-4 md:mx-6">
-                <i className="fa-regular fa-heart text-3xl text-gray-500"></i>
-              </a>
-              <a href="" className="mx-3 sm:mx-4 md:mx-6">
-                <i className="fa-solid fa-basket-shopping text-3xl text-gray-500"></i>
-              </a>
-              <a href="" className="mr-1">
-                <i className="fa-thin fa-o bg-primary text-white pl-1.5 text-sm rounded-full h-5 w-5"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
+        <Navbar.Toggle />
+      </div>
+
+      <Navbar.Collapse>
+        <Navbar.Link href="/" active={true}>
+          <Link href="/" className="uppercase">
+            HOME
+          </Link>
+        </Navbar.Link>
+
+        <Navbar.Link>
+          <Dropdown
+            arrowIcon={true}
+            trigger="hover"
+            inline={true}
+            label={"SHOP"}
+          >
+            <Dropdown.Item>Category 1</Dropdown.Item>
+            <Dropdown.Item>Category 2</Dropdown.Item>
+            <Navbar.Toggle />
+          </Dropdown>
+        </Navbar.Link>
+        <Navbar.Link href="/">
+          <Link href="/" className="uppercase">
+            PACKAGES
+          </Link>
+        </Navbar.Link>
+        <Navbar.Link href="/">
+          <Link href="/" className="uppercase">
+            JUST IN
+          </Link>
+        </Navbar.Link>
+        <Navbar.Link href="/">
+          <Link href="/" className="uppercase">
+            SALE
+          </Link>
+        </Navbar.Link>
+
+        <Navbar.Link href="/">
+          <Link href="/" className="uppercase">
+            SALE
+          </Link>
+        </Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
