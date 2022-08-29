@@ -3,13 +3,15 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPhone, faTable } from "@fortawesome/free-solid-svg-icons";
 import { Accordion, Alert, Carousel, Progress } from "flowbite-react";
+import ProductList from "./ProductList";
+import ProductDetailImages from "./ProductDetailImages";
 
 type Props = {};
 
-export default function WishList({}: Props) {
+export default function Productdeatails({}: Props) {
   return (
-    <section className="wishlist-section">
-      <div className="container mx-auto mt-10 p-5">
+    <section className="product-deatails-section">
+      <div className="container mx-auto mt-2 p-5">
         <div className="flex justify-between">
           <div className="p-2 text-base inline-block">
             <p className="text-gray-500 hover:text-gray-700 inline">
@@ -34,17 +36,12 @@ export default function WishList({}: Props) {
             </Link>
           </div>
         </div>
-        <div className="flex mt-6 flex-col md:flex-row mx-2">
-          <div className="basis-1/4 p-2">
-            <Link href="">
-              <img
-                src="/images/wishlist/wishlisht1.jpeg"
-                alt=""
-                className="max-w-2xl cursor-pointer p-4 sm:h-3/6 md:h-3/4 h-96"
-              />
-            </Link>
+
+        <div className="flex mt-6 flex-col md:flex-row mx-2 flex-wrap">
+          <div className="basis-2/4 p-2">
+            <ProductDetailImages />
           </div>
-          <div className="basis-3/4 border shadow-md rounded-3xl mt-5 p-6">
+          <div className="basis-2/4 border shadow-md rounded-3xl mt-5 p-6">
             <div className="text-center">
               <h2 className="text-3xl">
                 Helvape-Cotton & Tools Travel set(300ML) 25-50mg
@@ -123,7 +120,7 @@ export default function WishList({}: Props) {
                 <h3 className="mt-3">
                   <b>SKU:</b> 67747
                   <span className="ml-5">
-                    <b>Category </b> Disposables
+                    <b>Category: </b> Disposables
                   </span>
                 </h3>
               </p>
@@ -136,6 +133,7 @@ export default function WishList({}: Props) {
             </div>
           </div>
         </div>
+
         <Accordion flush={true} alwaysOpen={true}>
           <Accordion.Panel>
             <Accordion.Title>
@@ -206,11 +204,12 @@ export default function WishList({}: Props) {
         <h2 className="mt-5 text-center uppercase text-3xl">
           You May Also Like
         </h2>
-
+        <ProductList />
         <div className="mt-5">
-          <h2 className="mt-5 text-center uppercase text-3xl">
+          <h2 className="mt-8 text-center uppercase text-3xl">
             Related Product
           </h2>
+          <ProductList />
         </div>
       </div>
     </section>

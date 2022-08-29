@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import CartItem from "./CartItem";
+import { Progress } from "flowbite-react";
 
 type Props = {};
 
@@ -24,11 +25,12 @@ export default function CartComponents({}: Props) {
 
   return (
     <section className="cart-section">
-      <div className="container mx-auto mt-10">
+      <div className="container mx-auto mt-2">
         <div className="flex flex-col md:flex-row">
-          <div className="md:basis-8/12 mt-7 sm:basis-1/3">
+          <div className="md:basis-8/12 mt-7 sm:basis-1/3 p-6">
             <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 font-size">
               Add 54 to cart and get free shipping!
+              <Progress progress={45} />
             </p>
             <div className="flex mt-10 uppercase border-b-2 py-5">
               <div className="basis-1/2">
@@ -36,9 +38,9 @@ export default function CartComponents({}: Props) {
               </div>
               <div className="basis-1/2">
                 <div className="flex">
-                  <p className="basis-1/4">Price</p>
+                  <p className="basis-1/4 mr-2">Price</p>
                   <p className="basis-1/2">Quantity</p>
-                  <p className="basis-1/4">Subtotal</p>
+                  <p className="basis-1/4 ml-2">Subtotal</p>
                 </div>
               </div>
             </div>
@@ -67,38 +69,40 @@ export default function CartComponents({}: Props) {
             </div>
           </div>
 
-          <div className="md:basis-4/12 sm:basis-1/4 ml-4 border-4 p-5 mt-7">
-            <h2 className="mt-3 uppercase text-2xl">Cart Totals</h2>
-            <div className="flex justify-between mt-3 border-b-2 p-3 font-size">
-              <p>Subtotal</p>
-              <p>445</p>
+          <div className="md:basis-4/12 sm:basis-1/4 p-6 mt-7">
+            <div className="border-4 p-3">
+              <h2 className="mt-3 uppercase text-2xl">Cart Totals</h2>
+              <div className="flex justify-between mt-3 border-b-2 p-3 font-size">
+                <p>Subtotal</p>
+                <p>445</p>
+              </div>
+              <div className="flex justify-between mt-3 border-b-2 p-3 font-size">
+                <p>Shipping</p>
+                <p className="text-primary">Calculate shipping</p>
+              </div>
+              <div className="flex justify-between mt-3 p-3">
+                <p>Total</p>
+                <p className="text-primary">445</p>
+              </div>
+              <p className="text-end bottom-3 text-xs">
+                (includes<span className="text-primary"> 58 </span>VAT)
+              </p>
+              <div className="flex justify-between mt-3 p-4 border">
+                <a href="" className="text-gray-400 text-xs">
+                  or 4 interest-free payments of
+                  <b>
+                    111.25 <br /> SAR.
+                  </b>
+                  <u>Learn more</u>
+                </a>
+                <a href="" className="bg-green-300 rounded">
+                  tabby
+                </a>
+              </div>
+              <p className="teNamext-center mt-4 text-center bg-primary rounded p-3 text-white uppercase hover:bg-gray-400">
+                <Link href="checkout">proceed to checkout</Link>
+              </p>
             </div>
-            <div className="flex justify-between mt-3 border-b-2 p-3 font-size">
-              <p>Shipping</p>
-              <p className="text-primary">Calculate shipping</p>
-            </div>
-            <div className="flex justify-between mt-3 p-3">
-              <p>Total</p>
-              <p className="text-primary">445</p>
-            </div>
-            <p className="text-end bottom-3 text-xs">
-              (includes<span className="text-primary"> 58 </span>VAT)
-            </p>
-            <div className="flex justify-between mt-3 p-4 border">
-              <a href="" className="text-gray-400 text-xs">
-                or 4 interest-free payments of
-                <b>
-                  111.25 <br /> SAR.
-                </b>
-                <u>Learn more</u>
-              </a>
-              <a href="" className="bg-green-300 rounded">
-                tabby
-              </a>
-            </div>
-            <p className="teNamext-center mt-4 text-center bg-primary rounded p-3 text-white uppercase hover:bg-gray-400">
-              <Link href="checkout">proceed to checkout</Link>
-            </p>
           </div>
         </div>
       </div>
