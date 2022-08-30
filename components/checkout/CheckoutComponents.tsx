@@ -1,3 +1,4 @@
+import { Progress } from "flowbite-react";
 import React from "react";
 
 type Props = {};
@@ -5,23 +6,24 @@ type Props = {};
 export default function CheckoutComponents({}: Props) {
   return (
     <section className="cart-section">
-      <div className="container mx-auto mt-10">
-        <div className="flex font-size">
+      <div className="container mx-auto mt-6">
+        <div className="flex font-size p-4">
           <h2 className="font-bold">Returning customer?</h2>
           <a href="" className="ml-2 text-primary">
             <u>Clicck here to login</u>
           </a>
         </div>
-        <div className="flex font-size mt-7">
+        <div className="flex font-size mt-3 p-4">
           <h2 className="font-bold">Have a coupon?</h2>
           <a href="" className="ml-2 text-primary">
             <u>Click here to login</u>
           </a>
         </div>
-        <div className="flex sm:flex-col md:flex-row mt-7">
-          <div className="basis-1/2 mt-6">
+        <div className="flex flex-col md:flex-row mt-7">
+          <div className="basis-1/2 mt-6 p-4">
             <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 font-size">
               Add 54 to cart and get free shipping!
+              <Progress progress={45} />
             </p>
             <h2 className="mt-10 uppercase text-2xl">Billing & Shipping</h2>
 
@@ -166,7 +168,7 @@ export default function CheckoutComponents({}: Props) {
             </form>
           </div>
 
-          <div className="basis-1/2 ml-4 bg-slate-50 h-full p-5 mt-6">
+          <div className="basis-1/2 ml-4 bg-slate-50 h-full p-4 mt-6">
             <h2 className="mt-10 uppercase text-2xl text-center">Your Order</h2>
             <div className="bg-white">
               <div className="flex justify-between mt-5 border-b-2 p-4 uppercase text-xl">
@@ -220,32 +222,28 @@ export default function CheckoutComponents({}: Props) {
               Your personal data will be used to process your order, support
               your experience throughout this website.
             </p>
-
-            <input
-              type="checkbox"
-              name="condition"
-              id="condition"
-              className="mt-7"
-            />
-            <label htmlFor="condition" className="font-size ml-2">
-              I have read and agree to the website terms and conditions
-              <sub className="text-2xl text-red-500">*</sub>
-            </label>
-            <br />
-            <input
-              type="checkbox"
-              name="condition"
-              id="condition"
-              className="mt-7"
-            />
-            <label htmlFor="condition" className="font-size ml-2">
-              I am 21 years old.<sub className="text-2xl text-red-500">*</sub>
-            </label>
-            <p className="text-center mt-4 bg-primary rounded p-3 text-white uppercase hover:bg-gray-400">
-              <a href="" className="text-center uppercase">
-                place order
-              </a>
-            </p>
+            <div className="mt-3">
+              <input type="checkbox" name="condition" id="condition" />
+              <label htmlFor="condition" className="font-size ml-2">
+                I have read and agree to the website terms and conditions
+                <sub className="text-2xl text-red-500">*</sub>
+              </label>
+              <br />
+              <input
+                type="checkbox"
+                name="condition"
+                id="condition"
+                className=""
+              />
+              <label htmlFor="condition" className="font-size ml-2">
+                I am 21 years old.<sub className="text-2xl text-red-500">*</sub>
+              </label>
+              <p className="text-center mt-5 mb-3 bg-primary rounded p-3 text-white uppercase hover:bg-gray-400">
+                <a href="" className="text-center uppercase">
+                  place order
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
