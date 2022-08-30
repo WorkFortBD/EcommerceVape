@@ -98,7 +98,7 @@ export default function NavbarMain() {
             <Navbar.Link>
               <Dropdown
                 arrowIcon={true}
-                trigger="hover"
+                trigger="click"
                 inline={true}
                 label={"SHOP"}
               >

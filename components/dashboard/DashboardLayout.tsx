@@ -5,8 +5,8 @@ export default function DashboardLayout(props: any) {
   return (
     <section className="wishlist-section">
       <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row flex-wrap">
-          <div className="border-r-2">
+        <div className="flex flex-col md:flex-row">
+          <div className="basis-1/5 border-r-2">
             <h2 className="p-2 ml-4 uppercase text-xl text-gray-900">
               {props.title}
             </h2>
@@ -26,18 +26,18 @@ export default function DashboardLayout(props: any) {
                       </Link>
                     </li>
                     <li className="cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
-                      <Link href="#">
+                      <Link href="address">
                         <span className="ml-3">Address</span>
                       </Link>
                     </li>
                     <li className="cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
-                      <Link href="#">
+                      <Link href="accountdeatials">
                         <span className="flex-1 ml-3">Account Deatails</span>
                       </Link>
                     </li>
 
                     <li className="cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
-                      <Link href="#">
+                      <Link href="/">
                         <span className="flex-1 ml-3">Logout</span>
                       </Link>
                     </li>
@@ -64,7 +64,7 @@ export default function DashboardLayout(props: any) {
               </li>
             </div>
           </div>
-          <div>
+          <div className="basis-4/5">
             {/* Dynamic component inject */}
             {props.children}
           </div>

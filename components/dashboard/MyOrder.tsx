@@ -10,7 +10,7 @@ export default function MyOrder({}: Props) {
       <div className="flex flex-col md:flex-row flex-wrap p-3">
         <h3>
           <div
-            className="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+            className="flex p-4 mb-4 text-sm bg-red-300 rounded-lg dark:bg-red-200"
             role="alert"
           >
             <svg
@@ -28,8 +28,8 @@ export default function MyOrder({}: Props) {
             </svg>
             <span className="sr-only">Info</span>
             <div>
-              <span className="font-medium">Danger alert!</span> Change a few
-              things up and try submitting again.
+              <u className="font-medium text-xl text-white">Browse Products </u>
+              No order has been made yet.
             </div>
           </div>
         </h3>
