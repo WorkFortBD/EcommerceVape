@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import CheckoutComponents from "../components/checkout/CheckoutComponents";
+import CheckoutComponent from "../components/checkout/CheckoutComponent";
 import Layout from "../components/layouts/Layout";
 
 const Checkout: NextPage = () => {
   return (
     <Layout title={"Checkout"}>
-      <CheckoutComponents />
+      <CheckoutComponent />
     </Layout>
   );
 };

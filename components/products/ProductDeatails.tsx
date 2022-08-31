@@ -5,7 +5,7 @@ import { faCheck, faPhone, faTable } from "@fortawesome/free-solid-svg-icons";
 import { Accordion, Alert, Carousel, Progress } from "flowbite-react";
 import ProductList from "./ProductList";
 import ProductDetailImages from "./ProductDetailImages";
-import { getCurrency } from "../CurrencyHelper";
+import { formatCurrency } from "../../utils/currency";
 
 type Props = {};
 
@@ -55,7 +55,7 @@ export default function Productdeatails({}: Props) {
                 <strong>Brand:</strong> <span>Helvape</span>
               </h3>
               <p className="mt-2 text-base border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4">
-                Add <span className="text-primary">{getCurrency(54)}</span> to
+                Add <span className="text-primary">{formatCurrency(54)}</span> to
                 cart and get free shipping!
                 <Progress progress={45} />
               </p>
@@ -97,7 +97,7 @@ export default function Productdeatails({}: Props) {
               </button>
             </div>
             <div className="text-center">
-              <button className="bg-primary mt-6 rounded-md p-2">
+              <button className="bg-primary mt-6 rounded-md p-2 px-8 text-white">
                 Question?
                 <span className="inline-block ml-2">
                   <FontAwesomeIcon icon={faPhone} style={{ width: 14 }} />
@@ -130,7 +130,7 @@ export default function Productdeatails({}: Props) {
                 disposable pod system, E JUICE, evo disposable pod system, ICE,
                 mazaj, mint, pomegranate, Raspberry, Sweet, titan, Xtra
               </h4>
-              <b>Share:</b>
+              {/* <b>Share:</b> */}
             </div>
           </div>
         </div>
