@@ -12,7 +12,7 @@ import DashboardLayout from "./DashboardLayout";
 export default function MyAccount() {
   return (
     <DashboardLayout title="My Account">
-      <div className="p-4">
+      <div className="p-4 pt-10">
         <h3>
           Hello <strong>Jahangir</strong>{" "}
           <Link href="/">
@@ -28,9 +28,9 @@ export default function MyAccount() {
           account details.
         </p>
 
-        <div className="mt-4 flex flex-col md:flex-row flex-wrap justify-center items-center">
-          <div className="basis-1/3">
-            <div className="transition shadow hover:shadow-lg p-4 m-4 ml-0 flex flex-col opacity-75 items-center justify-center">
+        <div className="mt-4 flex md:flex-row flex-wrap justify-center items-center">
+          <div className="basis-1/2 md:basis-1/3">
+            <div className="transition w-full min-h-[50px] min-w-[200px] shadow hover:shadow-lg p-4 m-4 ml-0 flex flex-col opacity-75 items-center justify-center">
               <Link href={"my-order"}>
                 <div className="cursor-pointer hover:opacity-100">
                   <FontAwesomeIcon
@@ -39,42 +39,42 @@ export default function MyAccount() {
                     width={50}
                     className="text-slate-400"
                   />
-                  <h2 className="text-2xl mt-3 text-slate-500">Orders</h2>
+                  <h2 className="text-2xl mt-3 text-center text-slate-500">Orders</h2>
                 </div>
               </Link>
             </div>
           </div>
-          <div className="basis-1/3">
-            <div className="transition shadow hover:shadow-lg p-4 m-4 flex flex-col items-center justify-center">
+          <div className="basis-1/2 md:basis-1/3">
+            <div className="transition w-full min-h-[50px] min-w-[200px] shadow hover:shadow-lg p-2 md:p-4 m-2 md:m-4 flex flex-col items-center justify-center">
               <FontAwesomeIcon
                 icon={faMap}
                 size={"3x"}
                 width={50}
                 className="text-slate-400"
               />
-              <h2 className="text-2xl mt-3 text-slate-500">Address</h2>
+              <h2 className="text-2xl mt-3 text-center text-slate-500">Address</h2>
             </div>
           </div>
-          <div className="basis-1/3">
-            <div className="transition shadow hover:shadow-lg p-4 m-4 flex flex-col items-center justify-center">
+          <div className="basis-1/2 md:basis-1/3">
+            <div className="transition w-full min-h-[50px] min-w-[200px] shadow hover:shadow-lg p-2 md:p-4 m-2 md:m-6 flex flex-col items-center justify-center">
               <FontAwesomeIcon
                 icon={faUserAlt}
                 size={"3x"}
                 width={50}
                 className="text-slate-400"
               />
-              <h2 className="text-2xl mt-3 text-slate-500">Account Details</h2>
+              <h2 className="text-2xl mt-3 text-center text-slate-500">Account Details</h2>
             </div>
           </div>
-          <div className="basis-1/3">
-            <div className="transition shadow hover:shadow-lg p-4 m-4 flex flex-col items-center justify-center">
+          <div className="basis-1/2 md:basis-1/3">
+            <div className="transition w-full min-h-[50px] min-w-[200px] shadow hover:shadow-lg p-2 md:p-4 m-2 md:m-4 flex flex-col items-center justify-center">
               <FontAwesomeIcon
                 icon={faSignOutAlt}
                 size={"3x"}
                 width={50}
                 className="text-slate-400"
               />
-              <h2 className="text-2xl mt-3 text-slate-500">Logout</h2>
+              <h2 className="text-2xl mt-3 text-center text-slate-500">Logout</h2>
             </div>
           </div>
         </div>

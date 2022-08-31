@@ -45,13 +45,13 @@ export default function DashboardLayout(props: any) {
                 </div>
               </aside>
             </div>
-            <div className="mt-7 text-center">
+            <div className="mt-7 hidden md:block text-center">
               <h2 className="uppercase text-xl text-gray-900">HelpFul Links</h2>
               <li className="mt-3 list-none text-gray-400 hover:text-gray-600">
-                <Link href="">DukhanStore Blog</Link>
+                <Link href="">Saudi Vape Shop Blog</Link>
               </li>
               <li className="mt-3 list-none text-gray-400 hover:text-gray-600">
-                <Link href="">Tearms and Conditions</Link>
+                <Link href="">Terms and Conditions</Link>
               </li>
               <li className="mt-3 list-none text-gray-400 hover:text-gray-600">
                 <Link href="">Shipping and Handing</Link>

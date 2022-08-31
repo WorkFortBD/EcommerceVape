@@ -8,10 +8,13 @@ export default function AddressComponet({}: Props) {
   return (
     <DashboardLayout title="Address">
       <div className="ml-5">
-        <p className="text-gray-500">
+        <p className="text-gray-500 mt-10">
           The following addresses will be used on the checkout page by default.
         </p>
-        <div className="flex mt-5">
+        <h1 className="mt-10 bg-green-100 p-4 rounded-md">
+          Pending Development...
+        </h1>
+        {/* <div className="flex mt-5">
           <h2 className="text-3xl uppercase text-gray-600">Billing address</h2>
           <Link href="edit">
             <button className="ml-4 bg-green-600 px-4 rounded-2xl text-white hover:text-primary">
@@ -19,7 +22,7 @@ export default function AddressComponet({}: Props) {
             </button>
           </Link>
         </div>
-        <p className="text-gray-400 mt-2">Jahangir</p>
+        <p className="text-gray-400 mt-2">Jahangir</p> */}
       </div>
     </DashboardLayout>
   );

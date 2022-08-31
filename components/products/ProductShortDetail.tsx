@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import { getCurrency } from "../CurrencyHelper";
+import { formatCurrency } from "../../utils/currency";
 
 interface Props {
   product: object;
@@ -8,14 +8,16 @@ interface Props {
 
 export default function ProductShortDetail({ product }: Props): ReactElement {
   return (
-    <div className="mt-3 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[230px]">
+    <div className="group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[230px]">
       <Link href={"/products/single"}>
-        <div>
-          <img
-            src={product.image}
-            alt=""
-            className="cursor-pointer rounded rounded-b-none w-full h-60"
-          />
+        <div className="">
+          <div className="overflow-hidden">
+            <img
+              src={product.image}
+              alt=""
+              className="transition-all scale-100 group-hover:scale-110 cursor-pointer rounded rounded-b-none w-full h-60"
+            />
+          </div>
           <div className="mt-1 p-1 text-center">
             <p className="cursor-pointer text-gray-800 hover:text-gray-600 overflow-hidden h-12 ">
               {product.title}
@@ -23,10 +25,12 @@ export default function ProductShortDetail({ product }: Props): ReactElement {
           </div>
         </div>
       </Link>
-      <div className="text-center">
-        <span className="block text-primary">{getCurrency(product.price)}</span>
+      <div className="text-center mt-3">
+        <span className="block text-primary-light">
+          {formatCurrency(product.price)}
+        </span>
         <p>
-          <button className="uppercase mt-3 hover:bg-gray-400 transition-all mb-3 p-2 bg-primary rounded-md text-white">
+          <button className="transition-all uppercase mx-3 mt-3 hover:bg-primary-light text-sm mb-3 py-2 px-4 bg-primary rounded-md text-white hover:px-8">
             Add to Cart
           </button>
         </p>

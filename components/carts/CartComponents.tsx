@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import CartItem from "./CartItem";
 import { Progress } from "flowbite-react";
-import { getCurrency } from "../CurrencyHelper";
+import { formatCurrency } from "../../utils/currency";
 
 type Props = {};
 
@@ -58,12 +58,12 @@ export default function CartComponents({}: Props) {
                   placeholder="Coupon code"
                   className=" p-3 border rounded-md border-slate-300 outline-none w-full mr-1"
                 />
-                <button className="bg-primary text-white p-3 rounded-md w-full hover:bg-gray-400 mx-1 uppercase">
+                <button className="transition-all bg-primary text-white p-3 rounded-md w-full hover:bg-primary-light mx-1 uppercase">
                   Apply Coupon
                 </button>
               </div>
               <div className="">
-                <button className="w-full mb-2 md:mb-0 md:w-auto bg-primary text-white p-3 rounded-md hover:bg-gray-400 uppercase">
+                <button className="transition-all w-full mb-2 md:mb-0 md:w-auto bg-primary text-white p-3 rounded-md hover:bg-primary-light uppercase">
                   Update Cart
                 </button>
               </div>
@@ -75,7 +75,7 @@ export default function CartComponents({}: Props) {
               <h2 className="mt-3 uppercase text-2xl">Cart Totals</h2>
               <div className="flex justify-between mt-3 border-b-2 p-3 ">
                 <p>Subtotal</p>
-                <p>{getCurrency(445)}</p>
+                <p>{formatCurrency(445)}</p>
               </div>
               <div className="flex justify-between mt-3 border-b-2 p-3 ">
                 <p>Shipping</p>
@@ -83,11 +83,11 @@ export default function CartComponents({}: Props) {
               </div>
               <div className="flex justify-between mt-3 p-3">
                 <p>Total</p>
-                <p className="text-primary">{getCurrency(445)}</p>
+                <p className="text-primary">{formatCurrency(445)}</p>
               </div>
               <p className="text-end bottom-3 text-xs">
                 (includes
-                <span className="text-primary"> {getCurrency(58)}</span>VAT)
+                <span className="text-primary"> {formatCurrency(58)}</span>VAT)
               </p>
               <div className="flex justify-between mt-3 p-4 border">
                 <a href="" className="text-gray-400 text-xs">
@@ -101,8 +101,8 @@ export default function CartComponents({}: Props) {
                   tabby
                 </a>
               </div>
-              <p className="teNamext-center mt-4 text-center bg-primary rounded p-3 text-white uppercase hover:bg-gray-400">
-                <Link href="checkout">proceed to checkout</Link>
+              <p className="transition-all cursor-pointer text-center mt-4 bg-primary hover:bg-primary-light rounded p-3 text-white uppercase">
+                <Link href="checkout">Proceed to checkout</Link>
               </p>
             </div>
           </div>
