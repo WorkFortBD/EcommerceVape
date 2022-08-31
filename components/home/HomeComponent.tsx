@@ -1,6 +1,5 @@
-import Link from "next/link";
-import ProductList from "../products/ProductList";
 import Slider from "../slider/Slider";
+import HomeProductFilter from './HomeProductFilter';
 
 export default function HomeComponent() {
   return (
@@ -34,32 +33,8 @@ export default function HomeComponent() {
         </div>
       </section>
 
-      <section className="product-section">
-        <div className="container mx-auto">
-          <div className="mt-12 text-center p-2 uppercase">
-            <Link href="" className="ml-3">
-              New Arrivals
-            </Link>
-            <Link href="" className="ml-3">
-              Top Rated
-            </Link>
-            <Link href="" className="ml-3">
-              On Sale
-            </Link>
-          </div>
-
-          <div className="mt-3">
-            {/* Product List */}
-            <ProductList />
-
-            <div className="text-center mt-4">
-              <button className="uppercase border p-3">
-                Load More Products
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Filter */}
+      <HomeProductFilter />
     </>
   );
 }
