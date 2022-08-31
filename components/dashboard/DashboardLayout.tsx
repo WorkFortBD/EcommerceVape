@@ -48,19 +48,19 @@ export default function DashboardLayout(props: any) {
             <div className="mt-7 text-center">
               <h2 className="uppercase text-xl text-gray-900">HelpFul Links</h2>
               <li className="mt-3 list-none text-gray-400 hover:text-gray-600">
-                <a href="">DukhanStore Blog</a>
+                <Link href="">DukhanStore Blog</Link>
               </li>
               <li className="mt-3 list-none text-gray-400 hover:text-gray-600">
-                <a href="">Tearms and Conditions</a>
+                <Link href="">Tearms and Conditions</Link>
               </li>
               <li className="mt-3 list-none text-gray-400 hover:text-gray-600">
-                <a href="">Shipping and Handing</a>
+                <Link href="">Shipping and Handing</Link>
               </li>
               <li className="mt-3 list-none text-gray-400 hover:text-gray-600">
-                <a href="">Return Policy</a>
+                <Link href="">Return Policy</Link>
               </li>
               <li className="mt-3 list-none text-gray-400 hover:text-gray-600">
-                <a href="">Guarantee and Warranty</a>
+                <Link href="">Guarantee and Warranty</Link>
               </li>
             </div>
           </div>

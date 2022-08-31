@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import CartItem from "./CartItem";
 import { Progress } from "flowbite-react";
+import { getCurrency } from "../CurrencyHelper";
 
 type Props = {};
 
@@ -27,8 +28,8 @@ export default function CartComponents({}: Props) {
     <section className="cart-section">
       <div className="container mx-auto mt-2">
         <div className="flex flex-col md:flex-row">
-          <div className="md:basis-8/12 mt-7 sm:basis-1/3 p-6">
-            <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 font-size">
+          <div className="basis-8/12 mt-7 p-6">
+            <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 ">
               Add 54 to cart and get free shipping!
               <Progress progress={45} />
             </p>
@@ -55,7 +56,7 @@ export default function CartComponents({}: Props) {
                   type="search"
                   value=""
                   placeholder="Coupon code"
-                  className="font-size p-3 border rounded-md border-slate-300 outline-none w-full mr-1"
+                  className=" p-3 border rounded-md border-slate-300 outline-none w-full mr-1"
                 />
                 <button className="bg-primary text-white p-3 rounded-md w-full hover:bg-gray-400 mx-1 uppercase">
                   Apply Coupon
@@ -69,23 +70,24 @@ export default function CartComponents({}: Props) {
             </div>
           </div>
 
-          <div className="md:basis-4/12 sm:basis-1/4 p-6 mt-7">
+          <div className="basis-4/12 p-6 mt-7">
             <div className="border-4 p-3">
               <h2 className="mt-3 uppercase text-2xl">Cart Totals</h2>
-              <div className="flex justify-between mt-3 border-b-2 p-3 font-size">
+              <div className="flex justify-between mt-3 border-b-2 p-3 ">
                 <p>Subtotal</p>
-                <p>445</p>
+                <p>{getCurrency(445)}</p>
               </div>
-              <div className="flex justify-between mt-3 border-b-2 p-3 font-size">
+              <div className="flex justify-between mt-3 border-b-2 p-3 ">
                 <p>Shipping</p>
                 <p className="text-primary">Calculate shipping</p>
               </div>
               <div className="flex justify-between mt-3 p-3">
                 <p>Total</p>
-                <p className="text-primary">445</p>
+                <p className="text-primary">{getCurrency(445)}</p>
               </div>
               <p className="text-end bottom-3 text-xs">
-                (includes<span className="text-primary"> 58 </span>VAT)
+                (includes
+                <span className="text-primary"> {getCurrency(58)}</span>VAT)
               </p>
               <div className="flex justify-between mt-3 p-4 border">
                 <a href="" className="text-gray-400 text-xs">

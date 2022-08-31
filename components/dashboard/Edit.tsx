@@ -11,7 +11,7 @@ export default function Edit({}: Props) {
         <form action="" className="mt-4">
           <div className="flex">
             <div className="basis-1/2">
-              <label htmlFor="first-name" className="font-size">
+              <label htmlFor="first-name">
                 First name
                 <sub className="text-2xl text-red-500">*</sub>
               </label>
@@ -24,7 +24,7 @@ export default function Edit({}: Props) {
               />
             </div>
             <div className="basis-1/2">
-              <label htmlFor="lastt-name" className="font-size">
+              <label htmlFor="lastt-name">
                 Last name <sub className="text-2xl text-red-500">*</sub>
               </label>
               <br />
@@ -37,7 +37,7 @@ export default function Edit({}: Props) {
             </div>
           </div>
           <div className="mt-4">
-            <label htmlFor="country" className="font-size">
+            <label htmlFor="country">
               Country / Region
               <sub className="text-2xl text-red-500">*</sub>
             </label>
@@ -51,7 +51,7 @@ export default function Edit({}: Props) {
           </div>
 
           <div className="mt-4">
-            <label htmlFor="street-address" className="font-size">
+            <label htmlFor="street-address">
               Street Address
               <sub className="text-2xl text-red-500">*</sub>
             </label>
@@ -66,7 +66,7 @@ export default function Edit({}: Props) {
           </div>
 
           <div className="mt-4">
-            <label htmlFor="town" className="font-size">
+            <label htmlFor="town">
               Town / City <sub className="text-2xl text-red-500">*</sub>
             </label>
             <br />
@@ -79,7 +79,7 @@ export default function Edit({}: Props) {
           </div>
 
           <div className="mt-4">
-            <label htmlFor="state" className="font-size">
+            <label htmlFor="state">
               State / County
               <sub className="text-2xl text-red-500">*</sub>
             </label>
@@ -93,9 +93,7 @@ export default function Edit({}: Props) {
           </div>
 
           <div className="mt-4">
-            <label htmlFor="postcode" className="font-size">
-              Postcode / Zip(optional)
-            </label>
+            <label htmlFor="postcode">Postcode / Zip(optional)</label>
             <br />
             <input
               type="text"
@@ -106,7 +104,7 @@ export default function Edit({}: Props) {
           </div>
 
           <div className="mt-4">
-            <label htmlFor="number" className="font-size">
+            <label htmlFor="number">
               Billing Mobile Number
               <sub className="text-2xl text-red-500">*</sub>
             </label>
@@ -120,9 +118,7 @@ export default function Edit({}: Props) {
           </div>
 
           <div className="mt-5">
-            <label htmlFor="email" className="font-size">
-              Billing Email(optional)
-            </label>
+            <label htmlFor="email">Billing Email(optional)</label>
             <br />
             <input
               type="text"

@@ -5,6 +5,7 @@ import { faCheck, faPhone, faTable } from "@fortawesome/free-solid-svg-icons";
 import { Accordion, Alert, Carousel, Progress } from "flowbite-react";
 import ProductList from "./ProductList";
 import ProductDetailImages from "./ProductDetailImages";
+import { getCurrency } from "../CurrencyHelper";
 
 type Props = {};
 
@@ -53,9 +54,9 @@ export default function Productdeatails({}: Props) {
               <h3 className="mt-2 text-gray-500">
                 <strong>Brand:</strong> <span>Helvape</span>
               </h3>
-              <p className="mt-2 text-base border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 font-size">
-                Add <span className="text-primary">54</span> to cart and get
-                free shipping!
+              <p className="mt-2 text-base border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4">
+                Add <span className="text-primary">{getCurrency(54)}</span> to
+                cart and get free shipping!
                 <Progress progress={45} />
               </p>
               <h3>

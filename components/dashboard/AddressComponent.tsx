@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import DashboardLayout from "./DashboardLayout";
-import Edit from "./Edit";
 
 type Props = {};
 

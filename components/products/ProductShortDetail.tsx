@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, { ReactElement } from "react";
+import { getCurrency } from "../CurrencyHelper";
 
 interface Props {
   product: object;
@@ -23,7 +24,7 @@ export default function ProductShortDetail({ product }: Props): ReactElement {
         </div>
       </Link>
       <div className="text-center">
-        <span className="block text-primary">{product.price}</span>
+        <span className="block text-primary">{getCurrency(product.price)}</span>
         <p>
           <button className="uppercase mt-3 hover:bg-gray-400 transition-all mb-3 p-2 bg-primary rounded-md text-white">
             Add to Cart

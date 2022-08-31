@@ -1,6 +1,7 @@
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { NextPage } from "next";
+import Link from "next/link";
 import HomeComponent from "../components/home/HomeComponent";
 import Layout from "../components/layouts/Layout";
 
@@ -12,34 +13,34 @@ const Home: NextPage = () => {
           <p className="text-gray-500">Regulated Mechanical Pods Systems</p>
 
           <div className="mt-6">
-            <a href="" className="text-gray-500  hover:text-gray-700">
+            <Link href="/" className="text-gray-500  hover:text-gray-700">
               Home /
-            </a>
-            <a href="" className="text-gray-500 ml-1  hover:text-gray-700">
+            </Link>
+            <Link href="" className="text-gray-500 ml-1  hover:text-gray-700">
               Shops /
-            </a>
-            <a href="" className="text-gray-500 ml-1  hover:text-gray-700">
+            </Link>
+            <Link href="" className="text-gray-500 ml-1  hover:text-gray-700">
               vape /
-            </a>
-            <a href=""> Mods</a>
+            </Link>
+            <Link href=""> Mods</Link>
 
             <p className="mt-3">
-              Show : <a href="">18</a> /
-              <a href="" className="text-gray-500 hover:text-gray-700 ml-1">
+              Show : <Link href="">18</Link> /
+              <Link href="" className="text-gray-500 hover:text-gray-700 ml-1">
                 36
-              </a>
+              </Link>
               /
-              <a href="" className="text-gray-500 hover:text-gray-700 ml-1">
+              <Link href="" className="text-gray-500 hover:text-gray-700 ml-1">
                 100
-              </a>
-              <a href="" className="text-gray-700">
+              </Link>
+              <Link href="" className="text-gray-700">
                 <FontAwesomeIcon
                   icon={faFilter}
                   style={{ width: 16 }}
                   className="text-gray-500 inline ml-12"
                 />{" "}
                 Filters
-              </a>
+              </Link>
             </p>
           </div>
 

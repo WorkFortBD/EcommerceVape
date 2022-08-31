@@ -1,5 +1,7 @@
 import { Progress } from "flowbite-react";
+import Link from "next/link";
 import React from "react";
+import { getCurrency } from "../CurrencyHelper";
 
 type Props = {};
 
@@ -7,22 +9,22 @@ export default function CheckoutComponents({}: Props) {
   return (
     <section className="cart-section">
       <div className="container mx-auto mt-6">
-        <div className="flex font-size p-4">
+        <div className="flex p-4">
           <h2 className="font-bold">Returning customer?</h2>
-          <a href="" className="ml-2 text-primary">
-            <u>Clicck here to login</u>
-          </a>
+          <Link href="">
+            <u className="ml-2 text-primary">Clicck here to login</u>
+          </Link>
         </div>
-        <div className="flex font-size mt-3 p-4">
+        <div className="flex mt-3 p-4">
           <h2 className="font-bold">Have a coupon?</h2>
-          <a href="" className="ml-2 text-primary">
-            <u>Click here to login</u>
-          </a>
+          <Link href="">
+            <u className="ml-2 text-primary">Click here to login</u>
+          </Link>
         </div>
         <div className="flex flex-col md:flex-row mt-7">
-          <div className="basis-1/2 mt-6 p-4">
-            <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 font-size">
-              Add 54 to cart and get free shipping!
+          <div className="basis-1/2 mt-3 p-4">
+            <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 ">
+              Add {getCurrency(54)} to cart and get free shipping!
               <Progress progress={45} />
             </p>
             <h2 className="mt-10 uppercase text-2xl">Billing & Shipping</h2>
@@ -30,7 +32,7 @@ export default function CheckoutComponents({}: Props) {
             <form action="" className="mt-4">
               <div className="flex">
                 <div className="basis-1/2">
-                  <label htmlFor="first-name" className="font-size">
+                  <label htmlFor="first-name">
                     First name
                     <sub className="text-2xl text-red-500">*</sub>
                   </label>
@@ -43,7 +45,7 @@ export default function CheckoutComponents({}: Props) {
                   />
                 </div>
                 <div className="basis-1/2">
-                  <label htmlFor="lastt-name" className="font-size">
+                  <label htmlFor="lastt-name" className="ml-1">
                     Last name <sub className="text-2xl text-red-500">*</sub>
                   </label>
                   <br />
@@ -51,12 +53,12 @@ export default function CheckoutComponents({}: Props) {
                     type="text"
                     name="name"
                     id="last-name"
-                    className="w-full border outline-none rounded-md p-2 mt-2 mr-2 ml-3"
+                    className="w-full border outline-none rounded-md p-2 mt-2 mr-2 ml-1"
                   />
                 </div>
               </div>
               <div className="mt-4">
-                <label htmlFor="country" className="font-size">
+                <label htmlFor="country">
                   Country / Region
                   <sub className="text-2xl text-red-500">*</sub>
                 </label>
@@ -70,7 +72,7 @@ export default function CheckoutComponents({}: Props) {
               </div>
 
               <div className="mt-4">
-                <label htmlFor="street-address" className="font-size">
+                <label htmlFor="street-address">
                   Street Address
                   <sub className="text-2xl text-red-500">*</sub>
                 </label>
@@ -80,12 +82,12 @@ export default function CheckoutComponents({}: Props) {
                   name="address"
                   id="street-address"
                   placeholder="House number and Street name"
-                  className="border w-full outline-none rounded-md p-2 mt-2 font-size mr-2"
+                  className="border w-full outline-none rounded-md p-2 mt-2 mr-2"
                 />
               </div>
 
               <div className="mt-4">
-                <label htmlFor="town" className="font-size">
+                <label htmlFor="town">
                   Town / City <sub className="text-2xl text-red-500">*</sub>
                 </label>
                 <br />
@@ -98,7 +100,7 @@ export default function CheckoutComponents({}: Props) {
               </div>
 
               <div className="mt-4">
-                <label htmlFor="state" className="font-size">
+                <label htmlFor="state">
                   State / County
                   <sub className="text-2xl text-red-500">*</sub>
                 </label>
@@ -112,9 +114,7 @@ export default function CheckoutComponents({}: Props) {
               </div>
 
               <div className="mt-4">
-                <label htmlFor="postcode" className="font-size">
-                  Postcode / Zip(optional)
-                </label>
+                <label htmlFor="postcode">Postcode / Zip(optional)</label>
                 <br />
                 <input
                   type="text"
@@ -125,7 +125,7 @@ export default function CheckoutComponents({}: Props) {
               </div>
 
               <div className="mt-4">
-                <label htmlFor="number" className="font-size">
+                <label htmlFor="number">
                   Billing Mobile Number
                   <sub className="text-2xl text-red-500">*</sub>
                 </label>
@@ -139,9 +139,7 @@ export default function CheckoutComponents({}: Props) {
               </div>
 
               <div className="mt-5">
-                <label htmlFor="email" className="font-size">
-                  Billing Email(optional)
-                </label>
+                <label htmlFor="email">Billing Email(optional)</label>
                 <br />
                 <input
                   type="text"
@@ -152,16 +150,14 @@ export default function CheckoutComponents({}: Props) {
               </div>
               <h2 className="mt-6 text-3xl">Additional Information</h2>
               <div className="mt-5">
-                <label htmlFor="notes" className="font-size">
-                  Order Notes(optional)
-                </label>
+                <label htmlFor="notes">Order Notes(optional)</label>
                 <br />
                 <textarea
                   name="ordernotes"
                   id="notes"
                   cols="5"
                   rows="6"
-                  className="font-size border w-full outline-none rounded-md p-2 mt-2 mr-2"
+                  className="border w-full outline-none rounded-md p-2 mt-2 mr-2"
                   placeholder="Notes about your order, e.g. special notes for delivery"
                 ></textarea>
               </div>
@@ -175,20 +171,20 @@ export default function CheckoutComponents({}: Props) {
                 <p>Product</p>
                 <p>Subtotal</p>
               </div>
-              <div className="flex justify-between mt-3 border-b p-4 text-gray-400 font-size">
+              <div className="flex justify-between mt-3 border-b p-4 text-gray-400 ">
                 <p>
                   TWIST - Honeydew Melon(30ML) <br />
                   20mg - 20mg x 4
                 </p>
-                <p className="text-primary">330</p>
+                <p className="text-primary">{getCurrency(330)}</p>
               </div>
-              <div className="flex justify-between mt-3 border-b p-4 font-size">
+              <div className="flex justify-between mt-3 border-b p-4 ">
                 <p>Subtotal</p>
-                <p className="text-primary">330</p>
+                <p className="text-primary">{getCurrency(330)}</p>
               </div>
               <div className="flex justify-between mt-3 p-4 text-xl">
                 <p>Total</p>
-                <p className="text-primary">445</p>
+                <p className="text-primary">{getCurrency(445)}</p>
               </div>
             </div>
             <div className="mt-8 border-b p-3">
@@ -218,30 +214,25 @@ export default function CheckoutComponents({}: Props) {
               </div>
             </div>
 
-            <p className="mt-4 border-b p-3 font-size text-gray-400">
+            <p className="mt-4 border-b p-3 text-gray-400">
               Your personal data will be used to process your order, support
               your experience throughout this website.
             </p>
             <div className="mt-3">
               <input type="checkbox" name="condition" id="condition" />
-              <label htmlFor="condition" className="font-size ml-2">
+              <label htmlFor="condition" className="ml-2">
                 I have read and agree to the website terms and conditions
                 <sub className="text-2xl text-red-500">*</sub>
               </label>
               <br />
-              <input
-                type="checkbox"
-                name="condition"
-                id="condition"
-                className=""
-              />
-              <label htmlFor="condition" className="font-size ml-2">
+              <input type="checkbox" name="condition" id="condition" />
+              <label htmlFor="condition" className="ml-2">
                 I am 21 years old.<sub className="text-2xl text-red-500">*</sub>
               </label>
               <p className="text-center mt-5 mb-3 bg-primary rounded p-3 text-white uppercase hover:bg-gray-400">
-                <a href="" className="text-center uppercase">
+                <Link href="" className="text-center uppercase">
                   place order
-                </a>
+                </Link>
               </p>
             </div>
           </div>

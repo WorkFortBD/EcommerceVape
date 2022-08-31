@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ProductList from "../products/ProductList";
 import Slider from "../slider/Slider";
 
@@ -36,15 +37,15 @@ export default function HomeComponent() {
       <section className="product-section">
         <div className="container mx-auto">
           <div className="mt-12 text-center p-2 uppercase">
-            <a href="" className="ml-3">
+            <Link href="" className="ml-3">
               New Arrivals
-            </a>
-            <a href="" className="ml-3">
+            </Link>
+            <Link href="" className="ml-3">
               Top Rated
-            </a>
-            <a href="" className="ml-3">
+            </Link>
+            <Link href="" className="ml-3">
               On Sale
-            </a>
+            </Link>
           </div>
 
           <div className="mt-3">

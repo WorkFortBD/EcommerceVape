@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, { ReactElement } from "react";
+import { getCurrency } from "../CurrencyHelper";
 
 interface ICartItem {
   /**
@@ -32,7 +33,7 @@ export default function CartItem({ cart }: Props): ReactElement {
         </Link>
       </div>
       <div className="flex basis-1/2 mt-14 text-slate-500">
-        <p className="basis-1/4 font-size">{cart.productPrice}</p>
+        <p className="basis-1/4 font-size">{getCurrency(cart.productPrice)}</p>
         <p className="basis-1/2 font-size">
           <span className="border px-2 py-1 hover:bg-primary hover:text-white">
             -

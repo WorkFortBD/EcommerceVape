@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { ReactElement } from "react";
 
 interface Props {}
@@ -17,48 +18,48 @@ export default function footer({}: Props): ReactElement {
           <div className="container mx-auto">
             <div className="flex flex-wrap flex-col sm:flex-row justify-center items-center">
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                <a href="">
+                <Link href="">
                   <img src="images/Footer-Logo.svg" alt="" className="w-32" />
-                </a>
+                </Link>
                 <div className="flex flex-auto mt-16 text-gray-400">
-                  <a href="" className="mx-2 sm:mx-3 md:mx-4">
+                  <Link href="" className="mx-2 sm:mx-3 md:mx-4">
                     <i className="fa-brands fa-tiktok"></i>
-                  </a>
-                  <a href="" className="mx-2 sm:mx-3 md:mx-4">
+                  </Link>
+                  <Link href="" className="mx-2 sm:mx-3 md:mx-4">
                     <i className="fa-brands fa-instagram"></i>
-                  </a>
-                  <a href="" className="mx-3 sm:mx-4 md:mx-6">
+                  </Link>
+                  <Link href="" className="mx-3 sm:mx-4 md:mx-6">
                     <i className="fa-brands fa-linkedin-in"></i>
-                  </a>
-                  <a href="" className="mx-3 sm:mx-4 md:mx-6">
+                  </Link>
+                  <Link href="" className="mx-3 sm:mx-4 md:mx-6">
                     <i className="fa-brands fa-facebook-f"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                <a href="">
+                <Link href="">
                   <img
                     src="images/Payments.svg"
                     alt=""
                     className="w-36 mt-4 py-2"
                   />
-                </a>
+                </Link>
               </div>
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 text-gray-400 list-none">
                 <li className="mt-3">
-                  <a href="">DukhanStore Blog</a>
+                  <Link href="">DukhanStore Blog</Link>
                 </li>
                 <li className="mt-3">
-                  <a href="">Tearms and Conditions</a>
+                  <Link href="">Tearms and Conditions</Link>
                 </li>
                 <li className="mt-3">
-                  <a href="">Shipping and Handing</a>
+                  <Link href="">Shipping and Handing</Link>
                 </li>
                 <li className="mt-3">
-                  <a href="">Return Policy</a>
+                  <Link href="">Return Policy</Link>
                 </li>
                 <li className="mt-3">
-                  <a href="">Guarantee and Warranty</a>
+                  <Link href="">Guarantee and Warranty</Link>
                 </li>
               </div>
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 text-gray-400 list-none">
@@ -67,13 +68,13 @@ export default function footer({}: Props): ReactElement {
                 </li>
 
                 <li className="mt-3">
-                  <a href="">Email Us</a>
+                  <Link href="">Email Us</Link>
                 </li>
                 <li className="mt-3">
-                  <a href="">Message Us</a>
+                  <Link href="">Message Us</Link>
                 </li>
                 <li className="mt-3">
-                  <a href="">Message Us Vai Whatsapp</a>
+                  <Link href="">Message Us Vai Whatsapp</Link>
                 </li>
               </div>
             </div>
@@ -84,12 +85,12 @@ export default function footer({}: Props): ReactElement {
             </div>
 
             <div className="mt-7 flex justify-center items-center">
-              <a href="">
+              <Link href="">
                 <img src="images/maroof.png" alt="" className="w-15" />
-              </a>
-              <a href="">
+              </Link>
+              <Link href="">
                 <img src="images/vat2.png" alt="" className="w-10 ml-12" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

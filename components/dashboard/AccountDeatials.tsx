@@ -10,7 +10,7 @@ export default function AccountDeatials({}: Props) {
       <form action="">
         <div className="ml-3">
           <div className="mt-4">
-            <label htmlFor="number" className="font-size text-gray-800">
+            <label htmlFor="number" className="text-gray-800">
               Billing Mobile Number
               <sub className="text-2xl text-red-500">*</sub>
             </label>
@@ -24,7 +24,7 @@ export default function AccountDeatials({}: Props) {
           </div>
           <div className="flex">
             <div className="basis-1/2">
-              <label htmlFor="first-name" className="font-size text-gray-800">
+              <label htmlFor="first-name" className="text-gray-800">
                 First name
                 <sub className="text-2xl text-red-500">*</sub>
               </label>
@@ -37,7 +37,7 @@ export default function AccountDeatials({}: Props) {
               />
             </div>
             <div className="basis-1/2">
-              <label htmlFor="lastt-name" className="font-size text-gray-800">
+              <label htmlFor="lastt-name" className="text-gray-800 ml-2">
                 Last name <sub className="text-2xl text-red-500">*</sub>
               </label>
               <br />
@@ -45,12 +45,12 @@ export default function AccountDeatials({}: Props) {
                 type="text"
                 name="name"
                 id="last-name"
-                className="w-full text-gray-500 border outline-none rounded-md p-2 mt-2 mr-2 ml-3"
+                className="w-full text-gray-500 border outline-none rounded-md p-2 mt-2 mr-2 ml-2"
               />
             </div>
           </div>
           <div className="mt-4">
-            <label htmlFor="number" className="font-size text-gray-800">
+            <label htmlFor="number" className="text-gray-800">
               Display Name
               <sub className="text-2xl text-red-500">*</sub>
             </label>
@@ -67,7 +67,7 @@ export default function AccountDeatials({}: Props) {
             and in reviews
           </p>
           <div className="mt-5">
-            <label htmlFor="email" className="font-size text-gray-800">
+            <label htmlFor="email" className="text-gray-800">
               Email Address
             </label>
             <br />
@@ -80,10 +80,12 @@ export default function AccountDeatials({}: Props) {
           </div>
         </div>
         <fieldset>
-          <legend className="ml-3 mt-3">Password Change</legend>
+          <legend className="ml-3 mt-5 uppercase text-2xl">
+            Password Change
+          </legend>
           <div className="ml-3">
-            <div className="mt-5">
-              <label htmlFor="email" className="font-size text-gray-800">
+            <div className="mt-2">
+              <label htmlFor="email" className="text-gray-800">
                 Current password (leave blank to leave unchanged)
               </label>
               <br />
@@ -95,7 +97,7 @@ export default function AccountDeatials({}: Props) {
               />
             </div>
             <div className="mt-5">
-              <label htmlFor="email" className="font-size text-gray-800">
+              <label htmlFor="email" className="text-gray-800">
                 New password (leave blank to leave unchanged)
               </label>
               <br />
@@ -107,7 +109,7 @@ export default function AccountDeatials({}: Props) {
               />
             </div>
             <div className="mt-5">
-              <label htmlFor="email" className="font-size text-gray-800">
+              <label htmlFor="email" className="text-gray-800">
                 Confirm new passwords
               </label>
               <br />

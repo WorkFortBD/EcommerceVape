@@ -50,20 +50,20 @@ export default function NavbarMain() {
               </Dropdown>
             )}
 
-            <a href="" className="mx-3 sm:mx-4 md:mx-6">
+            <Link href="" className="mx-3 sm:mx-4 md:mx-6">
               <FontAwesomeIcon
                 icon={faUser}
                 className="text-gray-500"
                 style={{ width: 22 }}
               />
-            </a>
-            <a href="" className="mx-3 sm:mx-4 md:mx-6">
+            </Link>
+            <Link href="" className="mx-3 sm:mx-4 md:mx-6">
               <FontAwesomeIcon
                 icon={faSearch}
                 className="text-gray-500"
                 style={{ width: 22 }}
               />
-            </a>
+            </Link>
             <Link href="/wishlist" className="">
               <FontAwesomeIcon
                 icon={faHeart}
