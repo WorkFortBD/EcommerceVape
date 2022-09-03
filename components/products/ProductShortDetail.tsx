@@ -30,7 +30,7 @@ export default function ProductShortDetail({ product }: Props): ReactElement {
           {formatCurrency(product.price)}
         </span>
         <p>
-          <button className="transition-all uppercase mx-3 mt-3 hover:bg-primary-light text-sm mb-3 py-2 px-4 bg-primary rounded-md text-white hover:px-8">
+          <button className="cursor-pointer transition-all uppercase mx-3 mt-3 hover:bg-primary-light text-sm mb-3 py-2 px-4 bg-primary rounded-md text-white hover:px-8">
             Add to Cart
           </button>
         </p>
