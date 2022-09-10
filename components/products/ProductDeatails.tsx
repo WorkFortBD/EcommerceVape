@@ -31,11 +31,11 @@ export default function Productdeatails({}: Props) {
               <Link href="/"> Salt Nicotine</Link>
             </p>
           </div>
-          <div>
+          {/* <div>
             <Link href="/">
               <FontAwesomeIcon icon={faTable} style={{ width: 22 }} />
             </Link>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex mt-6 flex-col md:flex-row mx-2 flex-wrap">

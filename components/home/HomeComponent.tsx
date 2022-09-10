@@ -12,7 +12,7 @@ export default function HomeComponent() {
         <div className="container mx-auto mt-10">
           <div className="flex justify-center flex-wrap">
             <div className=" mt-3 ml-4">
-              <img src="/images/Ds.jpg" alt="Dukhan Package" />
+              <img src="/images/homepage/packages.jpg" alt="" />
             </div>
             <div className=" mt-3  ml-4">
               <img src="/images/Batteries.jpg" alt="Battery" />

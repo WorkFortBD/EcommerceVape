@@ -12,7 +12,6 @@ export default function ProductDetailImages({  }: Props): ReactElement {
     "/images/products/4.jpeg",
     "/images/products/5.jpeg",
     "/images/products/6.jpeg",
-    "/images/products/7.jpeg"
   ]);
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -39,7 +38,7 @@ export default function ProductDetailImages({  }: Props): ReactElement {
         {images.map((image, index) =>
           <img
             src={image}
-            className="w-full h-20 mb-2 cursor-pointer"
+            className="w-full h-[4.5rem] md:h-28 mb-2 cursor-pointer"
             key={index}
             onClick={() => setActiveImageIndex(index)}
           />
@@ -47,7 +46,7 @@ export default function ProductDetailImages({  }: Props): ReactElement {
       </div>
 
       <div className="basis-4/5 relative">
-        <div className="absolute top-[48%] left-10">
+        <div className="absolute top-[45%] left-10">
           <div className="bg-white  rounded-full w-10 h-10">
             <FontAwesomeIcon
               icon={faChevronLeft}
@@ -65,7 +64,7 @@ export default function ProductDetailImages({  }: Props): ReactElement {
           />
         </div>
 
-        <div className="absolute top-[48%] right-10">
+        <div className="absolute top-[45%] right-10">
           <div className="bg-white rounded-full w-10 h-10">
             <FontAwesomeIcon
               icon={faChevronRight}
