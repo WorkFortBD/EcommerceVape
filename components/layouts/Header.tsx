@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import content from '../../content.json';
+import content from "../../content.json";
 
 export default function Header() {
   const isLoggedIn = false;
@@ -29,7 +29,11 @@ export default function Header() {
 
   return (
     <header>
-      <div className={`navbar-main-area bg-white shadow ${barVisibility ? 'fixed-nav' : 'not-fixed-nav'}`}>
+      <div
+        className={`navbar-main-area bg-white shadow ${
+          barVisibility ? "fixed-nav" : "not-fixed-nav"
+        }`}
+      >
         <div className="container mx-auto">
           <Navbar fluid={false} rounded={false}>
             <Navbar.Brand href="/">
@@ -43,7 +47,7 @@ export default function Header() {
             </Navbar.Brand>
 
             <div className="flex md:order-2 items-center justify-center">
-              {isLoggedIn &&
+              {isLoggedIn && (
                 <Dropdown
                   arrowIcon={false}
                   inline={true}
@@ -66,7 +70,8 @@ export default function Header() {
                   <Dropdown.Item>Earnings</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>}
+                </Dropdown>
+              )}
 
               <Link href="/my-account" className="">
                 <FontAwesomeIcon
@@ -115,7 +120,7 @@ export default function Header() {
               </Navbar.Link>
 
               <Navbar.Link href="/" active={true}>
-                <Link href="/category">
+                <Link href="/categories">
                   <span className="transition uppercase text-primary hover:text-primary-light text-base">
                     LUCKY OFFER
                   </span>
@@ -123,33 +128,59 @@ export default function Header() {
               </Navbar.Link>
 
               <Navbar.Link href="/">
-                <Link href="/category" className="uppercase">
+                <Link href="/categories" className="uppercase">
                   <span className="transition uppercase text-primary hover:text-primary-light text-base">
                     SHOP PACKAGES
                   </span>
                 </Link>
               </Navbar.Link>
 
-              {/* <Navbar.Link href="/">
-                <Link href="/" className="uppercase">
-                <span className="transition uppercase text-primary hover:text-primary-light text-base">
-                  VAPE
-                </span>
-                </Link>
-              </Navbar.Link> */}
-
               <Navbar.Link>
                 <Dropdown
                   arrowIcon={true}
                   trigger="click"
                   inline={true}
-                  label={<span className="text-primary hover:text-primary-light">VAPE</span>}
+                  label={
+                    <span className="text-primary hover:text-primary-light">
+                      VAPE
+                    </span>
+                  }
                 >
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Vape Mod Kit</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Pods System Vape</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Coil System Vape</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Disposable Vape</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Popular Vape</span></Link></Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Vape Mod Kit
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Pods System Vape
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Coil System Vape
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Disposable Vape
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Popular Vape
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
                 </Dropdown>
               </Navbar.Link>
 
@@ -158,11 +189,33 @@ export default function Header() {
                   arrowIcon={true}
                   trigger="click"
                   inline={true}
-                  label={<span className="text-primary hover:text-primary-light">E-JUICE</span>}
+                  label={
+                    <span className="text-primary hover:text-primary-light">
+                      E-JUICE
+                    </span>
+                  }
                 >
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Salt Nic</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Vape Juice</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Popular E-juice</span></Link></Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Salt Nic
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Vape Juice
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Popular E-juice
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
                 </Dropdown>
               </Navbar.Link>
 
@@ -171,15 +224,61 @@ export default function Header() {
                   arrowIcon={true}
                   trigger="click"
                   inline={true}
-                  label={<span className="text-primary hover:text-primary-light">ACCESSORIES</span>}
+                  label={
+                    <span className="text-primary hover:text-primary-light">
+                      ACCESSORIES
+                    </span>
+                  }
                 >
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Disposable pods</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Vape Pods</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Vape Coils</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Vape Tank</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Vape Battery</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">RDA / RDTA</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Vape Tools</span></Link></Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Disposable pods
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Vape Pods
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Vape Coils
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Vape Tank
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Vape Battery
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        RDA / RDTA
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Vape Tools
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
                 </Dropdown>
               </Navbar.Link>
 
@@ -188,17 +287,39 @@ export default function Header() {
                   arrowIcon={true}
                   trigger="click"
                   inline={true}
-                  label={<span className="text-primary hover:text-primary-light">SHISHA HOOKAH</span>}
+                  label={
+                    <span className="text-primary hover:text-primary-light">
+                      SHISHA HOOKAH
+                    </span>
+                  }
                 >
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Hookah</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Flavour</span></Link></Dropdown.Item>
-                  <Dropdown.Item><Link href="/category"><span className="text-primary hover:text-primary-light">Tools</span></Link></Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Hookah
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Flavour
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link href="/categories">
+                      <span className="text-primary hover:text-primary-light">
+                        Tools
+                      </span>
+                    </Link>
+                  </Dropdown.Item>
                 </Dropdown>
               </Navbar.Link>
             </Navbar.Collapse>
           </Navbar>
         </div>
-    </div>
+      </div>
     </header>
   );
 }

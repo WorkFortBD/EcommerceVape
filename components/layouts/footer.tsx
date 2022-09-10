@@ -19,7 +19,11 @@ export default function footer({}: Props): ReactElement {
             <div className="flex flex-wrap flex-col sm:flex-row justify-center items-center">
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                 <Link href="">
-                  <img src="images/logos/logo-footer.svg" alt="" className="w-40" />
+                  <img
+                    src="images/logos/logo-footer.svg"
+                    alt=""
+                    className="w-40"
+                  />
                 </Link>
                 <div className="flex flex-auto mt-16 text-gray-400">
                   <Link href="" className="mx-2 sm:mx-3 md:mx-4">
@@ -64,7 +68,7 @@ export default function footer({}: Props): ReactElement {
               </div>
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 text-gray-400 list-none">
                 <li className="mt-3">
-                <Link href="/">Contact Us</Link>
+                  <Link href="/">Contact Us</Link>
                 </li>
 
                 <li className="mt-3">
