@@ -15,18 +15,18 @@ export default function HomeComponent() {
               <img src="/images/homepage/packages.jpg" alt="" />
             </div>
             <div className=" mt-3  ml-4">
-              <img src="/images/Batteries.jpg" alt="Battery" />
+              <img src="/images/homepage/batteries.jpg" alt="Battery" />
             </div>
             <div className=" ml-4">
               <p>
                 <img
-                  src="/images/Disposable.jpg"
+                  src="/images/categories/disposable.jpg"
                   alt="Disposable Pods"
                   className="mt-2"
                 />
               </p>
               <p className="mt-5">
-                <img src="/images/Cotton.jpg" alt="Cotton" />
+                <img src="/images/categories/cotton.jpg" alt="Cotton" />
               </p>
             </div>
           </div>

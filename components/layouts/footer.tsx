@@ -43,7 +43,7 @@ export default function footer({}: Props): ReactElement {
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                 <Link href="">
                   <img
-                    src="images/Payments.svg"
+                    src="images/common/payments.svg"
                     alt=""
                     className="w-36 mt-4 py-2"
                   />
@@ -88,10 +88,10 @@ export default function footer({}: Props): ReactElement {
 
             <div className="mt-7 flex justify-center items-center">
               <Link href="">
-                <img src="images/maroof.png" alt="" className="w-15" />
+                <img src="images/common/footer-brand.png" alt="" className="w-15" />
               </Link>
               <Link href="">
-                <img src="images/vat2.png" alt="" className="w-10 ml-12" />
+                <img src="images/common/vat-icon.png" alt="" className="w-10 ml-12" />
               </Link>
             </div>
           </div>

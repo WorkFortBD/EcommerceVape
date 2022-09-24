@@ -198,7 +198,7 @@ export default function CheckoutComponent({}: Props) {
                   <label htmlFor="creditcard"> Credit Card | MADA</label>
                 </div>
                 <img
-                  src="images/CC-1.svg"
+                  src="images/common/checkout.svg"
                   alt=""
                   id="creditcard"
                   className="w-44 ml-2"
