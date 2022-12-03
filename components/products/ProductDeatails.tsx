@@ -9,7 +9,7 @@ import { formatCurrency } from "../../utils/currency";
 
 type Props = {};
 
-export default function Productdeatails({}: Props) {
+export default function Productdeatails({ product }: Props) {
   return (
     <section className="product-deatails-section">
       <div className="container mx-auto mt-2 p-5">
@@ -45,7 +45,7 @@ export default function Productdeatails({}: Props) {
           <div className="basis-2/4 border shadow-md rounded-3xl mt-5 p-6">
             <div className="text-center">
               <h2 className="text-3xl">
-                Helvape-Cotton & Tools Travel set(300ML) 25-50mg
+                {product.name}
               </h2>
               <p className="text-primary mt-3 text-2xl">30</p>
               <p className="text-gray-500 text-xs mt-2">
