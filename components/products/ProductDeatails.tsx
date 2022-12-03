@@ -1,13 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPhone, faTable } from "@fortawesome/free-solid-svg-icons";
-import { Accordion, Alert, Carousel, Progress } from "flowbite-react";
+import { faCheck, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { Accordion, Progress } from "flowbite-react";
 import ProductList from "./ProductList";
 import ProductDetailImages from "./ProductDetailImages";
 import { formatCurrency } from "../../utils/currency";
+import { IProduct } from "../../interfaces/products";
 
-type Props = {};
+type Props = {
+  product: IProduct
+};
 
 export default function Productdeatails({ product }: Props) {
   return (
@@ -19,7 +22,7 @@ export default function Productdeatails({ product }: Props) {
               <Link href="/">Home /</Link>
             </p>
             <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Shope /</Link>
+              <Link href="/"> Shop /</Link>
             </p>
             <p className="text-gray-500 hover:text-gray-700 inline">
               <Link href="/"> Vape /</Link>
