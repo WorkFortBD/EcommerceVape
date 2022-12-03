@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React, { ReactElement } from "react";
+import { IProduct } from "../../interfaces/products";
 import { formatCurrency } from "../../utils/currency";
 
 interface Props {
-  product: object;
+  product: IProduct;
 }
 
 export default function ProductShortDetail({ product }: Props): ReactElement {
@@ -20,7 +21,7 @@ export default function ProductShortDetail({ product }: Props): ReactElement {
           </div>
           <div className="mt-1 p-1 text-center">
             <p className="cursor-pointer text-gray-800 hover:text-gray-600 overflow-hidden h-12 ">
-              {product.title}
+              {product.name}
             </p>
           </div>
         </div>
