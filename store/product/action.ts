@@ -12,15 +12,9 @@ import * as Types from "./type";
  */
  export const getProductListAction = (args = {}) =>async (dispatch) => {
    let response = {
-     loading: false,
+     loading: true,
      data: [],
    };
-
-   // console.log(`args`, args);
-
-   // console.log(`url`, url);
-
-   response.loading = true;
    dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
 
    response.data = await getProductsData(args);
