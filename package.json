@@ -13,7 +13,6 @@
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.0",
     "currency-formatter": "^1.5.9",
-    "dayjs": "^1.11.6",
     "flowbite": "^1.5.4",
     "flowbite-react": "^0.1.12",
     "next": "latest",
