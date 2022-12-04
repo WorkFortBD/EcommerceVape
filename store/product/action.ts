@@ -24,7 +24,6 @@ import * as Types from "./type";
    dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
 
    response.data = await getProductsData(args);
-   console.log('responseData',response.data);
    response.loading = false;
 
    dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
