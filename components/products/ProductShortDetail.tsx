@@ -1,7 +1,15 @@
+/**
+ * External dependencies.
+ */
 import Link from "next/link";
 import React, { ReactElement } from "react";
+
+/**
+ * Internal dependencies.
+ */
 import { IProduct } from "../../interfaces/products";
 import { formatCurrency } from "../../utils/currency";
+import { CartButton } from "../carts/CartButton";
 
 interface Props {
   product: IProduct;
@@ -31,9 +39,7 @@ export default function ProductShortDetail({ product }: Props): ReactElement {
           {formatCurrency(product.price)}
         </span>
         <p>
-          <button className="cursor-pointer transition-all uppercase mx-3 mt-3 hover:bg-primary-light text-sm mb-3 py-2 px-4 bg-primary rounded-md text-white hover:px-8">
-            Add to Cart
-          </button>
+          <CartButton product={product} />
         </p>
       </div>
     </div>
