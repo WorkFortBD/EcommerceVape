@@ -29,7 +29,6 @@ export default function Header() {
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
     setSrollPosition(position);
   };
-console.log('Categories',categories);
   useEffect(() => {
     dispatch(getCategoriesAction());
     window.addEventListener("scroll", handleScroll, { passive: true });
