@@ -1,4 +1,4 @@
-export interface ILayout {
+export interface ICategory {
     name: string;
     banner: string | null;
     parent_id: number;
@@ -8,7 +8,7 @@ export interface ILayout {
 
 
 export interface ILayoutReducer {
-    categories: Array<ILayout>,
-    category:ILayout,
+    categories: Array<ICategory>,
+    category:ICategory,
     categoryLoading:boolean
 }

@@ -1,11 +1,11 @@
 import { ICartReducer } from "./carts";
-import { ICategoryReducer } from "./category";
+import { ILayoutReducer } from "./layout";
 import { IProductReducer } from "./products";
 
 export interface IRootReducer {
     products: IProductReducer;
     carts: ICartReducer,
-    category: ICategoryReducer,
+    layout: ILayoutReducer,
 }
 
 export interface IAction {

@@ -10,7 +10,7 @@ import * as Types from "./type";
  *
  * @return void Dispatch `GET_PRODUCT_LIST_MAIN`
  */
- export const getProductListAction = (args = {}) =>async (dispatch) => {
+ export const getCategoriesAction = (args = {}) =>async (dispatch) => {
    let response = {
      loading: false,
      data: [],
@@ -26,7 +26,7 @@ import * as Types from "./type";
    let url = `${process.env.NEXT_PUBLIC_API_URL}frontend-categories`;
 
    const res = await Axios.get(url);
-   console.log('responseData',response.data);
+   response.data=res.data.data;
    response.loading = false;
 
    dispatch({ type: Types.GET_CATEGORIES, payload: response });
