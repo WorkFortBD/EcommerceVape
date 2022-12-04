@@ -7,6 +7,7 @@ import ProductList from "./ProductList";
 import ProductDetailImages from "./ProductDetailImages";
 import { formatCurrency } from "../../utils/currency";
 import { IProduct } from "../../interfaces/products";
+import { CartButton } from "../carts/CartButton";
 
 type Props = {
   product: IProduct
@@ -95,9 +96,7 @@ export default function Productdeatails({ product }: Props) {
                   +
                 </span>
               </small>
-              <button className="bg-primary hover:bg-gray-400 p-2 ml-2 rounded-md text-white">
-                Add to Cart
-              </button>
+              <CartButton product={product} />
             </div>
             <div className="text-center">
               <button className="bg-primary mt-6 rounded-md p-2 px-8 text-white">
