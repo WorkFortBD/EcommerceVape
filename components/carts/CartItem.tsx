@@ -1,22 +1,17 @@
+/**
+ * Internal dependencies.
+ */
 import Link from "next/link";
 import React, { ReactElement } from "react";
+
+/**
+ * External dependenncies.
+ */
+import { ICart } from "../../interfaces/carts";
 import { formatCurrency } from "../../utils/currency";
 
-interface ICartItem {
-  /**
-   * Cart Product Name.
-   */
-  productName: string;
-
-  productPrice: number;
-
-  productSlug: string;
-
-  productQty: number;
-}
-
 interface Props {
-  cart: ICartItem;
+  cart: ICart;
 }
 
 export default function CartItem({ cart }: Props): ReactElement {
@@ -33,18 +28,18 @@ export default function CartItem({ cart }: Props): ReactElement {
         </Link>
       </div>
       <div className="flex basis-1/2 mt-14 text-slate-500">
-        <p className="basis-1/4 font-size">{formatCurrency(cart.productPrice)}</p>
+        <p className="basis-1/4 font-size">{formatCurrency(cart.price)}</p>
         <p className="basis-1/2 font-size">
           <span className="border px-2 py-1 hover:bg-primary hover:text-white">
             -
           </span>
-          <span className="border px-2 py-1">{cart.productQty}</span>
+          <span className="border px-2 py-1">{cart.quantity}</span>
           <span className="border px-2 py-1 hover:bg-primary hover:text-white">
             +
           </span>
         </p>
         <p className="basis-1/4 text-primary">
-          {cart.productPrice * cart.productQty}
+          {cart.price * cart.quantity}
         </p>
       </div>
     </div>

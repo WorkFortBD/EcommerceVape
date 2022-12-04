@@ -1,28 +1,44 @@
-import React from "react";
+/**
+ * External dependencies.
+ */
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CartItem from "./CartItem";
 import { Progress } from "flowbite-react";
+import { useDispatch, useSelector } from "react-redux";
+
+/**
+ * Internal dependencies.
+ */
 import { formatCurrency } from "../../utils/currency";
+import { deleteCartItemAction, getCartsAction, toggleAllCartSelection } from "../../store/cart/action";
+import { IRootReducer } from "../../interfaces/reducers";
 
 type Props = {};
 
-export default function CartComponents({}: Props) {
-  const carts = [
-    {
-      productSlug: "/noisy-product",
-      productName: "NOISY - Cherry ICE (60ML) 3mg",
-      productImage: "images/1.jpeg",
-      productPrice: 80,
-      productQty: 1,
-    },
-    {
-      productSlug: "/noisy-product-2",
-      productName: "NOISY - Cherry ICE (60ML) 3mg",
-      productImage: "images/1.jpeg",
-      productPrice: 100,
-      productQty: 5,
-    },
-  ];
+export default function CartComponents({ }: Props) {
+  const dispatch = useDispatch();
+  const { carts, checkedAllCarts } = useSelector(
+    (state: IRootReducer) => state.carts
+  );
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleDeleteCartProduct = (productID: number) => {
+    dispatch(deleteCartItemAction(productID));
+    setShow(false);
+    // dispatch(handleShippingCost())
+  }
+
+  useEffect(() => {
+    dispatch(getCartsAction());
+  }, []);
+
+  const checkHandler = () => {
+    dispatch(toggleAllCartSelection(!cart.isChecked, cart.productID));
+    // dispatch(handleShippingCost())
+  }
 
   return (
     <section className="cart-section">
