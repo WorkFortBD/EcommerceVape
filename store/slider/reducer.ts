@@ -16,7 +16,7 @@ const initialState: ISliderReducer = {
 };
 
 
-const LayoutReducer = (state = initialState, action: IAction) => {
+const SliderReducer = (state = initialState, action: IAction) => {
 
     switch (action.type) {
         case Types.GET_SLIDER:
@@ -30,4 +30,4 @@ const LayoutReducer = (state = initialState, action: IAction) => {
             return state;
     }
 };
-export default LayoutReducer;
+export default SliderReducer;

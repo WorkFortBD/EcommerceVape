@@ -11,23 +11,18 @@ import * as Types from "./type";
  * @return void Dispatch `GET_PRODUCT_LIST_MAIN`
  */
  export const getSliderAction = (args = {}) =>async (dispatch) => {
-   let response = {
-     loading: false,
-     data: [],
-   };
+  let response = {
+    loading: false,
+    data: [],
+  };
 
-   // console.log(`args`, args);
+  dispatch({ type: Types.GET_SLIDER, payload: response });
 
-   // console.log(`url`, url);
+  let url = `${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`;
 
-   response.loading = true;
-   dispatch({ type: Types.GET_SLIDER, payload: response });
+  const res = await Axios.get(url);
+  response.data=res.data.data;
+  response.loading = false;
 
-   let url = `${process.env.NEXT_PUBLIC_API_URL}frontend-categories`;
-
-   const res = await Axios.get(url);
-   response.data=res.data.data;
-   response.loading = false;
-
-   dispatch({ type: Types.GET_SLIDER, payload: response });
- };
+  dispatch({ type: Types.GET_SLIDER, payload: response });
+};

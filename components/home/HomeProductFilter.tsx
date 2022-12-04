@@ -1,6 +1,7 @@
 /**
  * External dependencies.
  */
+import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect } from "react";
 import Link from "next/link";
 
@@ -9,16 +10,12 @@ import Link from "next/link";
  */
 import ProductList from "../products/ProductList";
 import { Tabs } from "flowbite-react";
-import { useSelector, useDispatch } from 'react-redux';
 import { IRootReducer } from "../../interfaces/reducers";
 import { getProductListAction } from "../../store/product/action";
 
 export default function HomeProductFilter() {
   const { products } = useSelector((state: IRootReducer) => state.products);
   const dispatch                = useDispatch();
-  // const { type, limit, page, category = "", isSliding } = props;
-  // const { topRatedProducts } = useSelector((state: IRootReducer) => state.products);
-console.log('products',products);
   useEffect(() => {
     const args = {
       'type' : null,
