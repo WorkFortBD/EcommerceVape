@@ -27,7 +27,7 @@ export default function Slider({  }: Props): ReactElement {
       <Carousel indicators={false}>
         {sliders.map((slider, index) =>
           <img
-            src={`http://localhost:8000/images/sliders/`+slider.image}
+            src={`${process.env.NEXT_PUBLIC_URL}images/sliders/`+slider.image}
             key={index}
             className="w-full"
             alt={slider.title}
