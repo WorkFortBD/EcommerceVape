@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import DOMPurify from 'dompurify';
+import Layout from "../../components/layouts/Layout";
 // import LoadingSpinner from "../../components/master/loading/LoadingSpinner";
 // import Notfound from '../404';
 
@@ -33,8 +34,9 @@ export default function PageBySlug() {
     }, [pageData]);
 
     return (
-        <div className="container">
-            <div className="row my-4 justify-content-center">
+        <Layout title={pageData.title}>
+        <div className="container mx-auto">
+            <div className="text-2xl mt-10 ml-5 mb-4">
                 {/* {
                     pageDataLoading && <LoadingSpinner text="Page Loading..." />
                 }
@@ -57,6 +59,7 @@ export default function PageBySlug() {
                 }
             </div>
         </div>
+        </Layout>
     );
 }
 
