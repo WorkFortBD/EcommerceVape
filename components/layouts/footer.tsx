@@ -72,7 +72,7 @@ export default function footer({}: Props): ReactElement {
                 </li>
 
                 <li className="mt-3">
-                  <Link href="/">Email Us</Link>
+                  <Link href="/p/help-center">Email Us</Link>
                 </li>
                 <li className="mt-3">
                   <Link href="/">Message Us</Link>
