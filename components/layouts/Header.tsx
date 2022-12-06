@@ -139,6 +139,14 @@ export default function Header() {
               </Navbar.Link>
 
               <Navbar.Link href="/">
+                <Link href="/products" className="uppercase">
+                  <span className="transition uppercase text-primary hover:text-primary-light text-base">
+                    PRODUCTS
+                  </span>
+                </Link>
+              </Navbar.Link>
+
+              <Navbar.Link href="/">
                 <Link href="/categories" className="uppercase">
                   <span className="transition uppercase text-primary hover:text-primary-light text-base">
                     SHOP PACKAGES
