@@ -47,13 +47,13 @@ export default function HomeProductFilter() {
             </Tabs.Item>
           </Tabs.Group>
 
-          {
+          {/* {
             products.map((product, index) => (
               <div key={index}>
                 <h2>{product.name}</h2>
               </div>
             ))
-          }
+          } */}
         </div>
 
         <div className="mt-3">

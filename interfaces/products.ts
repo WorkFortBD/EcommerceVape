@@ -7,6 +7,8 @@ export interface IProduct {
     price: number;
 
     image: string;
+    featured_image:string;
+    default_selling_price:number
 }
 
 export interface IProductReducer {
