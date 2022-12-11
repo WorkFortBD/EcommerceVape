@@ -1,3 +1,4 @@
+import { IAuthReducer } from "./auth";
 import { ICartReducer } from "./carts";
 import { ILayoutReducer } from "./layout";
 import { IProductReducer } from "./products";
@@ -8,6 +9,7 @@ export interface IRootReducer {
     carts: ICartReducer,
     layout: ILayoutReducer,
     slider: ISliderReducer,
+    auth: IAuthReducer,
 }
 
 export interface IAction {

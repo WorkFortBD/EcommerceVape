@@ -5,7 +5,7 @@ import Layout from "../components/layouts/Layout";
 
 const Login: NextPage = () => {
   return (
-    <Layout title={"Sing Up"}>
+    <Layout title={"Sing IN"}>
       <SignIn />
     </Layout>
   );
