@@ -34,10 +34,11 @@ export default function SignIn() {
       password: values.password,
       redirect: false,
     });
-
-    if (res.error) {
-      toast("error", res.error);
-    }
+    console.log('loginPost',res);
+    return false;
+    // if (res.error) {
+    //   toast("error", res.error);
+    // }
 
     if (res) {
       setIsLoading(false);
@@ -56,6 +57,7 @@ export default function SignIn() {
   };
 
   const onSubmit = (values) => {
+    console.log('value',values);
     loginPost(values);
   };
 
@@ -74,15 +76,15 @@ export default function SignIn() {
           const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
 
           let isValidEmail = emailRegex.test(value.trim());
-          let isValidPhone = phoneRegex.test(value.trim());
+          // let isValidPhone = phoneRegex.test(value.trim());
 
-          if (!isValidEmail && !isValidPhone) return false;
+          if (!isValidEmail) return false;
           return true;
         }
       ),
     password: yup
       .string()
-      .min(8, "Minimum 8 characters required")
+      .min(6, "Minimum 6 characters required")
       .required("Required")
       .test("password", "space not allowed", (value) => {
         if (value === undefined || value === null) return false;
@@ -95,13 +97,15 @@ export default function SignIn() {
 
   return (
     <div className="flex justify-center items-center">
-      <Formik
+        <div className="w-full max-w-lg p-5">
+        <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
         validateOnMount
       >
-        <div className="w-full max-w-lg p-5">
+        {() => {
+          return (
           <Form className="bg-white shadow-lg rounded px-5 pt-3 pb-8 mb-4">
             <div className="flex justify-center items-center cursor-pointer py-2">
               <a href="/">
@@ -139,7 +143,7 @@ export default function SignIn() {
                 <sub className="text-2xl text-red-500"> *</sub>
               </label>
               <Field
-                className="shadow appearance-none border border-red-500 rounded w-full px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -159,7 +163,7 @@ export default function SignIn() {
                   </span>
                 )}
               </div>
-              <ErrorMessage name="password" component={ ValidationError } />
+              {/* <ErrorMessage name="password" component={ ValidationError } /> */}
             </div>
 
             <div className="mt-1">
@@ -169,7 +173,7 @@ export default function SignIn() {
 
             <button
               className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+              type="submit"
             >
               Log In
             </button>
@@ -193,8 +197,10 @@ export default function SignIn() {
               </button>
             </a>
           </Form>
+             );
+            } }
+          </Formik>
         </div>
-      </Formik>
     </div>
   );
 }
