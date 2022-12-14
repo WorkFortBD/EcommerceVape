@@ -2,11 +2,15 @@ export interface ILogin {
     /**
      * Product name.
      */
-    name: string;
+    email: string;
     password:string;
+    remember:boolean;
 }
 
 export interface IAuthReducer {
-    loginData: ILogin,
-    authLoading:boolean,
+    userData: ILogin,
+    isLoading:boolean,
+    authToken:string,
+    status:boolean,
+    message:string
 }
