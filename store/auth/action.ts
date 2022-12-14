@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { ILogin } from "../../interfaces/auth";
 import * as Types from "./type";
+import { toast } from "react-toastify";
 
 
 
@@ -8,14 +9,56 @@ import * as Types from "./type";
  * changeinput function
  */
 
- export const changeItemInput = (name:ILogin, password:ILogin, e = null, itemInput = null) => (dispatch) => {
-  let data={
-    name:name,
-    value:password
+ export const postLoginData = (values:ILogin) => async (dispatch) => {
+  console.log('ActionLogin',values);
+  let loginResponse = {
+    status: false,
+    message: "",
+    isLoading: true,
+    tokenData: "",
+    data: null,
+  };
+  dispatch({ type: Types.POST_LOGIN_DATA, payload: loginResponse });
+
+  try {
+    let postData = {
+      email: values.email,
+      password: values.password,
+      remember: false,
+    };
+    await Axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, postData, {})
+      .then((res) => {
+        console.log('LoginResponse', res);
+        const { data, message, status } = res.data;
+        const { user, access_token} = data;
+        // localStorage.setItem(
+        //   "role-permissions",
+        //   JSON.stringify(role_permissions)
+        // );
+        // localStorage.setItem("menus", JSON.stringify(menus));
+
+        loginResponse.data = user;
+        loginResponse.tokenData = access_token;
+        loginResponse.message = message;
+        loginResponse.status = status;
+        toast("success", message);
+      })
+      .catch((err) => {
+        const { response } = err;
+        const { request, ...errorObject } = response;
+        loginResponse.message = errorObject.data.message;
+        toast("error", loginResponse.message);
+      });
+  } catch (error) {
+    loginResponse.message = "Something went wrong, Please try again !";
   }
 
-  dispatch({ type: Types.CHANGE_ITEM_INPUT, payload: data });
- }
+  loginResponse.isLoading = false;
+  dispatch({ type: Types.POST_LOGIN_DATA, payload: loginResponse });
+
+  // return axios.post(LOGIN_URL, { email, password });
+};
 
 /**
 * Get Products Data

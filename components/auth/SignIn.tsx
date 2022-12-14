@@ -1,10 +1,8 @@
 /**
  * External dependencies.
  */
-import Link from "next/link";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { signIn, getSession } from "next-auth/react";
+import React, { useState,useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -13,51 +11,34 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 /**
  * Internal Dependencies
  */
-import { getUserDataAction, isSignedIn } from "../../store/auth/action";
+import {postLoginData } from "../../store/auth/action";
+import { IRootReducer } from "../../interfaces/reducers";
 
-export default function SignIn() {
+export default function SignIn(history,props) {
   const router = useRouter();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
+  // const { status,message,isLoading } = useSelector((state: IRootReducer) => state.auth);
+  const status = useSelector((state) => state.auth.status);
+	const message = useSelector((state) => state.auth.message);
+	const isLoading = useSelector((state) => state.auth.isLoading);
+  console.log('authData',isLoading);
   const initialValues = {
     email: "",
     password: "",
     remember: false,
   };
 
+  useEffect(() => {
+		if (status && message.length > 0) {
+			router.replace('/');
+		}
+	}, [status, message, dispatch, history]);
   const loginPost = async (values) => {
-    setIsLoading(true);
-    const res = await signIn("credentials", {
-      email: values.email.trim(),
-      password: values.password,
-      redirect: false,
-    });
-    console.log('loginPost',res);
-    return false;
-    // if (res.error) {
-    //   toast("error", res.error);
-    // }
-
-    if (res) {
-      setIsLoading(false);
-    }
-
-    if (!res.error) {
-      const session = await getSession();
-      if (session && session.accessToken) {
-        localStorage.setItem("access-token", session.accessToken);
-        setIsLoading(false);
-        dispatch(isSignedIn());
-        dispatch(getUserDataAction());
-        router.replace("/");
-      }
-    }
+    dispatch(postLoginData(values));
   };
 
   const onSubmit = (values) => {
-    console.log('value',values);
     loginPost(values);
   };
 
@@ -171,11 +152,12 @@ export default function SignIn() {
               <span className="">Remember me</span>
             </div>
 
-            <button
+                <button
               className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Log In
+             {isLoading ? <i className="fas fa-spinner fa-spin"></i> : ''}
+             {isLoading ? <span className="sr-only">Signing in...</span> : 'Sign in'}
             </button>
             <div className="text-center">
               <a
