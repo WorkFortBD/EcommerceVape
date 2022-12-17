@@ -156,7 +156,6 @@ export default function SignIn(history,props) {
               className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-             {isLoading ? <i className="fas fa-spinner fa-spin"></i> : ''}
              {isLoading ? <span className="sr-only">Signing in...</span> : 'Sign in'}
             </button>
             <div className="text-center">
