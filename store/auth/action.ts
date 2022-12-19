@@ -118,3 +118,12 @@ export const getUserDataAction = () => async (dispatch) => {
     // dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
   }
 }
+
+export const customerRegister = async (registerInput) => {
+  try {
+    const res = await Axios.post(`${process.env.NEXT_PUBLIC_API_URL}auth/register-next`, registerInput);
+    return res;
+  } catch (error) {
+      return Promise.reject(false)
+  }
+};

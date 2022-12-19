@@ -1,229 +1,396 @@
 /**
  * External dependencies.
  */
- import React, { useState,useEffect } from "react";
- import { useDispatch, useSelector } from "react-redux";
- import { useRouter } from "next/router";
- import { toast } from "react-toastify";
- import * as yup from "yup";
- import { Formik, Form, Field, ErrorMessage } from "formik";
- 
- /**
-  * Internal Dependencies
-  */
- import {postLoginData } from "../../store/auth/action";
- import { IRootReducer } from "../../interfaces/reducers";
- 
- export default function SignUp(history,props) {
-   const router = useRouter();
-   const dispatch = useDispatch();
-   const [showPassword, setShowPassword] = useState(false);
-   // const { status,message,isLoading } = useSelector((state: IRootReducer) => state.auth);
-   const status = useSelector((state) => state.auth.status);
-     const message = useSelector((state) => state.auth.message);
-     const isLoading = useSelector((state) => state.auth.isLoading);
-   console.log('authData',isLoading);
-   const initialValues = {
-     email: "",
-     password: "",
-     remember: false,
-   };
- 
-   useEffect(() => {
-         if (status && message.length > 0) {
-             router.replace('/');
-         }
-     }, [status, message, dispatch, history]);
-   const loginPost = async (values) => {
-     dispatch(postLoginData(values));
-   };
- 
-   const onSubmit = (values) => {
-     loginPost(values);
-   };
- 
-   const validationSchema = yup.object().shape({
-     email: yup
-       .string()
-       .required("Required")
-       .test(
-         "email",
-         "Enter a valid email address",
-         (value) => {
-           if (value === undefined || value === null) return false;
- 
-           const emailRegex =
-             /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-           let isValidEmail = emailRegex.test(value.trim());
-           if (!isValidEmail) return false;
-           return true;
-         }
-       ),
-     password: yup
-       .string()
-       .min(6, "Minimum 6 characters required")
-       .required("Required")
-       .test("password", "space not allowed", (value) => {
-         if (value === undefined || value === null) return false;
- 
-         if (/\s/g.test(value)) return false;
- 
-         return true;
-       }),
-       phone: yup
-       .string()
-       .required("Required")
-       .test(
-         "phone",
-         "Enter a valid phone number",
-         (value) => {
-           if (value === undefined || value === null) return false;
-           const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
-           let isValidPhone = phoneRegex.test(value.trim());
-           if (!isValidPhone) return false;
-           return true;
-         }
-       ),
-       username: yup
-       .string()
-       .min(6, "Minimum 4 characters required")
-       .required("Required")
-       .test("username", "space not allowed", (value) => {
-         if (value === undefined || value === null) return false;
- 
-         if (/\s/g.test(value)) return false;
- 
-         return true;
-       }),
-   });
- 
-   return (
-     <div className="flex justify-center items-center">
-         <div className="w-full max-w-lg p-5">
-         <Formik
-         initialValues={initialValues}
-         onSubmit={onSubmit}
-         validationSchema={validationSchema}
-         validateOnMount
-       >
-         {() => {
-           return (
-           <Form className="bg-white shadow-lg rounded px-5 pt-3 pb-8 mb-4">
-             <div className="flex justify-center items-center cursor-pointer py-2">
-               <a href="/">
-                 <img
-                   src="/images/logos/logo.svg"
-                   className="mr-3 h-12 md:h-16"
-                   alt=""
-                 />
-               </a>
-             </div>
- 
-             <div className="mt-3">
-               <label
-                 htmlFor="number"
-                 className="block text-gray-700  font-bold mb-2"
-               >
-                 Email
-                 <sub className="text-2xl text-red-500"> *</sub>
-               </label>
-               <Field
-                 className="shadow appearance-none border rounded w-full px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                 id="email"
-                 type="text"
-                 placeholder="abc@email.com"
-                 name="email"
-               />
-               <ErrorMessage name="email" component={ValidationError} />
-             </div>
-             <div className="mt-3">
-              <label
-                htmlFor="number"
-                className="block text-gray-700  font-bold mb-2"
-              >
-                User Name
-                <sub className="text-2xl text-red-500"> *</sub>
-              </label>
-              <Field
-                className="shadow appearance-none border rounded w-full px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
-                type="text"
-                name="username"
-                placeholder="abc"
-              />
-              <ErrorMessage name="email" component={ValidationError} />
-            </div>
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import * as yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import Axios from "axios";
 
-            <div className="mb-1">
-              <label
-                htmlFor="number"
-                className="block text-gray-700  font-bold mb-2"
-              >
-                Phone Number(optional)
-                <sub className="text-2xl text-red-500"> *</sub>
-              </label>
-              <Field
-                className="shadow appearance-none border rounded w-full px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="number"
-                type="number"
-                name="phone"
-                placeholder="01********"
-              />
-              <ErrorMessage name="email" component={ValidationError} />
-            </div>
-            <div className="mb-1">
-               <label
-                 htmlFor="number"
-                 className="block text-gray-700  font-bold mb-2"
-               >
-                 Password
-                 <sub className="text-2xl text-red-500"> *</sub>
-               </label>
-               <Field
-                 className="shadow appearance-none border rounded w-full px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                 id="password"
-                 type={showPassword ? "text" : "password"}
-                 name="password"
-                 placeholder="******************"
-               />
-               <div
-                 className="account_input_group_prepend"
-                 onClick={() => setShowPassword(!showPassword)}
-               >
-                 {showPassword === false ? (
-                   <span>
-                     <i className="far fa-eye-slash"></i>
-                   </span>
-                 ) : (
-                   <span>
-                     <i className="far fa-eye"></i>
-                   </span>
-                 )}
-               </div>
-               <ErrorMessage name="password" component={ ValidationError } />
-             </div>
- 
-             <div className="mt-1">
-               <Field className="mr-2" type="checkbox" id="remember" name="remember" />
-               <span className="">Remember me</span>
-             </div>
- 
-                 <button
-               className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
-               type="submit"
-             >
-              {isLoading ? <span className="sr-only">Signing iUp...</span> : 'Sign UP'}
-             </button>
-           </Form>
+/**
+ * Internal Dependencies
+ */
+import { customerRegister, postLoginData } from "../../store/auth/action";
+import { IRootReducer } from "../../interfaces/reducers";
+
+export default function SignIn(history, props) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [validationStep, setValidationStep] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [resendOtp, setResendOtp] = useState(false);
+  const [stepOneFormData, setStepOneFormData] = useState(null);
+  const [otpExpireTime, setOtpExpireTime] = useState(0);
+  console.log("authData", isLoading);
+  const initialValues = {
+    email: "",
+    password: "",
+    remember: false,
+  };
+
+  // useEffect(() => {
+  //   if (status && message.length > 0) {
+  //     router.replace("/");
+  //   }
+  // }, [status, history]);
+  //  const loginPost = async (values) => {
+  //    dispatch(postLoginData(values));
+  //  };
+
+  const onSubmit = async (values, actions) => {
+    setIsLoading(true);
+    try {
+      if (validationStep === 0) {
+        const formData = {
+          email: values.email,
+          first_name: values.first_name,
+          last_name: values.last_name,
+          phone_no: values.phone_no,
+        };
+
+        // setStepOneFormData(formData);
+
+        const data = await Axios.post("auth/register", formData);
+
+        if (data.data.status) {
+          toast("success", "OTP is sent to your phone number");
+          setOtpExpireTime(data.data.data);
+          setIsLoading(false);
+          setValidationStep(1);
+          actions.setTouched({});
+          actions.setSubmitting(false);
+        }
+      }
+      if (validationStep === 1) {
+        const formData = {
+          email: values.email,
+          first_name: values.first_name,
+          last_name: values.last_name,
+          phone_no: values.phone_no,
+          otp: values.otp,
+          password: values.password,
+          password_confirmation: values.password_confirmation,
+        };
+
+        customerRegister(formData)
+          .then((data) => {
+            if (data.data.status) {
+              toast(
+                "success",
+                "Your account created successfully, Please Login."
               );
-             } }
-           </Formik>
-         </div>
-     </div>
-   );
- }
- 
- function ValidationError(props) {
-   return <small className="text-red-500">{props.children}</small>;
- }
- 
+              window.location.replace("/login");
+            }
+          })
+          .catch((_) => {
+            setIsLoading(false);
+            actions.setTouched({});
+            actions.setSubmitting(false);
+
+            setIsLoading(false);
+          });
+      }
+    } catch (error) {
+      const { response } = error;
+      setIsLoading(false);
+
+      if (!response.data.errors) {
+        toast("success", response.data.message);
+        setValidationStep(1);
+        setOtpExpireTime(response.data.data);
+        actions.setTouched({});
+        actions.setSubmitting(false);
+        return;
+      }
+
+      const errors = Object.keys(response.data.errors);
+
+      if (errors.length > 1) {
+        toast("error", "Email and phone number already used.");
+      } else {
+        toast(
+          "error",
+          `${errors[0] === "email" ? "email" : "Phone number"} is already used.`
+        );
+      }
+    }
+  };
+
+  //   const resendOtpApi = () => {
+  //     setResendOtp(false);
+  //     Axios.post('auth/register', stepOneFormData)
+  //     .then(data => {
+  //         if (data.data.status) {
+  //             toast('success', data.data.message)
+  //             setOtpExpireTime(data.data.data)
+  //         }
+  //     })
+  //     .catch(err => {
+  //         const { response } = err;
+  //         if(!response.data.errors) {
+  //             toast('success', response.data.message);
+  //             setOtpExpireTime(response.data.data);
+  //             return;
+  //         }
+
+  //         toast('error', 'Something went wrong. Please refresh browser')
+  //     })
+  // }
+
+  const validationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .required("Required")
+      .test("email", "Enter a valid email address", (value) => {
+        if (value === undefined || value === null) return false;
+
+        const emailRegex =
+          /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        //  const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
+
+        let isValidEmail = emailRegex.test(value.trim());
+        // let isValidPhone = phoneRegex.test(value.trim());
+
+        if (!isValidEmail) return false;
+        return true;
+      }),
+    password: yup
+      .string()
+      .min(6, "Minimum 6 characters required")
+      .required("Required")
+      .test("password", "space not allowed", (value) => {
+        if (value === undefined || value === null) return false;
+
+        if (/\s/g.test(value)) return false;
+
+        return true;
+      }),
+    password_confirmation: yup
+      .string()
+      .oneOf(
+        [yup.ref("password"), null],
+        "Password confirmation does not match password!"
+      )
+      .required("Required"),
+  });
+
+  return (
+    <div className="flex justify-center items-center">
+      <div className="w-full max-w-lg p-5">
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+          validateOnMount
+        >
+          {() => {
+            return (
+              <Form className="bg-white shadow-lg rounded px-5 pt-3 pb-8 mb-4">
+                {validationStep === 0 ? (
+                  <>
+                    <div className="flex justify-center items-center cursor-pointer py-2">
+                      <a href="/">
+                        <img
+                          src="/images/logos/logo.svg"
+                          className="mr-3 h-12 md:h-16"
+                          alt=""
+                        />
+                      </a>
+                    </div>
+
+                    <div className="mt-3">
+                      <label
+                        htmlFor="number"
+                        className="block text-gray-700  font-bold mb-2"
+                      >
+                        First Name
+                        <sub className="text-2xl text-red-500"> *</sub>
+                      </label>
+                      <Field
+                        className="shadow appearance-none border rounded w-full px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="first_name"
+                        type="text"
+                        placeholder="Muhammad"
+                        name="first_name"
+                      />
+                      <ErrorMessage
+                        name="first_name"
+                        component={ValidationError}
+                      />
+                    </div>
+
+                    <div className="mt-3">
+                      <label
+                        htmlFor="number"
+                        className="block text-gray-700  font-bold mb-2"
+                      >
+                        Last Name
+                        <sub className="text-2xl text-red-500"> *</sub>
+                      </label>
+                      <Field
+                        className="shadow appearance-none border rounded w-full px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="last_name"
+                        type="text"
+                        placeholder="Hafiz"
+                        name="last_name"
+                      />
+                      <ErrorMessage
+                        name="last_name"
+                        component={ValidationError}
+                      />
+                    </div>
+
+                    <div className="mt-3">
+                      <label
+                        htmlFor="number"
+                        className="block text-gray-700  font-bold mb-2"
+                      >
+                        Phone No
+                        <sub className="text-2xl text-red-500"> *</sub>
+                      </label>
+                      <Field
+                        className="shadow appearance-none border rounded w-full px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="phone_no"
+                        type="text"
+                        placeholder="abcd"
+                        name="phone_no"
+                      />
+                      <ErrorMessage
+                        name="phone_no"
+                        component={ValidationError}
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <label
+                        htmlFor="number"
+                        className="block text-gray-700  font-bold mb-2"
+                      >
+                        Email
+                        <sub className="text-2xl text-red-500"> *</sub>
+                      </label>
+                      <Field
+                        className="shadow appearance-none border rounded w-full px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="email"
+                        type="text"
+                        placeholder="abc@email.com"
+                        name="email"
+                      />
+                      <ErrorMessage name="email" component={ValidationError} />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mb-1">
+                      <label
+                        htmlFor="number"
+                        className="block text-gray-700  font-bold mb-2"
+                      >
+                        Password
+                        <sub className="text-2xl text-red-500"> *</sub>
+                      </label>
+                      <Field
+                        className="shadow appearance-none border rounded w-full px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        placeholder="******************"
+                      />
+                      <div
+                        className="account_input_group_prepend"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword === false ? (
+                          <span>
+                            <i className="far fa-eye-slash"></i>
+                          </span>
+                        ) : (
+                          <span>
+                            <i className="far fa-eye"></i>
+                          </span>
+                        )}
+                      </div>
+                      <ErrorMessage
+                        name="password"
+                        component={ValidationError}
+                      />
+                    </div>
+
+                    <div className="mb-1">
+                      <label
+                        htmlFor="number"
+                        className="block text-gray-700  font-bold mb-2"
+                      >
+                        Confirm Password
+                        <sub className="text-2xl text-red-500"> *</sub>
+                      </label>
+                      <Field
+                        className="shadow appearance-none border rounded w-full px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password_confirmation"
+                        type={showConfirmPassword ? "text" : "password"}
+                        name="password_confirmation"
+                        placeholder="******************"
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
+                      />
+                      <ErrorMessage
+                        name="password_confirmation"
+                        component={ValidationError}
+                      />
+                    </div>
+
+                    <div className="mt-1">
+                      <Field
+                        className="mr-2"
+                        type="checkbox"
+                        id="remember"
+                        name="remember"
+                      />
+                      <span className="">Remember me</span>
+                    </div>
+                  </>
+                )}
+
+                <button
+                  className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  {isLoading ? (
+                    <span className="sr-only">Signing in...</span>
+                  ) : (
+                    "Sign in"
+                  )}
+                </button>
+                <div className="text-center">
+                  <a
+                    className="inline-block align-baseline font-bold px-2 py-1 rounded-md text-primary hover:text-primary-light"
+                    href="#"
+                  >
+                    Forgot Password?
+                  </a>
+                </div>
+                <p className="text-primary mt-3 font-bold">
+                  Don't have an account ?
+                </p>
+                <a href="/sign-up">
+                  <button
+                    className="border w-full mt-1 py-2 uppercase text-primary font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
+                    Sing Up
+                  </button>
+                </a>
+              </Form>
+            );
+          }}
+        </Formik>
+      </div>
+    </div>
+  );
+}
+
+function ValidationError(props) {
+  return <small className="text-red-500">{props.children}</small>;
+}
