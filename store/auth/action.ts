@@ -2,6 +2,7 @@ import Axios from "axios";
 import { ILogin } from "../../interfaces/auth";
 import * as Types from "./type";
 import { toast } from "react-toastify";
+import { getUserDataAction } from "../users/action";
 
 
 
@@ -10,7 +11,6 @@ import { toast } from "react-toastify";
  */
 
  export const postLoginData = (values:ILogin) => async (dispatch) => {
-  console.log('ActionLogin',values);
   let loginResponse = {
     status: false,
     message: "",
@@ -29,7 +29,6 @@ import { toast } from "react-toastify";
     await Axios
       .post(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, postData, {})
       .then((res) => {
-        console.log('LoginResponse', res);
         const { data, message, status } = res.data;
         const { user, access_token} = data;
         // localStorage.setItem(
@@ -82,11 +81,12 @@ export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
   const userDataFound = localStorage.getItem('user-info');
 
   if (!userDataFound || !userData) {
-    await getProductsData(args);
+    dispatch(getUserDataAction());
   }
 
 
   const accessToken = localStorage.getItem('access-token');
+  console.log('accessToken', accessToken)
 
   if (accessToken) {
     dispatch({ type: Types.IS_SIGNED_IN, payload: true })
@@ -95,29 +95,29 @@ export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
   }
 };
 
-export const getUserDataAction = () => async (dispatch) => {
-  let data      = {
-    userData    : null,
-    access_token: 'access_token',
-    redirectTo  : null
-  };
-  const userDataFound = localStorage.getItem('user-info');
+// export const getUserDataAction = () => async (dispatch) => {
+//   let data      = {
+//     userData    : null,
+//     access_token: 'access_token',
+//     redirectTo  : null
+//   };
+//   const userDataFound = localStorage.getItem('user-info');
   
-  if(userDataFound) {
-    data.userData = JSON.parse(userDataFound);
-    dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
-    return;
-  }
+//   if(userDataFound) {
+//     data.userData = JSON.parse(userDataFound);
+//     dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
+//     return;
+//   }
   
-  try {
-    const res = await Axios.get('auth/getUserProfile');
-    data.userData = res.data.data;
-    localStorage.setItem('user-info', JSON.stringify(res.data.data));
-    dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
-  } catch (error) {
-    // dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
-  }
-}
+//   try {
+//     const res = await Axios.get('auth/getUserProfile');
+//     data.userData = res.data.data;
+//     localStorage.setItem('user-info', JSON.stringify(res.data.data));
+//     dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
+//   } catch (error) {
+//     // dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
+//   }
+// }
 
 export const customerRegister = async (registerInput) => {
   try {

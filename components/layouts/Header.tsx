@@ -16,14 +16,17 @@ import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { getCategoriesAction } from "../../store/layouts/action";
+import { isSignedIn } from "../../store/auth/action";
+import { getUserDataAction } from "../../store/users/action";
 
 
 export default function Header() {
-  const isLoggedIn = false;
   const [barVisibility, setBarVisibility] = useState(false);
   const [scrollPosition, setSrollPosition] = useState(0);
   const dispatch = useDispatch();
   const { categories } = useSelector((state: IRootReducer) => state.layout);
+  const isLoggedIn = useSelector((state: IRootReducer) => state.auth);
+  console.log('isloggedIn', isLoggedIn);
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
@@ -31,6 +34,8 @@ export default function Header() {
   };
   useEffect(() => {
     dispatch(getCategoriesAction());
+    dispatch(isSignedIn());
+    dispatch(getUserDataAction());
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
@@ -58,7 +63,6 @@ export default function Header() {
             </Navbar.Brand>
 
             <div className="flex md:order-2 items-center justify-center">
-              {isLoggedIn && (
                 <Dropdown
                   arrowIcon={false}
                   inline={true}
@@ -82,7 +86,6 @@ export default function Header() {
                   <Dropdown.Divider />
                   <Dropdown.Item>Sign out</Dropdown.Item>
                 </Dropdown>
-              )}
 
               <Link href="/my-account" className="">
                 <FontAwesomeIcon
