@@ -11,8 +11,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 /**
  * Internal Dependencies
  */
-import {postLoginData } from "../../store/auth/action";
-import { IRootReducer } from "../../interfaces/reducers";
+import {isSignedIn, postLoginData } from "../../store/auth/action";
+import { getUserDataAction } from "../../store/users/action";
 
 export default function SignIn(history,props) {
   const router = useRouter();
@@ -22,7 +22,6 @@ export default function SignIn(history,props) {
   const status = useSelector((state) => state.auth.status);
 	const message = useSelector((state) => state.auth.message);
 	const isLoading = useSelector((state) => state.auth.isLoading);
-  console.log('authData',isLoading);
   const initialValues = {
     email: "",
     password: "",
@@ -31,6 +30,8 @@ export default function SignIn(history,props) {
 
   useEffect(() => {
 		if (status && message.length > 0) {
+      dispatch(isSignedIn());
+      dispatch(getUserDataAction());
 			router.replace('/');
 		}
 	}, [status, message, dispatch, history]);

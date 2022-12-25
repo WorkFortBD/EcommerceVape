@@ -3,7 +3,6 @@ import Layout from "../../components/layouts/Layout";
 import ProductList from "../../components/products/ProductList";
 
 const Products: NextPage = (props) => {
-    console.log('productsProps',);
     let products=props.data.data;
     return (
         <Layout title={"Products"}>

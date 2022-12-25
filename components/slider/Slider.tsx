@@ -16,7 +16,6 @@ interface Props {}
 export default function Slider({  }: Props): ReactElement {
   const { sliders } = useSelector((state: IRootReducer) => state.slider);
   const dispatch                = useDispatch();
-  console.log('sliders',sliders);
   useEffect(() => {
     // New arrival products.
     dispatch(getSliderAction());

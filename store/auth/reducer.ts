@@ -8,6 +8,7 @@ const initialState: IAuthReducer = {
     status: false,
     message: "",
     isLoading: false,
+    isLoggedIn:false
 };
 
 const AuthReducer = (state = initialState, action: IAction) => {
@@ -16,8 +17,8 @@ const AuthReducer = (state = initialState, action: IAction) => {
       if (action.payload.status) {
         localStorage.setItem("userData", JSON.stringify(action.payload.data));
         localStorage.setItem("access_token", action.payload.tokenData);
+        // localStorage.setItem("isLoggedIn", action.payload.status);
       }
-      console.log('action.payload',action.payload);
       return {
         ...state,
         authToken: action.payload.tokenData,
@@ -26,6 +27,11 @@ const AuthReducer = (state = initialState, action: IAction) => {
         userData: action.payload.data,
         isLoading: action.payload.isLoading,
       };
+      case Types.IS_SIGNED_IN:
+        return{
+          ...state,
+          isLoggedIn:action.payload
+        }
 
     default:
       return state;

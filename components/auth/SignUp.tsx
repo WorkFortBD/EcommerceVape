@@ -14,6 +14,13 @@ import Axios from "axios";
  */
 import { customerRegister, postLoginData } from "../../store/auth/action";
 import { IRootReducer } from "../../interfaces/reducers";
+import Timer from "../layouts/Timer";
+
+const LOWERCASEREGEX = /(?=.*[a-z])/;
+const UPPERCASEREGEX = /(?=.*[A-Z])/;
+const NUMERICREGEX = /(?=.*[0-9])/;
+
+let IS_VALID_OTP = false;
 
 export default function SignIn(history, props) {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,11 +30,16 @@ export default function SignIn(history, props) {
   const [resendOtp, setResendOtp] = useState(false);
   const [stepOneFormData, setStepOneFormData] = useState(null);
   const [otpExpireTime, setOtpExpireTime] = useState(0);
-  console.log("authData", isLoading);
   const initialValues = {
+    first_name: "",
+    last_name: "",
+    phone_no: "",
     email: "",
     password: "",
-    remember: false,
+    password_confirmation: "",
+    otp: "",
+    offer: false,
+    policy: true,
   };
 
   // useEffect(() => {
@@ -49,10 +61,12 @@ export default function SignIn(history, props) {
           last_name: values.last_name,
           phone_no: values.phone_no,
         };
+        setStepOneFormData(formData);
 
-        // setStepOneFormData(formData);
-
-        const data = await Axios.post("auth/register", formData);
+        const data = await Axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}auth/register`,
+          formData
+        );
 
         if (data.data.status) {
           toast("success", "OTP is sent to your phone number");
@@ -81,7 +95,7 @@ export default function SignIn(history, props) {
                 "success",
                 "Your account created successfully, Please Login."
               );
-              window.location.replace("/login");
+              window.location.replace("/sign-in");
             }
           })
           .catch((_) => {
@@ -118,63 +132,116 @@ export default function SignIn(history, props) {
     }
   };
 
-  //   const resendOtpApi = () => {
-  //     setResendOtp(false);
-  //     Axios.post('auth/register', stepOneFormData)
-  //     .then(data => {
-  //         if (data.data.status) {
-  //             toast('success', data.data.message)
-  //             setOtpExpireTime(data.data.data)
-  //         }
-  //     })
-  //     .catch(err => {
-  //         const { response } = err;
-  //         if(!response.data.errors) {
-  //             toast('success', response.data.message);
-  //             setOtpExpireTime(response.data.data);
-  //             return;
-  //         }
+  const resendOtpApi = () => {
+    setResendOtp(false);
+    Axios.post("auth/register", stepOneFormData)
+      .then((data) => {
+        if (data.data.status) {
+          toast("success", data.data.message);
+          setOtpExpireTime(data.data.data);
+        }
+      })
+      .catch((err) => {
+        const { response } = err;
+        if (!response.data.errors) {
+          toast("success", response.data.message);
+          setOtpExpireTime(response.data.data);
+          return;
+        }
 
-  //         toast('error', 'Something went wrong. Please refresh browser')
-  //     })
-  // }
+        toast("error", "Something went wrong. Please refresh browser");
+      });
+  };
 
-  const validationSchema = yup.object().shape({
-    email: yup
-      .string()
-      .required("Required")
-      .test("email", "Enter a valid email address", (value) => {
-        if (value === undefined || value === null) return false;
+  const validationSchema = [
+    yup.object().shape({
+      first_name: yup
+        .string()
+        .required("Required")
+        .min(2, "Name should be at least 2 characters")
+        .max(40, "Up to 40 characters"),
+      last_name: yup
+        .string()
+        .required("Required")
+        .min(2, "Name should be at least 2 characters")
+        .max(40, "Up to 40 characters"),
+      phone_no: yup
+        .string()
+        .required("Required")
+        .test("phone_no", "Please input a valid phone number", (value) => {
+          const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
 
-        const emailRegex =
-          /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        //  const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
+          let isValidPhone = phoneRegex.test(value);
 
-        let isValidEmail = emailRegex.test(value.trim());
-        // let isValidPhone = phoneRegex.test(value.trim());
+          if (!isValidPhone) return false;
+          return true;
+        }),
+      email: yup.string().email("Please Input a valid email"),
+      policy: yup
+        .boolean()
+        .oneOf([true], "You must accept the terms and condition."),
+    }),
+    yup.object().shape({
+      otp: yup
+        .string()
+        .required("Required")
+        .min(6, "Input 6 digit OTP")
+        .max(6, "Input 6 digit OTP")
+        .test(
+          "otp-code",
+          "Please input a valid OTP",
+          async (value, context) => {
+            if (value && !IS_VALID_OTP && value.length === 6) {
+              try {
+                const otpBody = {
+                  otp: context.parent.otp,
+                  phone_no: context.parent.phone_no,
+                };
 
-        if (!isValidEmail) return false;
-        return true;
-      }),
-    password: yup
-      .string()
-      .min(6, "Minimum 6 characters required")
-      .required("Required")
-      .test("password", "space not allowed", (value) => {
-        if (value === undefined || value === null) return false;
+                const res = await Axios.post(`${process.env.NEXT_PUBLIC_API_URL}auth/check-otp`, otpBody);
 
-        if (/\s/g.test(value)) return false;
+                if (res.data.status) {
+                  IS_VALID_OTP = true;
+                  return Promise.resolve(true);
+                } else {
+                  return Promise.resolve(false);
+                }
+              } catch (error) {
+                return Promise.resolve(false);
+              }
+            }
 
-        return true;
-      }),
-    password_confirmation: yup
-      .string()
-      .oneOf(
-        [yup.ref("password"), null],
-        "Password confirmation does not match password!"
-      )
-      .required("Required"),
-  });
+            if (value && value.length < 6) {
+              IS_VALID_OTP = false;
+            }
+
+            return Promise.resolve(true);
+          }
+        ),
+      password: yup
+        .string()
+        .required("Required")
+        // .matches(LOWERCASEREGEX, 'At least one lowercase character required')
+        // .matches(UPPERCASEREGEX, 'At least one uppercase character required')
+        // .matches(NUMERICREGEX, 'At least one numeric value required')
+        // .matches(NUMERICREGEX, 'At least one numeric value required')
+        .min(8, "Minimum 8 characters required")
+        .test("password", "space not allowed", (value) => {
+          if (value === undefined || value === null) return false;
+
+          if (/\s/g.test(value)) return false;
+
+          return true;
+        }),
+      password_confirmation: yup
+        .string()
+        .oneOf(
+          [yup.ref("password"), null],
+          "Password confirmation does not match password!"
+        )
+        .required("Required"),
+    }),
+  ];
 
   return (
     <div className="flex justify-center items-center">
@@ -182,7 +249,7 @@ export default function SignIn(history, props) {
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
-          validationSchema={validationSchema}
+          validationSchema={validationSchema[validationStep]}
           validateOnMount
         >
           {() => {
@@ -284,6 +351,45 @@ export default function SignIn(history, props) {
                   <>
                     <div className="mb-1">
                       <label
+                        htmlFor="otp"
+                        className="block text-gray-700  font-bold mb-2"
+                      >
+                        OTP
+                        <sub className="text-2xl text-red-500"> *</sub>
+                      </label>
+                      <Field
+                        className="shadow appearance-none border rounded w-full px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        id="otp"
+                        type="text"
+                        name="otp"
+                        placeholder="123456"
+                      />
+                      <ErrorMessage name="otp" component={ValidationError} />
+                    </div>
+                    <a href="/sign-up">
+                      <button
+                        className="border w-full mt-1 py-2 uppercase text-primary font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="button"
+                        onClick={resendOtpApi}
+                        disabled={resendOtp ? false : true}
+                        // style={{
+                        //   backgroundColor: "var(--color-primary)",
+                        //   color: "#fff",
+                        // }}
+                      >
+                        Resend
+                      </button>
+                    </a>
+                    <div className="col-12">
+                      <div className="my-2">
+                        <Timer
+                          endDate={otpExpireTime}
+                          cb={() => setResendOtp(true)}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-1">
+                      <label
                         htmlFor="number"
                         className="block text-gray-700  font-bold mb-2"
                       >
@@ -360,7 +466,7 @@ export default function SignIn(history, props) {
                   {isLoading ? (
                     <span className="sr-only">Signing in...</span>
                   ) : (
-                    "Sign in"
+                    "Sign up"
                   )}
                 </button>
                 <div className="text-center">
@@ -372,14 +478,14 @@ export default function SignIn(history, props) {
                   </a>
                 </div>
                 <p className="text-primary mt-3 font-bold">
-                  Don't have an account ?
+                  Already Have an Account?
                 </p>
-                <a href="/sign-up">
+                <a href="/sign-in">
                   <button
                     className="border w-full mt-1 py-2 uppercase text-primary font-bold px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
                   >
-                    Sing Up
+                    Sing IN
                   </button>
                 </a>
               </Form>

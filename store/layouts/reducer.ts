@@ -20,7 +20,6 @@ const LayoutReducer = (state = initialState, action: IAction) => {
 
     switch (action.type) {
         case Types.GET_CATEGORIES:
-            console.log('action.payload',action.payload);
             return {
                 ...state,
                 categories: action.payload.data,
