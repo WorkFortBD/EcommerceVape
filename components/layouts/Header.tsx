@@ -26,7 +26,6 @@ export default function Header() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state: IRootReducer) => state.layout);
   const isLoggedIn = useSelector((state: IRootReducer) => state.auth);
-  console.log('isloggedIn', isLoggedIn);
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);

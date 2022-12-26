@@ -85,8 +85,7 @@ export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
   }
 
 
-  const accessToken = localStorage.getItem('access-token');
-  console.log('accessToken', accessToken)
+  const accessToken = localStorage.getItem('access_token');
 
   if (accessToken) {
     dispatch({ type: Types.IS_SIGNED_IN, payload: true })
