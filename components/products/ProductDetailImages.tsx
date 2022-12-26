@@ -4,18 +4,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { ReactElement, useState } from "react";
+import { IProductImage } from "../../interfaces/products";
 
-interface Props {}
+interface Props {
+  productImage:IProductImage
+}
 
-export default function ProductDetailImages({  }: Props): ReactElement {
-  const [images, setImages] = useState([
-    "/images/products/4.jpeg",
-    "/images/products/5.jpeg",
-    "/images/products/6.jpeg",
-  ]);
+export default function ProductDetailImages({ productImage }: Props): ReactElement {
+  console.log('productImage', productImage)
+  const [images, setImages] = useState(productImage);
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-
+console.log('activeImageIndex', activeImageIndex)
   const selectPreviousImage = () => {
     if (activeImageIndex === 0) {
       setActiveImageIndex(images.length - 1);
@@ -37,7 +37,7 @@ export default function ProductDetailImages({  }: Props): ReactElement {
       <div className="basis-1/5">
         {images.map((image, index) =>
           <img
-            src={image}
+            src={`${process.env.NEXT_PUBLIC_URL}images/products/`+image.image}
             className="w-full h-[4.5rem] md:h-28 mb-2 cursor-pointer"
             key={index}
             onClick={() => setActiveImageIndex(index)}
@@ -59,7 +59,7 @@ export default function ProductDetailImages({  }: Props): ReactElement {
 
         <div className="overflow-hidden">
           <img
-            src={images[activeImageIndex]}
+            src={`${process.env.NEXT_PUBLIC_URL}images/products/`+images[activeImageIndex].image}
             className="w-full transition-all mb-2 px-5"
           />
         </div>
