@@ -15,7 +15,7 @@ export default function ProductDetailImages({ productImage }: Props): ReactEleme
   const [images, setImages] = useState(productImage);
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-console.log('activeImageIndex', activeImageIndex)
+console.log('images', images)
   const selectPreviousImage = () => {
     if (activeImageIndex === 0) {
       setActiveImageIndex(images.length - 1);
@@ -35,7 +35,7 @@ console.log('activeImageIndex', activeImageIndex)
   return (
     <div className="flex flex-wrap flex-1 group ">
       <div className="basis-1/5">
-        {images.map((image, index) =>
+        {images && images.map((image, index) =>
           <img
             src={`${process.env.NEXT_PUBLIC_URL}images/products/`+image.image}
             className="w-full h-[4.5rem] md:h-28 mb-2 cursor-pointer"
@@ -59,7 +59,7 @@ console.log('activeImageIndex', activeImageIndex)
 
         <div className="overflow-hidden">
           <img
-            src={`${process.env.NEXT_PUBLIC_URL}images/products/`+images[activeImageIndex].image}
+            src={images !==undefined?`${process.env.NEXT_PUBLIC_URL}images/products/`+images[activeImageIndex].image:`${process.env.NEXT_PUBLIC_URL}images/products/default.jpg`}
             className="w-full transition-all mb-2 px-5"
           />
         </div>

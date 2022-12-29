@@ -18,12 +18,14 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { getCategoriesAction } from "../../store/layouts/action";
 import { isSignedIn } from "../../store/auth/action";
 import { getUserDataAction } from "../../store/users/action";
+import { useRouter } from "next/router";
 
 
 export default function Header() {
   const [barVisibility, setBarVisibility] = useState(false);
   const [scrollPosition, setSrollPosition] = useState(0);
   const dispatch = useDispatch();
+  const router = useRouter();
   const { categories } = useSelector((state: IRootReducer) => state.layout);
   const isLoggedIn = useSelector((state: IRootReducer) => state.auth);
   const handleScroll = () => {
@@ -41,6 +43,27 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const clickMenuLink = (category, toggleBackdrop, isMainCategory = false) => {
+    let categoryType = "";
+
+    if (isMainCategory && category.short_code === "groceries") {
+      categoryType = "main-category";
+    } else {
+      categoryType = "category";
+    }
+
+    // if (toggleBackdrop) {
+    //   navigationToggleHandler();
+    // }
+
+    router.push(
+        `/products?${categoryType}=${encodeURIComponent(
+          category.short_code
+        )}&name=${encodeURIComponent(category.name)}&filter=paginate_no__40`
+      )
+      .then(_ => window.scrollTo(0, 0)); // added "name" query param only for collect category name from url on product page
+  };
 
   return (
     <header>
@@ -169,8 +192,10 @@ export default function Header() {
                 >
                   {category.childs.map((cl, index) =>(
                   <Dropdown.Item>
-                    <Link href="/categories">
-                      <span className="text-primary hover:text-primary-light">
+                    <Link href="#">
+                      <span className="text-primary hover:text-primary-light"
+                      onClick={() =>
+                        clickMenuLink(cl, false)}>
                         {cl.name}
                       </span>
                     </Link>
