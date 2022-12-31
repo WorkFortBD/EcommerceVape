@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ProductNoFound from "../master/productNotFound/ProductNotFound";
-import ProductSingleMini from "../products/ProductShortDetail";
+import ProductShortDetail from "../products/ProductShortDetail";
 
 const CategoryWiseMiniProduct = ({ columns }) => {
-  const { products } = useSelector((state) => state.category);
+  const  products  = useSelector((state) => state.category);
+  console.log('products', products)
   const [cardClassName, setCardClassName] = useState('product-card categories_wise_product_card shadow-sm mb-sm-2 mb-md-3 bg-white rounded');
 
   // useEffect(() => {
@@ -18,15 +19,15 @@ const CategoryWiseMiniProduct = ({ columns }) => {
   return (
     <>
       {
-        products.length === 0 && (
+        products.products.length === 0 && (
           <div className="col-lg-12">
             <ProductNoFound />
           </div>
         )
       }
-      {products.length > 0 &&
-        products.map((item, index) => (
-          <ProductSingleMini
+      {products.products.length > 0 &&
+        products.products.map((item, index) => (
+          <ProductShortDetail
             item={item}
             key={index}
             columnClassName={columns}

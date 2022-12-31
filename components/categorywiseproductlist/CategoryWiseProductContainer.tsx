@@ -70,7 +70,6 @@ const CategoryWiseProductContainer = ({
 
     return src;
   };
-
   useEffect(() => {
     const source = Axios.CancelToken.source();
     window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top after mount
@@ -165,7 +164,7 @@ const CategoryWiseProductContainer = ({
                       )}&filter=paginate_no__40`}
                     >
                       <a>
-                        <div className="text-center">
+                        {/* <div className="text-center">
                           <ImageWithFallback
                             width={400}
                             height={280}
@@ -175,7 +174,7 @@ const CategoryWiseProductContainer = ({
                           <span className="d-inline-block pt-2 color-secondary color-main-hover font-15 font-weight-500">
                             {item?.name}
                           </span>
-                        </div>
+                        </div> */}
                       </a>
                     </Link>
                   </div>

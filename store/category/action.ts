@@ -5,7 +5,6 @@ export const getFilteredProducts =
   (filterParam, source = { token: "" }) =>
   async (dispatch) => {
     let filterParamObjClone;
-
     // if(filterParamObj.type || filterParamObj.search || filterParamObj.seller_id) {
     //   filterParamObjClone = {
     //     ...filterParamObj,
@@ -34,11 +33,12 @@ export const getFilteredProducts =
 
     try {
       dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
-      const res = await Axios.get(`get-items?${filterParam}`, {
+      const res = await Axios.get(`${process.env.NEXT_PUBLIC_API_URL}get-items?${filterParam}`, {
         cancelToken: source.token,
       });
+      console.log('GetItemsResponse', res.data.data.data)
       responseData.isLoading = false;
-      responseData.data = res.data.data;
+      responseData.data = res.data.data.data;
       dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
     } catch (error) {
       if (Axios.isCancel(error)) {
@@ -53,7 +53,7 @@ export const getProductsBySellerId = (id) => async (dispatch) => {
     data: [],
     isLoading: true,
   };
-  const url = `get-items?seller_id=${id}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}get-items?seller_id=${id}`;
 
   try {
     dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
@@ -110,10 +110,10 @@ export const resetFilterParams = (filterParams) => ({
 export const getSubCategories = (parentId) => async (dispatch) => {
   let url;
   if (parentId) {
-    url = "categories/" + parentId;
+    url = `${process.env.NEXT_PUBLIC_API_URL}categories/` + parentId;
     dispatch(getCategoryRelatedBrands(parentId));
   } else {
-    url = "categories?parent_id=null";
+    url = `${process.env.NEXT_PUBLIC_API_URL}categories?parent_id=null`;
   }
 
   try {
@@ -135,7 +135,7 @@ export const getSubCategories = (parentId) => async (dispatch) => {
 };
 
 export const getCategoryRelatedBrands = (categoryId) => async (dispatch) => {
-  const url = `categories/${categoryId}?with_brands=1`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}categories/${categoryId}?with_brands=1`;
   try {
     const res = await Axios.get(url);
     dispatch({
@@ -167,9 +167,9 @@ export const getCategories =
     let url = "";
 
     if (type === "homepage") {
-      url = `frontend-categories?type=${type}&limit=${limit}`;
+      url = `${process.env.NEXT_PUBLIC_API_URL}frontend-categories?type=${type}&limit=${limit}`;
     } else {
-      url = `categories`;
+      url = `${process.env.NEXT_PUBLIC_API_URL}categories`;
     }
 
     try {

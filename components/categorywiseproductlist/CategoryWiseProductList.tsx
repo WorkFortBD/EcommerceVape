@@ -102,8 +102,8 @@ const CategoryWiseProductList = ({showFilter, showFilterHandler, filterParams}) 
 
   return (
     <section className="category_wise_product_list">
-      <div className="row justify-content-between my-2 my-md-4">
-        <div className="col-lg-6 col-sm-12 px-1 px-md-3">
+      <div className="row-span-1 d-flex justify-content-between my-2 my-md-4">
+        <div className="col-span-2">
           <div className="category_wise_product_list_heading">
             <h5 className="category-search-title">
               {
@@ -125,7 +125,7 @@ const CategoryWiseProductList = ({showFilter, showFilterHandler, filterParams}) 
             }
           </p>
         </div>
-        <div className="col-lg-6 col-sm-12 px-1 px-md-3">
+        <div className="col-span-2">
           <div className="d-flex justify-content-start justify-content-sm-end">
             <div className="filter_view mr-2 d-flex align-items-center" onClick={() => showFilterHandler()}> 
               <div className="product-filter">
@@ -190,7 +190,7 @@ const CategoryWiseProductList = ({showFilter, showFilterHandler, filterParams}) 
           </div>
         )
       }
-      <div className={rowClasses}>
+      <div className="flex flex-col md:flex-row justify-center items-center flex-wrap">
         {
           !isLoading && (
             <CategoryWiseMiniProduct columns="col-md-3" />

@@ -6,12 +6,15 @@ import { Provider } from 'react-redux';
 import type { AppProps } from "next/app";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import "bootstrap/scss/bootstrap.scss";
 
 /**
  * Internal dependencies.
  */
 import "../styles/globals.css";
 import store from '../store';
+import "../styles/style.css";
+import "../styles/responsive.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);

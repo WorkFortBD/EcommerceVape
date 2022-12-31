@@ -70,6 +70,7 @@ const CategoryReducer = (state = initialState, { type, payload }) => {
       };
 
     case Types.GET_FILTER_PRODUCT_LIST:
+      console.log('payload', payload.data)
       const totalPage_ = Math.ceil(payload.data.total / payload.data.per_page);
 
       return {

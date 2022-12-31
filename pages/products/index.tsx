@@ -4,6 +4,7 @@ import Layout from "../../components/layouts/Layout";
 import ProductList from "../../components/products/ProductList";
 
 const Products: NextPage = (props) => {
+  console.log('props', props)
   const { isMainCategory, subCategories, mainCategoryBanner } = props;
   return (
     <Layout title={"Products"}>
@@ -23,7 +24,6 @@ export const getServerSideProps = async (context) => {
   const isMainCategory = query["main-category"] ? true : false;
   if (isMainCategory) {
     const mainCategorySlug = encodeURIComponent(query["main-category"]);
-
     const uri = `${process.env.NEXT_PUBLIC_API_URL}categories/${mainCategorySlug}`;
 
     try {
