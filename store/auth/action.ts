@@ -27,7 +27,7 @@ import { getUserDataAction } from "../users/action";
       remember: false,
     };
     await Axios
-      .post(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, postData, {})
+      .post(`auth/login`, postData, {})
       .then((res) => {
         const { data, message, status } = res.data;
         const { user, access_token} = data;
@@ -120,7 +120,7 @@ export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
 
 export const customerRegister = async (registerInput) => {
   try {
-    const res = await Axios.post(`${process.env.NEXT_PUBLIC_API_URL}auth/register-next`, registerInput);
+    const res = await Axios.post(`auth/register-next`, registerInput);
     return res;
   } catch (error) {
       return Promise.reject(false)

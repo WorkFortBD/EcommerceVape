@@ -80,7 +80,7 @@ const CategoryWiseProductList = ({showFilter, showFilterHandler, filterParams}) 
   }
 
   const rowClasses = classNames({
-    'row': true,
+    'flex flex-col md:flex-row flex-wrap': true,
     'no-gutters': isMobile,
   });
 
@@ -101,9 +101,9 @@ const CategoryWiseProductList = ({showFilter, showFilterHandler, filterParams}) 
   };
 
   return (
-    <section className="category_wise_product_list">
-      <div className="row justify-content-between my-2 my-md-4">
-        <div className="col-lg-6 col-sm-12 px-1 px-md-3">
+    <section className="container mx-auto category_wise_product_list">
+      <div className="flex flex-col md:flex-row justify-content-between my-2 my-md-4">
+        <div className="md:basis-1/2 col-lg-6 col-sm-12 px-1 px-md-3">
           <div className="category_wise_product_list_heading">
             <h5 className="category-search-title">
               {
@@ -125,7 +125,7 @@ const CategoryWiseProductList = ({showFilter, showFilterHandler, filterParams}) 
             }
           </p>
         </div>
-        <div className="col-lg-6 col-sm-12 px-1 px-md-3">
+        <div className="md:basis-1/2 col-lg-6 col-sm-12 px-1 px-md-3">
           <div className="d-flex justify-content-start justify-content-sm-end">
             <div className="filter_view mr-2 d-flex align-items-center" onClick={() => showFilterHandler()}> 
               <div className="product-filter">

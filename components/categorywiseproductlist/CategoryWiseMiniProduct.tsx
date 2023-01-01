@@ -27,7 +27,7 @@ const CategoryWiseMiniProduct = ({ columns }) => {
       {products.length > 0 &&
         products.map((item, index) => (
           <ProductSingleMini
-            item={item}
+            product={item}
             key={index}
             columnClassName={columns}
             cardClassName={cardClassName}

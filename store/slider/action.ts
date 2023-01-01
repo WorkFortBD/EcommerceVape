@@ -18,7 +18,7 @@ import * as Types from "./type";
 
   dispatch({ type: Types.GET_SLIDER, payload: response });
 
-  let url = `${process.env.NEXT_PUBLIC_API_URL}sliders-frontend`;
+  let url = `sliders-frontend`;
 
   const res = await Axios.get(url);
   response.data=res.data.data;

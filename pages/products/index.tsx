@@ -7,7 +7,7 @@ const Products: NextPage = (props) => {
   const { isMainCategory, subCategories, mainCategoryBanner } = props;
   return (
     <Layout title={"Products"}>
-      <div className="container">
+      <div className="container mx-auto">
         <CategoryWiseProductContainer
           isMainCategory={isMainCategory}
           subCategories={subCategories}
@@ -24,7 +24,7 @@ export const getServerSideProps = async (context) => {
   if (isMainCategory) {
     const mainCategorySlug = encodeURIComponent(query["main-category"]);
 
-    const uri = `${process.env.NEXT_PUBLIC_API_URL}categories/${mainCategorySlug}`;
+    const uri = `categories/${mainCategorySlug}`;
 
     try {
       const res = await fetch(uri);

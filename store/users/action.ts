@@ -19,7 +19,7 @@ export const getUserDataAction = () => async (dispatch) => {
   }
   
   try {
-    const res = await Axios.get(`${process.env.NEXT_PUBLIC_API_URL}auth/getUserProfile`);
+    const res = await Axios.get(`auth/getUserProfile`);
     data.userData = res.data.data;
     localStorage.setItem('user-info', JSON.stringify(res.data.data));
     dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });

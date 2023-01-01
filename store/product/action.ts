@@ -34,7 +34,7 @@ import * as Types from "./type";
 */
 export const getProductsData = async (args) => {
  try {
-   let url = `${process.env.NEXT_PUBLIC_API_URL}get-items?p=1`;
+   let url = `get-items?p=1`;
 
    if (args["type"]) {
      url += `&type=${args["type"]}`;
