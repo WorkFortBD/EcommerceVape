@@ -64,7 +64,7 @@ export default function SignIn(history, props) {
         setStepOneFormData(formData);
 
         const data = await Axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}auth/register`,
+          `auth/register`,
           formData
         );
 
@@ -198,7 +198,7 @@ export default function SignIn(history, props) {
                   phone_no: context.parent.phone_no,
                 };
 
-                const res = await Axios.post(`${process.env.NEXT_PUBLIC_API_URL}auth/check-otp`, otpBody);
+                const res = await Axios.post(`auth/check-otp`, otpBody);
 
                 if (res.data.status) {
                   IS_VALID_OTP = true;

@@ -12,6 +12,9 @@ import 'react-toastify/dist/ReactToastify.css';
  */
 import "../styles/globals.css";
 import store from '../store';
+import axiosDefault from "../utils/axios-default";
+
+axiosDefault();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
