@@ -12,6 +12,7 @@ export interface IAuthReducer {
     isLoading:boolean,
     authToken:string,
     status:boolean,
-    message:string
-    isLoggedIn:boolean
+    message:string,
+    isSignedIn:boolean,
+    isSignedOut:boolean
 }
