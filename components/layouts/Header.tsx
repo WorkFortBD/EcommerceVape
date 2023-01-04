@@ -29,7 +29,6 @@ export default function Header() {
   const { categories } = useSelector((state: IRootReducer) => state.layout);
   const signOut = useSelector((state: IRootReducer) => state.auth.isSignedOut);
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
-  console.log('signIn', signIn)
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
@@ -45,6 +44,10 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const handleLogOut = () => {
+    dispatch(isSignedOut());
+    window.location.replace("/");
+  }
 
   const clickMenuLink = (category, toggleBackdrop, isMainCategory = false) => {
     let categoryType = "";
@@ -66,11 +69,6 @@ export default function Header() {
       )
       .then(_ => window.scrollTo(0, 0)); // added "name" query param only for collect category name from url on product page
   };
-
-  const handleLogOut = () => {
-    dispatch(isSignedOut());
-    window.location.replace("/");
-  }
 
   return (
     <header>
@@ -103,25 +101,26 @@ export default function Header() {
                     />
                   }
                 >
-                  <Dropdown.Header>
+                  <Link href="/my-account" className=""><Dropdown.Header>
                     <span className="block text-sm">Bonnie Green</span>
                     <span className="block truncate text-sm font-medium">
                       name@flowbite.com
                     </span>
-                  </Dropdown.Header>
+                  </Dropdown.Header></Link>
                   <Dropdown.Item>Dashboard</Dropdown.Item>
                   <Dropdown.Item>Settings</Dropdown.Item>
                   <Dropdown.Item>Earnings</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={()=>handleLogOut()}>Sign out</Dropdown.Item>
                 </Dropdown>:
-                <Link href="/my-account" className="">
+                <Link href="/sign-in" className="">
                 <FontAwesomeIcon
                   icon={faUser}
                   className="text-black hover:text-primary cursor-pointer ml-3"
                   style={{ width: 22 }}
                 />
               </Link>
+              
                 }
               <Link href="/" className="">
                 <FontAwesomeIcon

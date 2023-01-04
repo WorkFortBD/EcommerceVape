@@ -183,13 +183,18 @@ const CategoryWiseProductList = ({showFilter, showFilterHandler, filterParams}) 
           </div>
         </div>
       </div>
+      {/* <div className=" flex flex-row"> */}
+         <div className='flex flex-col'>
       {
-        isLoading && (
-          <div className="row no-gutters">
-            <LoadingPlaceHolder className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 p-1 px-md-3 pb-2" count={4} height={isMobile ? 250 : 370}  />
-          </div>
+        !isLoading && (
+          // <div className={rowClasses}>
+            <LoadingPlaceHolder  count={4} height={isMobile ? 250 : 370}  />
+          // </div>
         )
       }
+      </div>
+      {/* </div> */}
+     
       <div className={rowClasses}>
         {
           !isLoading && (
