@@ -1,3 +1,8 @@
+/**Internal dependencies */
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import DashboardLayout from "./DashboardLayout";
+/**External Dependencies */
 import {
   faList,
   faMap,
@@ -6,18 +11,30 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import React from "react";
-import DashboardLayout from "./DashboardLayout";
+import { getUserDataAction } from '../../store/users/action';
+import { isSignedOut } from '../../store/auth/action';
+
 
 export default function MyAccount() {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
+  // console.log('userData', userData)
+  // const {first_name,last_name,email}=userData;
+  useEffect(() => {
+    dispatch(getUserDataAction());
+  }, []);
+  const handleLogOut = () => {
+    dispatch(isSignedOut());
+    window.location.replace("/");
+  }
   return (
     <DashboardLayout title="My Account">
       <div className="p-4 pt-10">
         <h3>
-          Hello <strong>Jahangir</strong>{" "}
-          <Link href="/">
+          Hello <strong>{userData.first_name +' '+ userData.last_name??'N/A'}</strong>
+          <Link href="#" onClick={()=>handleLogOut()}>
             <span className="text-blue-400 cursor-pointer">
-              (not Jahangir? Log out)
+              (not {userData.first_name??'N/A'}? Log out)
             </span>
           </Link>
         </h3>

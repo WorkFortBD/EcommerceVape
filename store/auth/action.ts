@@ -98,11 +98,10 @@ export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
 };
 
 export const isSignedOut = () => async (dispatch) => {
-  alert('hello')
-  localStorage.removeItem("access-token");
+  localStorage.removeItem("access_token");
   localStorage.removeItem("user-info");
   localStorage.removeItem("carts");
-  localStorage.removeItem("search-history");
+  localStorage.removeItem("userData");
   dispatch({ type: Types.IS_SIGNED_OUT, payload: true });
 };
 
