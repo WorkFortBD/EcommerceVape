@@ -19,7 +19,7 @@ export default function SignIn(history,props) {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   // const { status,message,isLoading } = useSelector((state: IRootReducer) => state.auth);
-  const status = useSelector((state) => state.auth.status);
+  const status = useSelector((state) => state.auth.isSignedIn);
 	const message = useSelector((state) => state.auth.message);
 	const isLoading = useSelector((state) => state.auth.isLoading);
   const initialValues = {
@@ -29,8 +29,8 @@ export default function SignIn(history,props) {
   };
 
   useEffect(() => {
-		if (status && message.length > 0) {
-      dispatch(isSignedIn());
+    dispatch(isSignedIn());
+		if (status) {
       dispatch(getUserDataAction());
 			router.replace('/');
 		}

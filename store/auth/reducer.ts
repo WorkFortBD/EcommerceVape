@@ -8,9 +8,9 @@ const initialState: IAuthReducer = {
     status: false,
     message: "",
     isLoading: false,
-    isLoggedIn:false
+    isSignedIn:false,
+    isSignedOut:false
 };
-
 const AuthReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case Types.POST_LOGIN_DATA:
@@ -30,8 +30,14 @@ const AuthReducer = (state = initialState, action: IAction) => {
       case Types.IS_SIGNED_IN:
         return{
           ...state,
-          isLoggedIn:action.payload
+          isSignedIn:action.payload.isSignedIn,
+          isLoading:action.payload.isLoading
         }
+        case Types.IS_SIGNED_OUT:
+          return {
+            ...state,
+            isSignedOut: action.payload,
+          };
 
     default:
       return state;

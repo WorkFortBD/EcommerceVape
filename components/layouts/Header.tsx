@@ -16,7 +16,7 @@ import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { getCategoriesAction } from "../../store/layouts/action";
-import { isSignedIn } from "../../store/auth/action";
+import { isSignedIn, isSignedOut } from "../../store/auth/action";
 import { getUserDataAction } from "../../store/users/action";
 import { useRouter } from "next/router";
 
@@ -27,7 +27,9 @@ export default function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
   const { categories } = useSelector((state: IRootReducer) => state.layout);
-  const isLoggedIn = useSelector((state: IRootReducer) => state.auth);
+  const signOut = useSelector((state: IRootReducer) => state.auth.isSignedOut);
+  const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
+  console.log('signIn', signIn)
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
@@ -65,6 +67,11 @@ export default function Header() {
       .then(_ => window.scrollTo(0, 0)); // added "name" query param only for collect category name from url on product page
   };
 
+  const handleLogOut = () => {
+    dispatch(isSignedOut());
+    window.location.replace("/");
+  }
+
   return (
     <header>
       <div
@@ -85,7 +92,7 @@ export default function Header() {
             </Navbar.Brand>
 
             <div className="flex md:order-2 items-center justify-center">
-                <Dropdown
+              {signIn ? <Dropdown
                   arrowIcon={false}
                   inline={true}
                   label={
@@ -106,16 +113,16 @@ export default function Header() {
                   <Dropdown.Item>Settings</Dropdown.Item>
                   <Dropdown.Item>Earnings</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
-
-              <Link href="/my-account" className="">
+                  <Dropdown.Item onClick={()=>handleLogOut()}>Sign out</Dropdown.Item>
+                </Dropdown>:
+                <Link href="/my-account" className="">
                 <FontAwesomeIcon
                   icon={faUser}
                   className="text-black hover:text-primary cursor-pointer ml-3"
                   style={{ width: 22 }}
                 />
               </Link>
+                }
               <Link href="/" className="">
                 <FontAwesomeIcon
                   icon={faSearch}

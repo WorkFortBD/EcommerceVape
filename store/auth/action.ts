@@ -4,13 +4,11 @@ import * as Types from "./type";
 import { toast } from "react-toastify";
 import { getUserDataAction } from "../users/action";
 
-
-
 /**
  * changeinput function
  */
 
- export const postLoginData = (values:ILogin) => async (dispatch) => {
+export const postLoginData = (values: ILogin) => async (dispatch) => {
   let loginResponse = {
     status: false,
     message: "",
@@ -26,11 +24,10 @@ import { getUserDataAction } from "../users/action";
       password: values.password,
       remember: false,
     };
-    await Axios
-      .post(`auth/login`, postData, {})
+    await Axios.post(`auth/login`, postData, {})
       .then((res) => {
         const { data, message, status } = res.data;
-        const { user, access_token} = data;
+        const { user, access_token } = data;
         // localStorage.setItem(
         //   "role-permissions",
         //   JSON.stringify(role_permissions)
@@ -60,17 +57,17 @@ import { getUserDataAction } from "../users/action";
 };
 
 /**
-* Get Products Data
-*
-* @since 1.0.0
-*
-* @param object args filtered criteria
-*
-* @return array products array
-*/
+ * Get Products Data
+ *
+ * @since 1.0.0
+ *
+ * @param object args filtered criteria
+ *
+ * @return array products array
+ */
 // export const postLoginData = async (args) => {
 //  try {
- 
+
 //  } catch (error) {
 //    //
 //  }
@@ -78,20 +75,35 @@ import { getUserDataAction } from "../users/action";
 
 export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
   // const session = await getSession();
-  const userDataFound = localStorage.getItem('user-info');
+  let data = {
+    isSignedIn: false,
+    isLoading: false,
+  };
+  const userDataFound = localStorage.getItem("user-info");
 
   if (!userDataFound || !userData) {
     dispatch(getUserDataAction());
   }
 
-
-  const accessToken = localStorage.getItem('access_token');
-
+  const accessToken = localStorage.getItem("access_token");
   if (accessToken) {
-    dispatch({ type: Types.IS_SIGNED_IN, payload: true })
+    data.isLoading = true;
+    data.isSignedIn = true;
+    dispatch({ type: Types.IS_SIGNED_IN, payload: data });
   } else {
-    dispatch({ type: Types.IS_SIGNED_IN, payload: false })
+    data.isLoading = false;
+    data.isSignedIn = false;
+    dispatch({ type: Types.IS_SIGNED_IN, payload: data });
   }
+};
+
+export const isSignedOut = () => async (dispatch) => {
+  alert('hello')
+  localStorage.removeItem("access-token");
+  localStorage.removeItem("user-info");
+  localStorage.removeItem("carts");
+  localStorage.removeItem("search-history");
+  dispatch({ type: Types.IS_SIGNED_OUT, payload: true });
 };
 
 // export const getUserDataAction = () => async (dispatch) => {
@@ -101,13 +113,13 @@ export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
 //     redirectTo  : null
 //   };
 //   const userDataFound = localStorage.getItem('user-info');
-  
+
 //   if(userDataFound) {
 //     data.userData = JSON.parse(userDataFound);
 //     dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
 //     return;
 //   }
-  
+
 //   try {
 //     const res = await Axios.get('auth/getUserProfile');
 //     data.userData = res.data.data;
@@ -123,6 +135,6 @@ export const customerRegister = async (registerInput) => {
     const res = await Axios.post(`auth/register-next`, registerInput);
     return res;
   } catch (error) {
-      return Promise.reject(false)
+    return Promise.reject(false);
   }
 };
