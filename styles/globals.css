@@ -10,4 +10,10 @@
   .navbar-main-area ul li a {
     @apply bg-slate-100 md:bg-transparent;
   }
+  .card {
+    background-color: theme('colors.white');
+    border-radius: theme('borderRadius.lg');
+    padding: theme('spacing.6');
+    box-shadow: theme('boxShadow.xl');
+  }
 }

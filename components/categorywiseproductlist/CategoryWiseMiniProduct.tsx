@@ -19,7 +19,7 @@ const CategoryWiseMiniProduct = ({ columns }) => {
     <>
       {
         products.length === 0 && (
-          <div className="col-lg-12">
+          <div className="card">
             <ProductNoFound />
           </div>
         )
