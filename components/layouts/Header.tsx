@@ -19,6 +19,7 @@ import { getCategoriesAction } from "../../store/layouts/action";
 import { isSignedIn, isSignedOut } from "../../store/auth/action";
 import { getUserDataAction } from "../../store/users/action";
 import { useRouter } from "next/router";
+import { getCartsAction } from "../../store/cart/action";
 
 
 export default function Header() {
@@ -27,7 +28,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
   const { categories } = useSelector((state: IRootReducer) => state.layout);
-  const signOut = useSelector((state: IRootReducer) => state.auth.isSignedOut);
+  const { totalQuantity } = useSelector((state: IRootReducer) => state.carts);
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -38,6 +39,7 @@ export default function Header() {
     dispatch(getCategoriesAction());
     dispatch(isSignedIn());
     dispatch(getUserDataAction());
+    dispatch(getCartsAction());
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
@@ -58,9 +60,6 @@ export default function Header() {
       categoryType = "category";
     }
 
-    // if (toggleBackdrop) {
-    //   navigationToggleHandler();
-    // }
 
     router.push(
         `/products?${categoryType}=${encodeURIComponent(
@@ -145,7 +144,7 @@ export default function Header() {
                     style={{ width: 22 }}
                   />
                   <span className="bg-primary text-white pl-1.5 text-sm rounded-full h-5 w-5 absolute -top-3 -right-2">
-                    0
+                    {totalQuantity}
                   </span>
                 </span>
               </Link>

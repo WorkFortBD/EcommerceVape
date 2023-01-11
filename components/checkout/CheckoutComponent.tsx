@@ -1,11 +1,22 @@
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from 'next/router';
 import { Progress } from "flowbite-react";
 import Link from "next/link";
-import React from "react";
 import { formatCurrency } from "../../utils/currency";
+import { getCartsAction } from "../../store/cart/action";
+import { IRootReducer } from "../../interfaces/reducers";
 
 type Props = {};
 
 export default function CheckoutComponent({}: Props) {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { carts, totalPrice, totalQuantity } = useSelector((state: IRootReducer) => state.carts);
+  console.log('totalPrice', totalPrice)
+  useEffect(() => {
+    dispatch(getCartsAction());
+  }, []);
   return (
     <section className="cart-section">
       <div className="container mx-auto mt-6">
