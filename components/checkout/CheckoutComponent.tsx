@@ -1,22 +1,130 @@
+/**Internal Dependency */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { Progress } from "flowbite-react";
 import Link from "next/link";
 import { formatCurrency } from "../../utils/currency";
 import { getCartsAction } from "../../store/cart/action";
 import { IRootReducer } from "../../interfaces/reducers";
 
+/**External Dependency */
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
+
 type Props = {};
 
 export default function CheckoutComponent({}: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { carts, totalPrice, totalQuantity } = useSelector((state: IRootReducer) => state.carts);
-  console.log('totalPrice', totalPrice)
+  const { carts, totalPrice, totalQuantity } = useSelector(
+    (state: IRootReducer) => state.carts
+  );
+  const initialValues = {
+    first_name: "",
+    last_name: "",
+    phone_no: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    otp: "",
+    offer: false,
+    policy: true,
+  };
   useEffect(() => {
     dispatch(getCartsAction());
   }, []);
+
+  const onSubmit = async (values, actions) => {}
+  // const validationSchema = [
+  //   yup.object().shape({
+  //     first_name: yup
+  //       .string()
+  //       .required("Required")
+  //       .min(2, "Name should be at least 2 characters")
+  //       .max(40, "Up to 40 characters"),
+  //     last_name: yup
+  //       .string()
+  //       .required("Required")
+  //       .min(2, "Name should be at least 2 characters")
+  //       .max(40, "Up to 40 characters"),
+  //     phone_no: yup
+  //       .string()
+  //       .required("Required")
+  //       .test("phone_no", "Please input a valid phone number", (value) => {
+  //         const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
+
+  //         let isValidPhone = phoneRegex.test(value);
+
+  //         if (!isValidPhone) return false;
+  //         return true;
+  //       }),
+  //     email: yup.string().email("Please Input a valid email"),
+  //     policy: yup
+  //       .boolean()
+  //       .oneOf([true], "You must accept the terms and condition."),
+  //   }),
+  //   yup.object().shape({
+  //     otp: yup
+  //       .string()
+  //       .required("Required")
+  //       .min(6, "Input 6 digit OTP")
+  //       .max(6, "Input 6 digit OTP")
+  //       .test(
+  //         "otp-code",
+  //         "Please input a valid OTP",
+  //         async (value, context) => {
+  //           if (value && !IS_VALID_OTP && value.length === 6) {
+  //             try {
+  //               const otpBody = {
+  //                 otp: context.parent.otp,
+  //                 phone_no: context.parent.phone_no,
+  //               };
+
+  //               const res = await Axios.post(`auth/check-otp`, otpBody);
+
+  //               if (res.data.status) {
+  //                 IS_VALID_OTP = true;
+  //                 return Promise.resolve(true);
+  //               } else {
+  //                 return Promise.resolve(false);
+  //               }
+  //             } catch (error) {
+  //               return Promise.resolve(false);
+  //             }
+  //           }
+
+  //           if (value && value.length < 6) {
+  //             IS_VALID_OTP = false;
+  //           }
+
+  //           return Promise.resolve(true);
+  //         }
+  //       ),
+  //     password: yup
+  //       .string()
+  //       .required("Required")
+  //       // .matches(LOWERCASEREGEX, 'At least one lowercase character required')
+  //       // .matches(UPPERCASEREGEX, 'At least one uppercase character required')
+  //       // .matches(NUMERICREGEX, 'At least one numeric value required')
+  //       // .matches(NUMERICREGEX, 'At least one numeric value required')
+  //       .min(8, "Minimum 8 characters required")
+  //       .test("password", "space not allowed", (value) => {
+  //         if (value === undefined || value === null) return false;
+
+  //         if (/\s/g.test(value)) return false;
+
+  //         return true;
+  //       }),
+  //     password_confirmation: yup
+  //       .string()
+  //       .oneOf(
+  //         [yup.ref("password"), null],
+  //         "Password confirmation does not match password!"
+  //       )
+  //       .required("Required"),
+  //   }),
+  // ];
   return (
     <section className="cart-section">
       <div className="container mx-auto mt-6">
@@ -38,6 +146,12 @@ export default function CheckoutComponent({}: Props) {
               Add {formatCurrency(54)} to cart and get free shipping!
               <Progress progress={45} />
             </p>
+            {/* <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={validationSchema}
+              validateOnMount
+            ></Formik> */}
             <h2 className="mt-10 uppercase text-2xl">Billing & Shipping</h2>
 
             <form action="" className="mt-4">
@@ -50,8 +164,8 @@ export default function CheckoutComponent({}: Props) {
                   <br />
                   <input
                     type="text"
-                    name="name"
-                    id="first-name"
+                    name="first_name"
+                    id="first_name"
                     className="border w-full transition-all outline-none focus:outline-none focus:ring-0 focus:border-primary-light rounded-md p-2 mt-2 mr-2"
                   />
                 </div>
@@ -62,8 +176,8 @@ export default function CheckoutComponent({}: Props) {
                   <br />
                   <input
                     type="text"
-                    name="name"
-                    id="last-name"
+                    name="last_name"
+                    id="last_name"
                     className="w-full border transition-all outline-none focus:outline-none focus:ring-0 focus:border-primary-light rounded-md p-2 mt-2 mr-2 ml-1"
                   />
                 </div>
@@ -77,7 +191,7 @@ export default function CheckoutComponent({}: Props) {
                 <input
                   type="text"
                   name="country"
-                  id="contry"
+                  id="country"
                   className="border w-full transition-all outline-none focus:outline-none focus:ring-0 focus:border-primary-light rounded-md p-2 mt-2 mr-2"
                 />
               </div>
@@ -182,30 +296,55 @@ export default function CheckoutComponent({}: Props) {
                 <p>Product</p>
                 <p>Subtotal</p>
               </div>
-              <div className="flex justify-between mt-3 border-b p-4 text-gray-400 ">
-                <p>
-                  TWIST - Honeydew Melon(30ML) <br />
-                  20mg - 20mg x 4
-                </p>
-                <p className="text-primary">{formatCurrency(400)}</p>
-              </div>
+              {carts.map((cart, index) => (
+                <div className="flex justify-between mt-3 border-b p-4 text-gray-400 ">
+                  <p>
+                    {cart.productName}
+                    <br />
+                    {cart.sku}
+                  </p>
+                  {cart.isOffer ? (
+                    <p className="text-primary">
+                      {formatCurrency(cart.offerPrice)}
+                    </p>
+                  ) : (
+                    <p className="text-primary">{formatCurrency(cart.price)}</p>
+                  )}
+                </div>
+              ))}
+              <div className="basis-1/2">
+                  <label htmlFor="first-name">
+                    Apply Coupon(If Any)
+                  </label>
+                  <br />
+                  <input
+                    type="text"
+                    name="coupon"
+                    id="coupon"
+                    className="border w-full transition-all outline-none focus:outline-none focus:ring-0 focus:border-primary-light rounded-md p-2 mt-2 mr-2"
+                  />
+                </div>
               <div className="flex justify-between mt-3 border-b p-4 ">
                 <p>Subtotal</p>
-                <p className="text-primary">{formatCurrency(400)}</p>
+                <p className="text-primary">{formatCurrency(totalPrice)}</p>
               </div>
               <div className="flex justify-between mt-3 border-b p-4 ">
                 <p>Shipping Cost</p>
-                <p className="text-primary">{formatCurrency(45)}</p>
+                <p className="text-primary">{formatCurrency(0)}</p>
+              </div>
+              <div className="flex justify-between mt-3 border-b p-4 ">
+                <p>Discount Fee</p>
+                <p className="text-primary">{formatCurrency(0)}</p>
               </div>
               <div className="flex justify-between mt-3 p-4 text-xl">
                 <p>Total</p>
-                <p className="text-primary">{formatCurrency(445)}</p>
+                <p className="text-primary">{formatCurrency(totalPrice)}</p>
               </div>
             </div>
             <div className="mt-8 border-b p-3">
               <div className="flex">
                 <div>
-                  <input type="radio" name="creditcard" id="creditcard" />
+                  <input type="radio" name="payment" id="creditcard" />
                   <label htmlFor="creditcard"> Credit Card | MADA</label>
                 </div>
                 <img
@@ -217,7 +356,7 @@ export default function CheckoutComponent({}: Props) {
               </div>
               <div className="flex mt-5">
                 <div>
-                  <input type="radio" name="apple" id="apple" />
+                  <input type="radio" name="payment" id="apple" />
                   <label htmlFor="apple"> STC Pay</label>
                 </div>
                 <img
@@ -226,6 +365,12 @@ export default function CheckoutComponent({}: Props) {
                   id="apple"
                   className="w-44 ml-2"
                 />
+              </div>
+              <div className="flex mt-5">
+                <div>
+                  <input type="radio" name="payment" id="apple" />
+                  <label htmlFor="apple"> Cash On Delivery</label>
+                </div>
               </div>
             </div>
 
