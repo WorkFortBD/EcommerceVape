@@ -59,7 +59,7 @@ console.log('images', images)
 
         <div className="overflow-hidden">
           <img
-            src={images !==undefined?`${process.env.NEXT_PUBLIC_URL}images/products/`+images[activeImageIndex].image:`${process.env.NEXT_PUBLIC_URL}images/products/default.jpg`}
+            src={images[activeImageIndex] !==undefined?`${process.env.NEXT_PUBLIC_URL}images/products/`+images[activeImageIndex].image:`${process.env.NEXT_PUBLIC_URL}images/products/default.jpg`}
             className="w-full transition-all mb-2 px-5"
           />
         </div>

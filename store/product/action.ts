@@ -11,7 +11,6 @@ import * as Types from "./type";
  * @return void Dispatch `GET_PRODUCT_LIST_MAIN`
  */
  export const getProductListAction = (args = {}) =>async (dispatch) => {
-  console.log('args', args)
    let response = {
      loading: true,
      data: [],

@@ -28,6 +28,8 @@
     "react-paginate": "^7.1.3",
     "react-bootstrap": "^1.6.1",
     "react-loading-skeleton": "^2.2.0",
+    "simple-encrypter": "0.0.6",
+    "react-select": "^4.3.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {
