@@ -17,7 +17,6 @@ export const getUserDataAction = () => async (dispatch) => {
     dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
     return;
   }
-  console.log('hello')
   try {
     const res = await Axios.get(`auth/getUserProfile`);
     data.userData = res.data.data;

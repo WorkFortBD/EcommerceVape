@@ -26,25 +26,38 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
     };
     await Axios.post(`auth/login`, postData, {})
       .then((res) => {
+        console.log('res', res)
         const { data, message, status } = res.data;
         const { user, access_token } = data;
-        // localStorage.setItem(
-        //   "role-permissions",
-        //   JSON.stringify(role_permissions)
-        // );
-        // localStorage.setItem("menus", JSON.stringify(menus));
 
         loginResponse.data = user;
         loginResponse.tokenData = access_token;
-        loginResponse.message = message;
         loginResponse.status = status;
-        toast("success", message);
+        toast.success(message,{
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       })
       .catch((err) => {
-        const { response } = err;
-        const { request, ...errorObject } = response;
-        loginResponse.message = errorObject.data.message;
-        toast("error", loginResponse.message);
+        // const { response } = err.response;
+        // const { request, ...errorObject } = response;
+        loginResponse.message = err.response.data.message;
+        toast.error(loginResponse.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
   } catch (error) {
     loginResponse.message = "Something went wrong, Please try again !";

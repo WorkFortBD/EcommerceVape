@@ -31,6 +31,16 @@ export default function HomeProductFilter() {
     dispatch(getProductListAction(args));
   }, []);
 
+  const handleLoadMoreProduct=()=>{
+//get next page url from productreducer 
+const args = {
+  type: null,
+  limit: 20,
+  category: null,
+};
+dispatch(getProductListAction(args));
+  }
+
   const loadTopRatedProducts = () => {};
 
   return (
@@ -79,9 +89,10 @@ export default function HomeProductFilter() {
 
         <div className="mt-3">
           <div className="text-center mt-4">
-            <button className="transition uppercase border p-3 px-6 hover:bg-primary hover:text-white hover:px-8">
+            <button onClick={()=>handleLoadMoreProduct()} className="transition uppercase border p-3 px-6 hover:bg-primary hover:text-white hover:px-8">
               Load More Products
             </button>
+            
           </div>
         </div>
       </div>
