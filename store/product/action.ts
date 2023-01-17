@@ -14,11 +14,13 @@ import * as Types from "./type";
    let response = {
      loading: true,
      data: [],
+     paginate:{}
    };
    dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
 
-   response.data = await getProductsData(args);
+   response.paginate = await getProductsData(args);
    response.loading = false;
+   response.data=response.paginate.data;
 
    dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
  };
@@ -49,8 +51,7 @@ export const getProductsData = async (args) => {
    }
 
    const res = await Axios.get(url);
-
-   return res.data.data.data;
+   return res.data.data;
  } catch (error) {
    //
  }

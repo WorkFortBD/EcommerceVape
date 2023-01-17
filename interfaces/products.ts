@@ -30,4 +30,5 @@ export interface IProductReducer {
     product: IProduct | undefined | null,
     isModalOpen: boolean,
     isDetailLoading: boolean
+    paginate:object
 }

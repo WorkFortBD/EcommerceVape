@@ -2,7 +2,7 @@
  * External dependencies.
  */
 import { useSelector, useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 /**
@@ -15,33 +15,37 @@ import { getProductListAction } from "../../store/product/action";
 import ShimmerEffect from "../master/skeleton/ShimmerEffect";
 
 export default function HomeProductFilter() {
-  const { products, productsLoading } = useSelector(
+  const { products, productsLoading,paginate } = useSelector(
     (state: IRootReducer) => state.products
   );
-  console.log("productsLoading", productsLoading);
+  console.log('paginate', paginate)
+  const [tabValue, setTabValue] = useState('latest');
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log("tabValue", tabValue);
     const args = {
-      type: null,
+      type: tabValue,
       limit: 20,
       page: 1,
       category: null,
     };
     // New arrival products.
     dispatch(getProductListAction(args));
-  }, []);
+  }, [tabValue]);
 
-  const handleLoadMoreProduct=()=>{
-//get next page url from productreducer 
-const args = {
-  type: null,
-  limit: 20,
-  category: null,
-};
-dispatch(getProductListAction(args));
-  }
+  const handleLoadMoreProduct = (limit) => {
+    //get next page url from productreducer
+    const args = {
+      type: null,
+      limit: limit,
+      category: null,
+    };
+    dispatch(getProductListAction(args));
+  };
 
-  const loadTopRatedProducts = () => {};
+  const loadTopRatedProducts = (value) => {
+    setTabValue(value);
+  };
 
   return (
     <section className="product-section">
@@ -50,11 +54,16 @@ dispatch(getProductListAction(args));
           <Tabs.Group aria-label="Full width tabs" style="underline">
             <Tabs.Item
               title={
-                <span className="text-primary px-2 md:px-5">New Arrivals</span>
+                <span
+                  className="text-primary px-2 md:px-5"
+                  onClick={() => loadTopRatedProducts("latest")}
+                >
+                  New Arrivals
+                </span>
               }
             >
               {productsLoading == true ? (
-                  <ShimmerEffect />
+                <ShimmerEffect />
               ) : (
                 <ProductList products={products} />
               )}
@@ -63,18 +72,33 @@ dispatch(getProductListAction(args));
               title={
                 <span
                   className="text-primary px-2 md:px-5"
-                  onClick={loadTopRatedProducts}
+                  onClick={() => loadTopRatedProducts("best-sold")}
                 >
                   Top Rated
                 </span>
               }
             >
-              <ProductList products={products} />
+              {productsLoading == true ? (
+                <ShimmerEffect />
+              ) : (
+                <ProductList products={products} />
+              )}
             </Tabs.Item>
             <Tabs.Item
-              title={<span className="text-primary px-2 md:px-5">On Sale</span>}
+              title={
+                <span
+                  className="text-primary px-2 md:px-5"
+                  onClick={() => loadTopRatedProducts("most-offer-product")}
+                >
+                  On Sale
+                </span>
+              }
             >
-              <ProductList products={products} />
+              {productsLoading == true ? (
+                <ShimmerEffect />
+              ) : (
+                <ProductList products={products} />
+              )}
             </Tabs.Item>
           </Tabs.Group>
 
@@ -89,10 +113,12 @@ dispatch(getProductListAction(args));
 
         <div className="mt-3">
           <div className="text-center mt-4">
-            <button onClick={()=>handleLoadMoreProduct()} className="transition uppercase border p-3 px-6 hover:bg-primary hover:text-white hover:px-8">
+            <button
+              onClick={() => handleLoadMoreProduct(2)}
+              className="transition uppercase border p-3 px-6 hover:bg-primary hover:text-white hover:px-8"
+            >
               Load More Products
             </button>
-            
           </div>
         </div>
       </div>
