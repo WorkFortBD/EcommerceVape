@@ -15,11 +15,11 @@ import { getProductListAction } from "../../store/product/action";
 import ShimmerEffect from "../master/skeleton/ShimmerEffect";
 
 export default function HomeProductFilter() {
-  const { products, productsLoading,paginate } = useSelector(
+  const { products, productsLoading, paginate } = useSelector(
     (state: IRootReducer) => state.products
   );
-  console.log('paginate', paginate)
-  const [tabValue, setTabValue] = useState('latest');
+  const [tabValue, setTabValue] = useState("latest");
+  const [showLoadMore, setShowLoadMore] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
     console.log("tabValue", tabValue);
@@ -41,6 +41,7 @@ export default function HomeProductFilter() {
       category: null,
     };
     dispatch(getProductListAction(args));
+    setShowLoadMore(false);
   };
 
   const loadTopRatedProducts = (value) => {
@@ -110,17 +111,20 @@ export default function HomeProductFilter() {
             ))
           } */}
         </div>
-
-        <div className="mt-3">
-          <div className="text-center mt-4">
-            <button
-              onClick={() => handleLoadMoreProduct(2)}
-              className="transition uppercase border p-3 px-6 hover:bg-primary hover:text-white hover:px-8"
-            >
-              Load More Products
-            </button>
+        {showLoadMore ? (
+          <div className="mt-3">
+            <div className="text-center mt-4">
+              <button
+                onClick={() => handleLoadMoreProduct(40)}
+                className="transition uppercase border p-3 px-6 hover:bg-primary hover:text-white hover:px-8"
+              >
+                Load More Products
+              </button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </section>
   );
