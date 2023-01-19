@@ -117,6 +117,7 @@ export const getUserOrderList = (value = 5) => (dispatch) => {
     status   : false,
     isLoading: true,
   }
+  console.log('value', value)
   dispatch({ type: Types.GET_USER_ORDER_LIST, payload: responseData });
 
   const end_date  = dayjs().format('YYYY-MM-DD');
