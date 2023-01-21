@@ -132,10 +132,10 @@ export default function CheckoutComponent({}: Props) {
         <form onSubmit={formik.handleSubmit} className="mt-4">
           <div className="flex flex-col md:flex-row mt-7">
             <div className="basis-1/2 mt-3 p-4">
-              <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 ">
+              {/* <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 ">
                 Add {formatCurrency(54)} to cart and get free shipping!
                 <Progress progress={45} />
-              </p>
+              </p> */}
 
               <h2 className="mt-10 uppercase text-2xl">Billing & Shipping</h2>
 

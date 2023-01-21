@@ -38,7 +38,7 @@ const CategoryWiseProductContainer = ({
   const { paginate, categoryBrandDetails, isLoading } = useSelector(
     (state) => state.category
   );
-
+console.log('showFilter', showFilter)
   const paginateHandler = (page) => {
     if (!page) return;
 
@@ -119,7 +119,7 @@ const CategoryWiseProductContainer = ({
     <>
       <Modal
         visible={showFilter}
-        closeModalHandler={() => setShowFilter((preState) => !preState)}
+        closeModalHandler={() => setShowFilter((preState) => !true)}
         sideModal={true}
       >
         <ProductFilter show={true} />

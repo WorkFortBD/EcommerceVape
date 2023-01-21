@@ -90,12 +90,6 @@ const CategoryWiseProductList = ({showFilter, showFilterHandler, filterParams}) 
   })
 
   let title = "";
-  
-  // const {type, search, name} = filterParams;
-
-  // if(filterParams.seller_id) {
-  //   title = filterParams.seller_id;
-  // }
 
   if(filterParams?.type || filterParams?.search || filterParams?.name) {
     title = filterParams.type || filterParams.search || filterParams.name
