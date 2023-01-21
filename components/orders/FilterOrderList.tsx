@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import WarningMessage from "../master/warningMessage/WarningMessage";
-import SingleOrder from "./SingleOrder";
 import {
   getFilterOptionDataForOrderList,
   getUserOrderList,
 } from "../../store/order/action";
 import TableShimmer from "../master/skeleton/TableShimmer";
+import OrderList from "./OrderList";
 
 const FilterOrderList = () => {
   const dispatch = useDispatch();
@@ -86,7 +86,7 @@ const FilterOrderList = () => {
             {!isLoading &&
               orderList.length > 0 &&
               orderList.map((item, index) => (
-                <SingleOrder
+                <OrderList
                   item={item}
                   isManageable={true}
                   key={index + 1}

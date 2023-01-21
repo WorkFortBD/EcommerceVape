@@ -67,7 +67,16 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
     }
 
     localStorage.setItem('carts', JSON.stringify(carts));
-    toast.success('Product has been added to cart');
+    toast.success('Product has been added to cart', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+        });
     dispatch(getCartsAction());
 };
 
