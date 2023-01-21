@@ -393,16 +393,15 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
   }
 
   dispatch({ type: Types.ORDER_SUBMIT, payload: response });
-  const invoiceURL = `${window.location.protocol}//${window.location.host}/order/invoice/`;
+  const invoiceURL = `/my-order`;
 
   if(typeof payment_method === 'undefined' && payment_method === null || payment_method === '') {
-      toast('error', 'Please select a payment method');
+      toast.error('Please select a payment method');
       return false;
   }
 
   Axios.post('sales', orderPostedData)
       .then((res) => {
-        console.log('response order', res)
           if (res.data.status) {
               response.status    = res.data.status;
               response.orderData = res.data.data;
@@ -410,19 +409,19 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
               dispatch(getCartsAction());
               localStorage.setItem('tr', encrypt(res.data.data.id));
               
-              toast('success', res.data.message);
+              toast.success(res.data.message);
               dispatch({ type : Types.ORDER_SUBMIT, payload: response });
               
               setTimeout(() => {
                 if(payment_method === 'cash') {
-                  window.location.href = `${invoiceURL}${res.data.data.id}`;
+                  window.location.href = `${invoiceURL}`;
                   localStorage.removeItem("carts");
                 } else {
                     localStorage.removeItem("carts");
                       if(res.data.data.payment !== null) {
-                          window.location.href = res.data.data.payment.forwarding_url
+                          window.location.assign('/');
                       } else {
-                          toast('error', 'Payment Error. please try again.');
+                          toast.error('Payment Error. please try again.');
                       }
                   }
               }, 1000);
@@ -434,7 +433,7 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
 
           if (typeof responseLog !== 'undefined') {
               const { request, ...errorObject } = responseLog;
-              toast('error', responseLog.data.message);
+              toast.error( responseLog.data.message);
               dispatch({ type: Types.ORDER_SUBMIT, payload: response })
           }
       })

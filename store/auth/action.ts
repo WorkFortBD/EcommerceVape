@@ -4,6 +4,7 @@ import * as Types from "./type";
 import { toast } from "react-toastify";
 import { getUserDataAction } from "../users/action";
 
+
 /**
  * changeinput function
  */
@@ -33,16 +34,20 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
         loginResponse.data = user;
         loginResponse.tokenData = access_token;
         loginResponse.status = status;
-        toast.success(message,{
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        if(loginResponse.status == true){
+          toast.success(message,{
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          window.location.assign('/');
+        }
+       
       })
       .catch((err) => {
         // const { response } = err.response;
