@@ -37,13 +37,13 @@ const OrderList = ({ item, isManageable = true, index }) => {
         <td className="px-6 py-4">{formatCurrency(item.due_total)}</td>
         <td className="px-6 py-4">{formatCurrency(item.final_total)}</td>
         <td className="px-6 py-4 text-right">
-        <Link href={"/orders/"+[item.id]}>
-          <a
+        <Link href={`/orders/${item.id}`}>
+          {/* <a
             href=""
             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          >
+          > */}
             details
-          </a>
+          {/* </a> */}
           </Link>
         </td>
       </tr>

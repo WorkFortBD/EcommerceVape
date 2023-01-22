@@ -1,20 +1,16 @@
 import React, { useEffect } from 'react';
-// import PageTitle from '../master/page-title/PageTitle.jsx'
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import LoadingSkelleton from '../master/skelleton/LoadingSkelleton.jsx';
-import SingleOrder from './SingleOrder.js';
 import dayjs from 'dayjs';
-import { formatCurrency } from '../../services/currency.js';
+import SingleOrder from './SingleOrder.jsx';
+import { formatCurrency } from '../../utils/currency.jsx';
 import { getOrderDetails } from '../../store/order/action.js';
-// import OrderLifeCycle from './OrderLifeCycle.js';
 
 const OrderDetails = ({ orderID }) => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { manageOrder } = router.query;
     const { orderDetails, isLoading } = useSelector((state) => state.order);
-
     useEffect(() => {
         dispatch(getOrderDetails(manageOrder))
     }, [])
@@ -27,7 +23,7 @@ const OrderDetails = ({ orderID }) => {
     return (
         <>
             {/* <PageTitle title="Order Details" /> */}
-            {
+            {/* {
                 isLoading && (
                     <div className="card shadow-sm">
                         <LoadingSkelleton
@@ -38,7 +34,7 @@ const OrderDetails = ({ orderID }) => {
                         />
                     </div>
                 )
-            }
+            } */}
             {
                 orderDetails !== null && (
                     <>
