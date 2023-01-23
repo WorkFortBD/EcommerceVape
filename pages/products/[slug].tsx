@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import Layout from "../../components/layouts/Layout";
-import ProductDeatails from "../../components/products/ProductDeatails";
+import ProductDetails from "../../components/products/ProductDetails";
 
 const Product: NextPage = ({ product }) => {
   return (
     <Layout title={"Product Deatails"}>
-      <ProductDeatails product={product} />
+      <ProductDetails product={product} />
     </Layout>
   );
 };

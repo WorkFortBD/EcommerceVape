@@ -12,19 +12,15 @@ import * as Types from "./type";
  */
  export const getProductListAction = (args = {}) =>async (dispatch) => {
    let response = {
-     loading: false,
+     loading: true,
      data: [],
+     paginate:{}
    };
-
-   // console.log(`args`, args);
-
-   // console.log(`url`, url);
-
-   response.loading = true;
    dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
 
-   response.data = await getProductsData(args);
+   response.paginate = await getProductsData(args);
    response.loading = false;
+   response.data=response.paginate.data;
 
    dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
  };
@@ -40,7 +36,7 @@ import * as Types from "./type";
 */
 export const getProductsData = async (args) => {
  try {
-   let url = `${process.env.NEXT_PUBLIC_API_URL}get-items?p=1`;
+   let url = `get-items?p=1`;
 
    if (args["type"]) {
      url += `&type=${args["type"]}`;
@@ -55,8 +51,7 @@ export const getProductsData = async (args) => {
    }
 
    const res = await Axios.get(url);
-
-   return res.data.data.data;
+   return res.data.data;
  } catch (error) {
    //
  }

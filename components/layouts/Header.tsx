@@ -16,28 +16,58 @@ import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { getCategoriesAction } from "../../store/layouts/action";
+import { isSignedIn, isSignedOut } from "../../store/auth/action";
+import { getUserDataAction } from "../../store/users/action";
+import { useRouter } from "next/router";
+import { getCartsAction } from "../../store/cart/action";
 
 
 export default function Header() {
-  const isLoggedIn = false;
   const [barVisibility, setBarVisibility] = useState(false);
   const [scrollPosition, setSrollPosition] = useState(0);
   const dispatch = useDispatch();
+  const router = useRouter();
   const { categories } = useSelector((state: IRootReducer) => state.layout);
+  const { totalQuantity } = useSelector((state: IRootReducer) => state.carts);
+  const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
     setSrollPosition(position);
   };
-console.log('Categories',categories);
   useEffect(() => {
     dispatch(getCategoriesAction());
+    dispatch(isSignedIn());
+    dispatch(getUserDataAction());
+    dispatch(getCartsAction());
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const handleLogOut = () => {
+    dispatch(isSignedOut());
+    window.location.replace("/");
+  }
+
+  const clickMenuLink = (category, toggleBackdrop, isMainCategory = false) => {
+    let categoryType = "";
+
+    if (isMainCategory && category.short_code === "groceries") {
+      categoryType = "main-category";
+    } else {
+      categoryType = "category";
+    }
+
+
+    router.push(
+        `/products?${categoryType}=${encodeURIComponent(
+          category.short_code
+        )}&name=${encodeURIComponent(category.name)}&filter=paginate_no__40`
+      )
+      .then(_ => window.scrollTo(0, 0)); // added "name" query param only for collect category name from url on product page
+  };
 
   return (
     <header>
@@ -59,8 +89,7 @@ console.log('Categories',categories);
             </Navbar.Brand>
 
             <div className="flex md:order-2 items-center justify-center">
-              {isLoggedIn && (
-                <Dropdown
+              {signIn ? <Dropdown
                   arrowIcon={false}
                   inline={true}
                   label={
@@ -71,27 +100,27 @@ console.log('Categories',categories);
                     />
                   }
                 >
-                  <Dropdown.Header>
+                  <Link href="/my-account" className=""><Dropdown.Header>
                     <span className="block text-sm">Bonnie Green</span>
                     <span className="block truncate text-sm font-medium">
                       name@flowbite.com
                     </span>
-                  </Dropdown.Header>
+                  </Dropdown.Header></Link>
                   <Dropdown.Item>Dashboard</Dropdown.Item>
                   <Dropdown.Item>Settings</Dropdown.Item>
                   <Dropdown.Item>Earnings</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
-              )}
-
-              <Link href="/my-account" className="">
+                  <Dropdown.Item onClick={()=>handleLogOut()}>Sign out</Dropdown.Item>
+                </Dropdown>:
+                <Link href="/sign-in" className="">
                 <FontAwesomeIcon
                   icon={faUser}
                   className="text-black hover:text-primary cursor-pointer ml-3"
                   style={{ width: 22 }}
                 />
               </Link>
+              
+                }
               <Link href="/" className="">
                 <FontAwesomeIcon
                   icon={faSearch}
@@ -115,7 +144,7 @@ console.log('Categories',categories);
                     style={{ width: 22 }}
                   />
                   <span className="bg-primary text-white pl-1.5 text-sm rounded-full h-5 w-5 absolute -top-3 -right-2">
-                    0
+                    {totalQuantity}
                   </span>
                 </span>
               </Link>
@@ -135,6 +164,14 @@ console.log('Categories',categories);
                 <Link href="/categories">
                   <span className="transition uppercase text-primary hover:text-primary-light text-base">
                     LUCKY OFFER
+                  </span>
+                </Link>
+              </Navbar.Link>
+
+              <Navbar.Link href="/">
+                <Link href="/products" className="uppercase">
+                  <span className="transition uppercase text-primary hover:text-primary-light text-base">
+                    PRODUCTS
                   </span>
                 </Link>
               </Navbar.Link>
@@ -160,8 +197,10 @@ console.log('Categories',categories);
                 >
                   {category.childs.map((cl, index) =>(
                   <Dropdown.Item>
-                    <Link href="/categories">
-                      <span className="text-primary hover:text-primary-light">
+                    <Link href="#">
+                      <span className="text-primary hover:text-primary-light"
+                      onClick={() =>
+                        clickMenuLink(cl, false)}>
                         {cl.name}
                       </span>
                     </Link>

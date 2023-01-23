@@ -72,22 +72,6 @@ export default function CartComponents({ }: Props) {
                   ))}
 
                   <div className="flex justify-between mt-4 flex-col-reverse md:flex-row mx-2">
-                    {/* <div className="flex">
-                      <input
-                        type="search"
-                        value=""
-                        placeholder="Coupon code"
-                        className=" p-3 border rounded-md border-slate-300 outline-none w-full mr-1"
-                      />
-                      <button className="transition-all bg-primary text-white p-3 rounded-md w-full hover:bg-primary-light mx-1 uppercase">
-                        Apply Coupon
-                      </button>
-                    </div> */}
-                    {/* <div className="">
-                      <button className="transition-all w-full mb-2 md:mb-0 md:w-auto bg-primary text-white p-3 rounded-md hover:bg-primary-light uppercase">
-                        Update Cart
-                      </button>
-                    </div> */}
                   </div>
                 </>
               )
@@ -103,30 +87,10 @@ export default function CartComponents({ }: Props) {
                   <p>Subtotal</p>
                   <p>{formatCurrency(totalPrice)}</p>
                 </div>
-                {/* <div className="flex justify-between mt-3 border-b-2 p-3 ">
-                <p>Shipping</p>
-                <p className="text-primary">Calculate shipping</p>
-              </div> */}
                 <div className="flex justify-between mt-3 p-3">
                   <p>Total</p>
                   <p className="text-primary">{formatCurrency(totalPrice)}</p>
                 </div>
-                {/* <p className="text-end bottom-3 text-xs">
-                (includes
-                <span className="text-primary"> {formatCurrency(58)}</span>VAT)
-              </p> */}
-                {/* <div className="flex justify-between mt-3 p-4 border">
-                <a href="" className="text-gray-400 text-xs">
-                  or 4 interest-free payments of
-                  <b>
-                    111.25 <br /> SAR.
-                  </b>
-                  <u>Learn more</u>
-                </a>
-                <a href="" className="bg-green-300 rounded">
-                  tabby
-                </a>
-              </div> */}
                 <p className="transition-all cursor-pointer text-center mt-4 bg-primary hover:bg-primary-light rounded p-3 text-white uppercase">
                   <Link href="checkout">Proceed to checkout</Link>
                 </p>

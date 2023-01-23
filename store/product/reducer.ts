@@ -12,6 +12,7 @@ const initialState: IProductReducer = {
         price: 0,
         image:''
     },
+    paginate:{},
     isModalOpen: false,
     isDetailLoading: false
 };
@@ -25,7 +26,8 @@ const ProductReducer = (state = initialState, action: IAction) => {
             return {
                 ...state,
                 products: action.payload.data,
-                productsLoading: action.payload.loading
+                productsLoading: action.payload.loading,
+                paginate: action.payload.paginate
             };
 
         default:
