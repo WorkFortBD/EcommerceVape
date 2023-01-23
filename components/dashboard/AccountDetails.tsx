@@ -4,7 +4,7 @@ import DashboardLayout from "./DashboardLayout";
 
 type Props = {};
 
-export default function AccountDeatials({}: Props) {
+export default function AccountDetails({}: Props) {
   return (
     <DashboardLayout title="Account Deatials">
       <form action="">
