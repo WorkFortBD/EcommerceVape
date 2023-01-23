@@ -50,30 +50,8 @@ const FilterOrderList = () => {
         My Orders
       </h1>
       <div className="p-5 relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm shadow-md text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-red-400 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Order ID
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Customer Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Email
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Due Payment
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Final Payment
-              </th>
-              <th scope="col" className="px-6 py-3">
-                <span>Action</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+        {/* <table className="w-full text-sm shadow-md text-left text-gray-500 dark:text-gray-400">
+          <tbody> */}
             {isLoading && (
                 <TableShimmer count={4} />
             )}
@@ -92,8 +70,8 @@ const FilterOrderList = () => {
                   key={index + 1}
                 />
               ))}
-          </tbody>
-        </table>
+          {/* </tbody>
+        </table> */}
       </div>
     </>
   );
