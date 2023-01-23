@@ -15,14 +15,12 @@ import { getProductListAction } from "../../store/product/action";
 import ShimmerEffect from "../master/skeleton/ShimmerEffect";
 
 export default function HomeProductFilter() {
-  const { products } = useSelector((state: IRootReducer) => state.products);
   const dispatch                = useDispatch();
   const { products, productsLoading, paginate } = useSelector(
     (state: IRootReducer) => state.products
   );
   const [tabValue, setTabValue] = useState("latest");
   const [showLoadMore, setShowLoadMore] = useState(true);
-  const dispatch = useDispatch();
   useEffect(() => {
     console.log("tabValue", tabValue);
     const args = {
