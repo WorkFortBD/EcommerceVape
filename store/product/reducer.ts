@@ -10,6 +10,7 @@ const initialState: IProductReducer = {
     product: {
         name: '',
         price: 0,
+        image:''
     },
     paginate:{},
     isModalOpen: false,
@@ -21,6 +22,7 @@ const ProductReducer = (state = initialState, action: IAction) => {
 
     switch (action.type) {
         case Types.GET_PRODUCT_LIST_MAIN:
+            console.log('action.payload',action.payload);
             return {
                 ...state,
                 products: action.payload.data,
