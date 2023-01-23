@@ -21,17 +21,17 @@ export default function DashboardLayout(props: any) {
                       </Link>
                     </li>
                     <li className="cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
-                      <Link href="my-order">
+                      <Link href={"/my-order"}>
                         <span className="ml-3">Order</span>
                       </Link>
                     </li>
                     <li className="cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
-                      <Link href="address">
+                      <Link href={"/address"}>
                         <span className="ml-3">Address</span>
                       </Link>
                     </li>
                     <li className="cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
-                      <Link href="accountdeatials">
+                      <Link href={"/account-details"}>
                         <span className="flex-1 ml-3">Account Deatails</span>
                       </Link>
                     </li>

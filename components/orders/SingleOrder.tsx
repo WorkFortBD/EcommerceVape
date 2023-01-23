@@ -58,14 +58,14 @@ const SingleOrder = ({ item, isManageable = true }) => {
               <div className="d-flex mb-2">
                 {isManageable && (
                   <Link href={`/order/${item.id}`}>
-                      <button className="btn btn-info order-top-btn btn-sm mr-2">
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2">
                         <i className="far fa-eye"></i> View
                       </button>
                   </Link>
                 )}
                 <Link href={`/order/invoice/${item.id}`}>
                   {/* <a> */}
-                    <button className="btn btn-success order-top-btn btn-sm">
+                    <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4">
                       <i className="fas fa-print"></i> Invoice
                     </button>
                   {/* </a> */}
@@ -78,10 +78,11 @@ const SingleOrder = ({ item, isManageable = true }) => {
           {item.items &&
             item.items.length > 0 &&
             item.items.map((product, indexProduct) => (
-              <div className="row mt-2" key={indexProduct}>
+              <div className="row mt-2 grid justify-items-center" key={indexProduct}>
+                <div className="grid-auto-rows: auto">
                 <div className="col-lg-6">
-                  <div className="row align-items-center">
-                    <div className="col-sm-4 text-center">
+                  <div className="row">
+                    <div className="col-sm-4">
                       <img
                         style={{ maxHeight: "100px" }}
                         src={`${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`}
@@ -139,6 +140,8 @@ const SingleOrder = ({ item, isManageable = true }) => {
                     )}
                   </div>
                 </div>
+                </div>
+                
               </div>
             ))}
         </div>
