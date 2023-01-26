@@ -1,33 +1,55 @@
 export default function TableShimmer(props) {
-        return(
-            <>
-            <tr className="animate-pulse bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-300 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-300 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-            </tr>
-            <br></br>
-            <tr className="animate-pulse bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-300 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-300 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-            </tr>
-            <br></br>
-            <tr className="animate-pulse bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-300 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-300 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-              <td class="px-6 py-4 h-4 bg-gray-200 mb-6 rounded"></td>
-            </tr>
-        </>
-        );
-//   );
+  return (
+    <>
+      <div className="flex">
+        <div className="w-1/2 p-4 bg-gray-400 bg-white p-4 mr-4">
+          <>
+            <div class="animate-shimmer animate-pulse mb-2">
+              <div class="bg-gray-300 h-6 w-15"></div>
+            </div>
+            <div class="animate-shimmer animate-pulse">
+              <div class="bg-gray-300 h-6 w-15"></div>
+            </div>
+          </>
+        </div>
+        <div className="w-1/2 p-4 bg-gray-400 bg-white p-4">
+          <button class="bg-gray-300 animate-shimmer-button float-right mr-2"></button>
+
+          <button class="bg-gray-300 animate-shimmer-button float-right mr-2"></button>
+        </div>
+      </div>
+      <div className="flex">
+        <div className="w-1 bg-white square-lg p-6 mb-10">
+          <div class="bg-gray-300 animate-shimmer-div  mb-2"></div>
+          <div class="bg-gray-300 animate-shimmer-div  mb-2"></div>
+          <div class="bg-gray-300 animate-shimmer-div  mb-2"></div>
+        </div>
+      </div>
+      <div className="flex">
+        <div className="w-1/2 p-4 bg-gray-400 bg-white p-4 mr-4">
+          <>
+            <div class="animate-shimmer animate-pulse mb-2">
+              <div class="bg-gray-300 h-6 w-15"></div>
+            </div>
+            <div class="animate-shimmer animate-pulse">
+              <div class="bg-gray-300 h-6 w-15"></div>
+            </div>
+          </>
+        </div>
+        <div className="w-1/2 p-4 bg-gray-400 bg-white p-4">
+          <button class="bg-gray-300 animate-shimmer-button float-right mr-2"></button>
+
+          <button class="bg-gray-300 animate-shimmer-button float-right mr-2"></button>
+        </div>
+      </div>
+      <div className="flex">
+        <div className="w-1 bg-white square-lg p-6 mb-10">
+          <div class="bg-gray-300 animate-shimmer-div  mb-2"></div>
+          <div class="bg-gray-300 animate-shimmer-div  mb-2"></div>
+          <div class="bg-gray-300 animate-shimmer-div  mb-2"></div>
+        </div>
+      </div>
+    </>
+  );
+  //   );
 }
