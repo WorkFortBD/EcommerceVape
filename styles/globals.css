@@ -17,3 +17,37 @@
     box-shadow: theme('boxShadow.xl');
   }
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.animate-shimmer {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0.5) 100%);
+  background-repeat: no-repeat;
+  animation: shimmer 1s linear;
+}
+.animate-shimmer-button {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0.5) 100%);
+  background-repeat: no-repeat;
+  animation: shimmer 1s linear infinite;
+  padding: 20px 40px;
+  border-radius: 4px;
+  /* color: #fff; */
+  font-weight: bold;
+}
+
+.animate-shimmer-div {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0.5) 100%);
+  background-repeat: no-repeat;
+  animation: shimmer 1s linear infinite;
+  padding: 15px 50px;
+  border-radius: 0px;
+  /* color: #fff; */
+  font-weight: bold;
+}

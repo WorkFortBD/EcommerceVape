@@ -30,6 +30,7 @@ export default function Header() {
   const { categories } = useSelector((state: IRootReducer) => state.layout);
   const { totalQuantity } = useSelector((state: IRootReducer) => state.carts);
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
+  const {userData} = useSelector((state) => state.user);
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
@@ -100,15 +101,15 @@ export default function Header() {
                     />
                   }
                 >
-                  <Link href="/my-account" className=""><Dropdown.Header>
-                    <span className="block text-sm">Bonnie Green</span>
+                  <Link href="/my-account"><Dropdown.Header>
+                    <span className="block text-sm">{userData.first_name}{" "}{userData.last_name}</span>
                     <span className="block truncate text-sm font-medium">
-                      name@flowbite.com
+                      {userData.email}
                     </span>
                   </Dropdown.Header></Link>
-                  <Dropdown.Item>Dashboard</Dropdown.Item>
-                  <Dropdown.Item>Settings</Dropdown.Item>
-                  <Dropdown.Item>Earnings</Dropdown.Item>
+                  <Link href={"/my-account"}><span className="hover:text-red-500"><Dropdown.Item> Dashboard</Dropdown.Item></span></Link>
+                  <Link href={"/my-order"}><Dropdown.Item>My Orders</Dropdown.Item></Link>
+                  <Link href={"/account-details"}><Dropdown.Item>Account</Dropdown.Item></Link>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={()=>handleLogOut()}>Sign out</Dropdown.Item>
                 </Dropdown>:
