@@ -1,7 +1,5 @@
 export interface ILogin {
-    /**
-     * Product name.
-     */
+
     email: string;
     password:string;
     remember:boolean;

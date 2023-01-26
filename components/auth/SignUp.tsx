@@ -63,13 +63,10 @@ export default function SignIn(history, props) {
         };
         setStepOneFormData(formData);
 
-        const data = await Axios.post(
-          `auth/register`,
-          formData
-        );
+        const data = await Axios.post(`auth/register`, formData);
 
         if (data.data.status) {
-          toast("success", "OTP is sent to your phone number");
+          toast.success("OTP is sent to your phone number",{theme: "colored",});
           setOtpExpireTime(data.data.data);
           setIsLoading(false);
           setValidationStep(1);
@@ -91,10 +88,7 @@ export default function SignIn(history, props) {
         customerRegister(formData)
           .then((data) => {
             if (data.data.status) {
-              toast(
-                "success",
-                "Your account created successfully, Please Login."
-              );
+              toast.success("Your account created successfully, Please Login.",{theme: "colored",});
               window.location.replace("/sign-in");
             }
           })
@@ -111,7 +105,7 @@ export default function SignIn(history, props) {
       setIsLoading(false);
 
       if (!response.data.errors) {
-        toast("success", response.data.message);
+        toast.success(response.data.message,{theme: "colored",});
         setValidationStep(1);
         setOtpExpireTime(response.data.data);
         actions.setTouched({});
@@ -122,12 +116,9 @@ export default function SignIn(history, props) {
       const errors = Object.keys(response.data.errors);
 
       if (errors.length > 1) {
-        toast("error", "Email and phone number already used.");
+        toast.error("Email and phone number already used.",{theme: "colored",});
       } else {
-        toast(
-          "error",
-          `${errors[0] === "email" ? "email" : "Phone number"} is already used.`
-        );
+        toast.error(`${errors[0] === "email" ? "email" : "Phone number"} is already used.`,{theme: "colored",});
       }
     }
   };
@@ -366,7 +357,7 @@ export default function SignIn(history, props) {
                       />
                       <ErrorMessage name="otp" component={ValidationError} />
                     </div>
-                    <a href="/sign-up">
+                    <a href={"/sign-up"}>
                       <button
                         className="border w-full mt-1 py-2 uppercase text-primary font-bold px-4 rounded focus:outline-none focus:shadow-outline"
                         type="button"
@@ -458,17 +449,21 @@ export default function SignIn(history, props) {
                     </div>
                   </>
                 )}
-
-                <button
+                {isLoading ? (
+                  <button disabled
                   className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
-                  {isLoading ? (
-                    <span className="sr-only">Signing in...</span>
-                  ) : (
-                    "Sign up"
-                  )}
+                  Loding...
                 </button>
+                ) : (
+                  <button
+                    className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    Sign up
+                  </button>
+                )}
                 <div className="text-center">
                   <a
                     className="inline-block align-baseline font-bold px-2 py-1 rounded-md text-primary hover:text-primary-light"

@@ -12,7 +12,7 @@ import * as Types from "./type";
  */
  export const getSliderAction = (args = {}) =>async (dispatch) => {
   let response = {
-    loading: false,
+    loading: true,
     data: [],
   };
 
