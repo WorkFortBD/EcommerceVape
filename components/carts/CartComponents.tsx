@@ -50,7 +50,7 @@ export default function CartComponents({ }: Props) {
               Add 54 to cart and get free shipping!
               <Progress progress={45} />
             </p> */}
-            <div className="flex mt-2 uppercase border-b-2 py-5">
+            <div className="flex mt-2 uppercase py-2 bg-red-400 text-white">
               <div className="basis-1/2">
                 <p className="text-center">Product</p>
               </div>
@@ -59,6 +59,7 @@ export default function CartComponents({ }: Props) {
                   <p className="basis-1/4 mr-2">Price</p>
                   <p className="basis-1/2">Quantity</p>
                   <p className="basis-1/4 ml-2">Subtotal</p>
+                  <p className="basis-1/4 ml-2">Action</p>
                 </div>
               </div>
             </div>

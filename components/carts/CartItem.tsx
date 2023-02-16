@@ -65,7 +65,8 @@ export default function CartItem({ cart }: Props): ReactElement {
         </p>
         <p className="basis-1/4 text-primary">
           {formatCurrency((cart.isOffer ? cart.offerPrice : cart.price) * cart.quantity)}
-
+        </p>
+        <p className="basis-1/4 text-primary">
           <button className="text-danger ml-4" style={{ padding: '5px 10px' }} onClick={() => handleDeleteCartProduct(cart.productID)}>Remove</button>
         </p>
       </div>

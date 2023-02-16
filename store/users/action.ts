@@ -11,7 +11,6 @@ export const getUserDataAction = () => async (dispatch) => {
     status:false
   };
   const userDataFound = localStorage.getItem('userData');
-  console.log('userDataFound', userDataFound)
   if(userDataFound) {
     data.userData = JSON.parse(userDataFound);
     dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
@@ -19,7 +18,6 @@ export const getUserDataAction = () => async (dispatch) => {
   }
   try {
     const res = await Axios.get(`auth/getUserProfile`);
-    console.log('User Response', res)
     data.userData = res.data.data;
     localStorage.setItem('user-info', JSON.stringify(res.data.data));
     dispatch({ type: Types.GET_USER_STORAGE_DATA, payload: data });
