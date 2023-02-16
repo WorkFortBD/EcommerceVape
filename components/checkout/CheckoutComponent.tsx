@@ -10,14 +10,13 @@ import { IRootReducer } from "../../interfaces/reducers";
 import CustomSelect from "../master/custom-select/CustomSelect";
 
 /**External Dependency */
-import {useFormik } from "formik";
+import { useFormik } from "formik";
 import * as yup from "yup";
-import {
-  getLocationData,
-} from "../../store/profileaccountsetting/action";
+import { getLocationData } from "../../store/profileaccountsetting/action";
 import { createOrder } from "../../store/order/action";
 import { getUserDataAction } from "../../store/users/action";
 import { isSignedIn } from "../../store/auth/action";
+import Spinner from "../master/spinner/Spinner";
 
 type Props = {};
 
@@ -30,15 +29,17 @@ export default function CheckoutComponent({}: Props) {
   const { countryList, divisionList, cityList, areaList } = useSelector(
     (state) => state.userProfile
   );
-  const { couponData, shippingCost, coupon } 							= useSelector((state) => state.order);
-  const { userData } 													            = useSelector((state) => state.user);
+  const { couponData, shippingCost, coupon, isSubmitting } = useSelector(
+    (state) => state.order
+  );
+  const { userData } = useSelector((state) => state.user);
   const status = useSelector((state) => state.auth.isSignedIn);
 
   useEffect(() => {
     dispatch(getCartsAction());
     dispatch(getUserDataAction());
     dispatch(isSignedIn());
-    if (userData ==null) {
+    if (userData == null) {
       router.replace("/sign-in");
     }
     if (countryList.length === 0) {
@@ -51,7 +52,6 @@ export default function CheckoutComponent({}: Props) {
       dispatch(getLocationData("cities", null, null));
     }
   }, []);
-
 
   const formik = useFormik({
     initialValues: {
@@ -69,8 +69,8 @@ export default function CheckoutComponent({}: Props) {
       email: "",
       ordernotes: "",
       payment: "",
-      condition:"",
-      age:"",
+      condition: "",
+      age: "",
     },
     validationSchema: yup.object().shape({
       first_name: yup
@@ -102,8 +102,18 @@ export default function CheckoutComponent({}: Props) {
           return true;
         }),
     }),
-    onSubmit: values => {
-      dispatch(createOrder(values, carts, totalQuantity, shippingCost, totalPrice, couponData, userData));
+    onSubmit: (values) => {
+      dispatch(
+        createOrder(
+          values,
+          carts,
+          totalQuantity,
+          shippingCost,
+          totalPrice,
+          couponData,
+          userData
+        )
+      );
     },
   });
   return (
@@ -121,22 +131,9 @@ export default function CheckoutComponent({}: Props) {
             <u className="ml-2 text-primary">Click here to login</u>
           </Link>
         </div>
-        {/* <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validationSchema={validationSchema}
-          validateOnMount
-        > */}
-        {/* {() => {
-            return ( */}
         <form onSubmit={formik.handleSubmit} className="mt-4">
           <div className="flex flex-col md:flex-row mt-7">
             <div className="basis-1/2 mt-3 p-4">
-              {/* <p className="border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4 ">
-                Add {formatCurrency(54)} to cart and get free shipping!
-                <Progress progress={45} />
-              </p> */}
-
               <h2 className="mt-10 uppercase text-2xl">Billing & Shipping</h2>
 
               <div className="flex">
@@ -366,25 +363,6 @@ export default function CheckoutComponent({}: Props) {
                 </div>
               </div>
               <div className="mt-8 border-b p-3">
-                <div className="flex">
-                  <div>
-                    <input
-                      type="radio"
-                      name="payment"
-                      id="creditcard"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.payment}
-                    />
-                    <label htmlFor="creditcard"> Credit Card | MADA</label>
-                  </div>
-                  <img
-                    src="images/common/checkout.svg"
-                    alt=""
-                    id="creditcard"
-                    className="w-44 ml-2"
-                  />
-                </div>
                 <div className="flex mt-5">
                   <div>
                     <input
@@ -397,12 +375,16 @@ export default function CheckoutComponent({}: Props) {
                     />
                     <label htmlFor="apple"> STC Pay</label>
                   </div>
-                  <img
-                    src="images/Apple-STC-1.svg"
-                    alt=""
-                    id="apple"
-                    className="w-44 ml-2"
-                  />
+                </div>
+                <div className="flex">
+                  <div>
+                    <p className="mt-4 border-b p-3 text-gray-400">
+                      Make your payment directly into our STC Pay account.
+                      Please use your Order ID as the payment reference. Your
+                      order will not be shipped until the funds have cleared in
+                      our account. +966558449919
+                    </p>
+                  </div>
                 </div>
                 <div className="flex mt-5">
                   <div>
@@ -417,12 +399,16 @@ export default function CheckoutComponent({}: Props) {
                     <label htmlFor="apple"> Cash On Delivery</label>
                   </div>
                 </div>
+                <div className="flex">
+                  <div>
+                    <p className="mt-4 border-b p-3 text-gray-400">
+                      Your personal data will be used to process your order,
+                      support your experience throughout this website, and for
+                      other purposes described in our privacy policy.
+                    </p>
+                  </div>
+                </div>
               </div>
-
-              <p className="mt-4 border-b p-3 text-gray-400">
-                Your personal data will be used to process your order, support
-                your experience throughout this website.
-              </p>
               <div className="mt-3">
                 <input
                   type="checkbox"
@@ -449,24 +435,27 @@ export default function CheckoutComponent({}: Props) {
                   I am 21 years old.
                   <sub className="text-2xl text-red-500">*</sub>
                 </label>
-                {/* <p className="text-center cursor-pointer mt-5 mb-3 bg-primary hover:bg-primary-light rounded p-3 text-white uppercase">
-                    <Link href="" className="text-center uppercase">
-                    place order
-                    </Link>
-                  </p> */}
-                <button
-                  className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
-                >
-                  Place Order
-                </button>
+                {isSubmitting == true ? (
+                  <button
+                    disabled
+                    className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    <Spinner />
+                    Placeing Order....
+                  </button>
+                ) : (
+                  <button
+                    className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    Place Order
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </form>
-        {/* //   );
-          // }}
-        // </Formik> */}
       </div>
     </section>
   );

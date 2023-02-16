@@ -31,7 +31,6 @@ export default function Header() {
   const { totalQuantity } = useSelector((state: IRootReducer) => state.carts);
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
   const {userData} = useSelector((state) => state.user);
-  console.log('userData', userData)
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
