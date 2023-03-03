@@ -18,7 +18,7 @@ export default function MyOrder({}: Props) {
   return (
     <DashboardLayout title="My Orders">
       <div className="p-3">
-        <h3>
+        {/* <h3>
           <div
             className="flex p-4 mb-4 text-sm bg-red-300 rounded-lg dark:bg-red-200"
             role="alert"
@@ -40,7 +40,7 @@ export default function MyOrder({}: Props) {
               <u className="font-medium text-xl text-white">Browse Products </u>
             </span>
           </div>
-        </h3>
+        </h3> */}
 
         <div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
