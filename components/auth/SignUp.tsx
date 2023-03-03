@@ -480,7 +480,7 @@ export default function SignIn(history, props) {
                     className="border w-full mt-1 py-2 uppercase text-primary font-bold px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
                   >
-                    Sing IN
+                    Sign IN
                   </button>
                 </a>
               </Form>

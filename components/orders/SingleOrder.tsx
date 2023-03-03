@@ -57,11 +57,11 @@ const SingleOrder = ({ item, isManageable = true }) => {
               </button>
             </Link>
           )}
-          <Link href={`/order/invoice/${item.id}`}>
+          {/* <Link href={`/order/invoice/${item.id}`}>
             <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-4 float-right">
               <i className="fas fa-print"></i> Invoice
             </button>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="flex">
