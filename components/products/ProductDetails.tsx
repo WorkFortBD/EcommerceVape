@@ -9,6 +9,7 @@ import { formatCurrency } from "../../utils/currency";
 import { IProduct } from "../../interfaces/products";
 import { CartButton } from "../carts/CartButton";
 import DOMPurify from 'dompurify';
+import { Head } from "next/document";
 
 type Props = {
   product: IProduct
@@ -17,6 +18,10 @@ type Props = {
 export default function ProductDetails({ product }: Props) {
   return (
     <section className="product-deatails-section">
+      <Head>
+        <title>{product->meta_title}</title>
+        <meta property="og:title" content={product->meta_title} key="title" />
+      </Head>
       <div className="container mx-auto mt-2 p-5">
         <div className="flex justify-between">
           <div className="p-2 text-base inline-block">
