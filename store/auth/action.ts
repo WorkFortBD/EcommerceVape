@@ -74,6 +74,76 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
   // return axios.post(LOGIN_URL, { email, password });
 };
 
+
+/**
+ * Social Login
+ */
+
+ export const socialLogin = () => async (dispatch) => {
+  let loginResponse = {
+    status: false,
+    message: "",
+    isLoading: true,
+    tokenData: "",
+    data: null,
+  };
+  dispatch({ type: Types.SOCIAL_LOGIN, payload: loginResponse });
+
+  try {
+    let postData = {
+      email: values.email,
+      password: values.password,
+      remember: false,
+    };
+    await Axios.post(`auth/login`, postData, {})
+      .then((res) => {
+        console.log('res', res)
+        const { data, message, status } = res.data;
+        const { user, access_token } = data;
+
+        loginResponse.data = user;
+        loginResponse.tokenData = access_token;
+        loginResponse.status = status;
+        if(loginResponse.status == true){
+          toast.success(message,{
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          window.location.assign('/');
+        }
+       
+      })
+      .catch((err) => {
+        // const { response } = err.response;
+        // const { request, ...errorObject } = response;
+        loginResponse.message = err.response.data.message;
+        toast.error(loginResponse.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      });
+  } catch (error) {
+    loginResponse.message = "Something went wrong, Please try again !";
+  }
+
+  loginResponse.isLoading = false;
+  dispatch({ type: Types.POST_LOGIN_DATA, payload: loginResponse });
+
+  // return axios.post(LOGIN_URL, { email, password });
+};
+
 /**
  * Get Products Data
  *

@@ -8,13 +8,13 @@ import ProductDetailImages from "./ProductDetailImages";
 import { formatCurrency } from "../../utils/currency";
 import { IProduct } from "../../interfaces/products";
 import { CartButton } from "../carts/CartButton";
+import DOMPurify from 'dompurify';
 
 type Props = {
   product: IProduct
 };
 
 export default function ProductDetails({ product }: Props) {
-  console.log('product', product.current_stock)
   return (
     <section className="product-deatails-section">
       <div className="container mx-auto mt-2 p-5">
@@ -49,9 +49,9 @@ export default function ProductDetails({ product }: Props) {
           </div>
           <div className="basis-2/4 border shadow-md rounded-3xl mt-5 p-6">
             <div className="text-center">
-              <h2 className="text-3xl">
+              <h1 className="text-3xl">
                 {product.name}
-              </h2>
+              </h1>
               <p className="text-primary mt-3 text-2xl">30</p>
               <p className="text-gray-500 text-xs mt-2">
                 مجموعة السفر قطن + ملقط + مقص صغير
@@ -172,11 +172,11 @@ export default function ProductDetails({ product }: Props) {
                 <img src="/images/wishlist/description.png" alt="" />
               </p>
               <div className="mt-8">
-                <h2 className="mt-6 text-3xl text-center uppercase">
+                {/* <h2 className="mt-6 text-3xl text-center uppercase">
                   Description
-                </h2>
-                <p className="mt-3 text-center text-gray-400">
-                  {product.description}
+                </h2> */}
+                <p className="mt-3 text-center text-gray-400" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(product.description)}}>
+                  {/* {sanitizeHtml(product.description)} */}
                 </p>
                 <div className="text-center mt-5">
                   <h2 className="text-3xl uppercase">What's Included</h2>

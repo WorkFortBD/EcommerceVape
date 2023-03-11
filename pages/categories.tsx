@@ -2,7 +2,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { NextPage } from "next";
 import Link from "next/link";
-import HomeComponent from "../components/home/HomeComponent";
+// import HomeComponent from "../components/home/HomeComponent";
 import Layout from "../components/layouts/Layout";
 import ProductList from "../components/products/ProductList";
 import { formatCurrency } from "../utils/currency";
