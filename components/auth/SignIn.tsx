@@ -37,6 +37,10 @@ export default function SignIn(history, props) {
       router.push("/");
     }
   }, [status, message, dispatch, history]);
+
+  const handleSocialLogin=()=>{
+    dispatch(socialLogin());
+  }
   const loginPost = async (values) => {
     dispatch(postLoginData(values));
   };
@@ -176,6 +180,27 @@ export default function SignIn(history, props) {
                     Sign in
                   </button>
                 )}
+                {/* <a href={'/social'}> */}
+                <button
+                  className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="button"
+                  onClick={()=>handleSocialLogin()}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    className="text-center"
+                    width="30"
+                    height="30"
+                  >
+                    <path
+                      fill="#ffffff"
+                      d="M19.938 10.986h-9.353v2.471h6.782c-.298 1.717-1.884 2.984-3.871 2.984-2.305 0-4.179-1.876-4.179-4.18s1.874-4.179 4.179-4.179c1.057 0 1.991.387 2.716 1.017l1.938-1.938c-1.26-1.12-2.933-1.802-4.79-1.802-3.96 0-7.171 3.21-7.171 7.171s3.211 7.171 7.171 7.171c4.322 0 7.063-3.264 7.063-7.062 0-.474-.049-.852-.096-1.123z"
+                    />
+                  </svg>
+                  Sign in with Google
+                </button>
+                {/* </a> */}
                 <div className="text-center">
                   <a
                     className="inline-block align-baseline font-bold px-2 py-1 rounded-md text-primary hover:text-primary-light"
@@ -205,6 +230,5 @@ export default function SignIn(history, props) {
 }
 
 function ValidationError(props) {
-  
   return <small className="text-red-500">{props.children}</small>;
 }
