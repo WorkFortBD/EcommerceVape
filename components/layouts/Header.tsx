@@ -184,13 +184,13 @@ export default function Header() {
                         trigger="click"
                         inline={true}
                         label={
-                          <span className="text-primary hover:text-primary-light text-navbar">
+                          <span className="text-primary uppercase hover:text-primary-light text-navbar">
                             {category.name}
                           </span>
                         }
                       >
-                        {category.childs.map((cl, index) => (
-                          <Dropdown.Item>
+                        {category.childs.map((cl, index2: number) => (
+                          <Dropdown.Item key={index2}>
                             <Link href="#">
                               <span className="text-primary hover:text-primary-light text-navbar"
                                 onClick={() =>
