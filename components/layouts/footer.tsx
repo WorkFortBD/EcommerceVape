@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ReactElement } from "react";
+import WhatsAppButton from "../whatsapp-button";
 
 export default function Footer(): ReactElement {
   return (
@@ -94,6 +95,8 @@ export default function Footer(): ReactElement {
             </div>
           </div>
         </div>
+
+        <WhatsAppButton />
       </footer>
     </div>
   );
