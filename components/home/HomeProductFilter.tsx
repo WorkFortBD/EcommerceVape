@@ -3,13 +3,12 @@
  */
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import { Tabs } from "flowbite-react";
 
 /**
  * Internal dependencies.
  */
 import ProductList from "../products/ProductList";
-import { Tabs } from "flowbite-react";
 import { IRootReducer } from "../../interfaces/reducers";
 import { getProductListAction } from "../../store/product/action";
 import ShimmerEffect from "../master/skeleton/ShimmerEffect";
