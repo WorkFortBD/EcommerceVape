@@ -16,6 +16,10 @@
     padding: theme('spacing.6');
     box-shadow: theme('boxShadow.xl');
   }
+
+  .text-navbar {
+    @apply !text-[12px]
+  }
 }
 
 @keyframes shimmer {

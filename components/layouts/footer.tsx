@@ -1,9 +1,7 @@
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-interface Props {}
-
-export default function footer({}: Props): ReactElement {
+export default function Footer(): ReactElement {
   return (
     <div className="footer-section">
       <footer className="mt-20">
@@ -20,9 +18,9 @@ export default function footer({}: Props): ReactElement {
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                 <Link href="">
                   <img
-                    src="images/logos/logo-footer.svg"
+                    src="images/logos/logo.png"
                     alt=""
-                    className="w-40"
+                    className="w-36"
                   />
                 </Link>
                 <div className="flex flex-auto mt-16 text-gray-400">
@@ -83,7 +81,7 @@ export default function footer({}: Props): ReactElement {
               </div>
             </div>
             <div className="mt-16 text-gray-400 text-center  text-xs">
-              © 2022 Saudi Vape Shop
+              © 2023 Saudi Vape Shop
             </div>
 
             <div className="mt-7 flex justify-center items-center">

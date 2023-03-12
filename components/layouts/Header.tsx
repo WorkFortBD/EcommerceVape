@@ -30,7 +30,7 @@ export default function Header() {
   const { categories } = useSelector((state: IRootReducer) => state.layout);
   const { totalQuantity } = useSelector((state: IRootReducer) => state.carts);
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
-  const {userData} = useSelector((state) => state.user);
+  const { userData } = useSelector((state) => state.user);
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
@@ -63,26 +63,25 @@ export default function Header() {
 
 
     router.push(
-        `/products?${categoryType}=${encodeURIComponent(
-          category.short_code
-        )}&name=${encodeURIComponent(category.name)}&filter=paginate_no__40`
-      )
+      `/products?${categoryType}=${encodeURIComponent(
+        category.short_code
+      )}&name=${encodeURIComponent(category.name)}&filter=paginate_no__40`
+    )
       .then(_ => window.scrollTo(0, 0)); // added "name" query param only for collect category name from url on product page
   };
 
   return (
     <header>
       <div
-        className={`navbar-main-area bg-white shadow ${
-          barVisibility ? "fixed-nav" : "not-fixed-nav"
-        }`}
+        className={`navbar-main-area bg-white shadow ${barVisibility ? "fixed-nav" : "not-fixed-nav"
+          }`}
       >
         <div className="container mx-auto">
           <Navbar fluid={false} rounded={false}>
             <Navbar.Brand href="/">
               <Link href="/">
                 <img
-                  src="/images/logos/logo.svg"
+                  src="/images/logos/logo.png"
                   className="mr-3 h-12 md:h-16"
                   alt={content.name}
                 />
@@ -91,37 +90,37 @@ export default function Header() {
 
             <div className="flex md:order-2 items-center justify-center">
               {signIn ? <Dropdown
-                  arrowIcon={false}
-                  inline={true}
-                  label={
-                    <Avatar
-                      alt="User settings"
-                      img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                      rounded={true}
-                    />
-                  }
-                >
-                  <Link href="/my-account"><Dropdown.Header>
-                    <span className="block text-sm">{userData.first_name}{" "}{userData.last_name}</span>
-                    <span className="block truncate text-sm font-medium">
-                      {userData.email}
-                    </span>
-                  </Dropdown.Header></Link>
-                  <Link href={"/my-account"}><span className="hover:text-red-500"><Dropdown.Item> Dashboard</Dropdown.Item></span></Link>
-                  <Link href={"/my-order"}><Dropdown.Item>My Orders</Dropdown.Item></Link>
-                  <Link href={"/account-details"}><Dropdown.Item>Account</Dropdown.Item></Link>
-                  <Dropdown.Divider />
-                  <Dropdown.Item onClick={()=>handleLogOut()}>Sign out</Dropdown.Item>
-                </Dropdown>:
-                <Link href="/sign-in" className="">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className="text-black hover:text-primary cursor-pointer ml-3"
-                  style={{ width: 22 }}
-                />
-              </Link>
-              
+                arrowIcon={false}
+                inline={true}
+                label={
+                  <Avatar
+                    alt="User settings"
+                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    rounded={true}
+                  />
                 }
+              >
+                <Link href="/my-account"><Dropdown.Header>
+                  <span className="block text-sm">{userData.first_name}{" "}{userData.last_name}</span>
+                  <span className="block truncate text-sm font-medium">
+                    {userData.email}
+                  </span>
+                </Dropdown.Header></Link>
+                <Link href={"/my-account"}><span className="hover:text-red-500"><Dropdown.Item> Dashboard</Dropdown.Item></span></Link>
+                <Link href={"/my-order"}><Dropdown.Item>My Orders</Dropdown.Item></Link>
+                <Link href={"/account-details"}><Dropdown.Item>Account</Dropdown.Item></Link>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={() => handleLogOut()}>Sign out</Dropdown.Item>
+              </Dropdown> :
+                <Link href="/sign-in" className="">
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className="text-black hover:text-primary cursor-pointer ml-3"
+                    style={{ width: 22 }}
+                  />
+                </Link>
+
+              }
               <Link href="/" className="">
                 <FontAwesomeIcon
                   icon={faSearch}
@@ -155,23 +154,55 @@ export default function Header() {
             <Navbar.Collapse>
               <Navbar.Link href="/" active={true}>
                 <Link href="/">
-                  <span className="transition uppercase text-primary hover:text-primary-light text-base">
+                  <span className="transition uppercase text-primary hover:text-primary-light text-navbar">
                     HOME
                   </span>
                 </Link>
               </Navbar.Link>
 
-              <Navbar.Link href="/" active={true}>
-                <Link href="/categories">
-                  <span className="transition uppercase text-primary hover:text-primary-light text-base">
-                    LUCKY OFFER
+              <Dropdown
+                arrowIcon={true}
+                trigger="click"
+                inline={true}
+                label={
+                  <span className="text-primary hover:text-primary-light text-navbar">
+                    SHOP
                   </span>
-                </Link>
-              </Navbar.Link>
+                }
+              >
+                {categories.map((category, index) => (
+                  <Navbar.Link key={index}>
+                    <div className="p-2">
+                      <Dropdown
+                        arrowIcon={true}
+                        trigger="click"
+                        inline={true}
+                        label={
+                          <span className="text-primary hover:text-primary-light text-navbar">
+                            {category.name}
+                          </span>
+                        }
+                      >
+                        {category.childs.map((cl, index) => (
+                          <Dropdown.Item>
+                            <Link href="#">
+                              <span className="text-primary hover:text-primary-light text-navbar"
+                                onClick={() =>
+                                  clickMenuLink(cl, false)}>
+                                {cl.name}
+                              </span>
+                            </Link>
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown>
+                    </div>
+                  </Navbar.Link>
+                ))}
+              </Dropdown>
 
               <Navbar.Link href="/">
                 <Link href="/products" className="uppercase">
-                  <span className="transition uppercase text-primary hover:text-primary-light text-base">
+                  <span className="transition uppercase text-primary hover:text-primary-light text-navbar">
                     PRODUCTS
                   </span>
                 </Link>
@@ -179,38 +210,37 @@ export default function Header() {
 
               <Navbar.Link href="/">
                 <Link href="/categories" className="uppercase">
-                  <span className="transition uppercase text-primary hover:text-primary-light text-base">
+                  <span className="transition uppercase text-primary hover:text-primary-light text-navbar">
                     SHOP PACKAGES
                   </span>
                 </Link>
               </Navbar.Link>
-              {categories.map((category, index) =>(
+              {categories.map((category, index) => (
                 <Navbar.Link>
-                <Dropdown
-                  arrowIcon={true}
-                  trigger="click"
-                  inline={true}
-                  label={
-                    <span className="text-primary hover:text-primary-light">
-                      {category.name}
-                    </span>
-                  }
-                >
-                  {category.childs.map((cl, index) =>(
-                  <Dropdown.Item>
-                    <Link href="#">
-                      <span className="text-primary hover:text-primary-light"
-                      onClick={() =>
-                        clickMenuLink(cl, false)}>
-                        {cl.name}
+                  <Dropdown
+                    arrowIcon={true}
+                    trigger="click"
+                    inline={true}
+                    label={
+                      <span className="text-primary hover:text-primary-light text-navbar">
+                        {category.name}
                       </span>
-                    </Link>
-                  </Dropdown.Item>
-                  ))} 
-                </Dropdown>
-              </Navbar.Link>
-              ))}    
-              
+                    }
+                  >
+                    {category.childs.map((cl, index) => (
+                      <Dropdown.Item>
+                        <Link href="#">
+                          <span className="text-primary hover:text-primary-light text-navbar"
+                            onClick={() =>
+                              clickMenuLink(cl, false)}>
+                            {cl.name}
+                          </span>
+                        </Link>
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown>
+                </Navbar.Link>
+              ))}
             </Navbar.Collapse>
           </Navbar>
         </div>

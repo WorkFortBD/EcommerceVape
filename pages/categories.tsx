@@ -1,10 +1,5 @@
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { NextPage } from "next";
-import Link from "next/link";
-// import HomeComponent from "../components/home/HomeComponent";
 import Layout from "../components/layouts/Layout";
-import ProductList from "../components/products/ProductList";
 import { formatCurrency } from "../utils/currency";
 
 const Home: NextPage = () => {
@@ -101,7 +96,7 @@ const Home: NextPage = () => {
                 <h2 className="text-primary text-2xl">Products</h2>
                 <p>Get your necessary vapes in this category...</p>
               </div>
-              <ProductList count={12} />
+              {/* <ProductList count={12} /> */}
             </div>
           </div>
         </section>
