@@ -1,7 +1,6 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import { IProduct } from "../../interfaces/products";
 import ProductShortDetail from "./ProductShortDetail";
-import { GetServerSideProps } from 'next';
 
 interface Props {
   products: Array<IProduct>
@@ -9,7 +8,7 @@ interface Props {
 
 export default function ProductList({ products }: Props): ReactElement {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center flex-wrap">
+    <div className="flex flex-row justify-center items-center flex-wrap">
       {products.map((product, index) =>
         <ProductShortDetail product={product} key={index} />
       )}

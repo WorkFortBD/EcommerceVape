@@ -7,24 +7,24 @@ var currencyFormatter = require('currency-formatter');
  *
  * @return array currencies as array
  */
- export const currencies = [
+export const currencies = [
     {
-        'name' : 'US Dollar',
-        'slug'     : 'en',
-        'code'     : 'USD',
-        'lang'     : 'EN',
-        'sign'     : '$',
+        'name': 'US Dollar',
+        'slug': 'en',
+        'code': 'USD',
+        'lang': 'EN',
+        'sign': '$',
         'flag_link': '/images/languages/usa.png',
-        'active'   : false
+        'active': false
     },
     {
-        'name' : 'Saudi Arab Riyals',
-        'slug'     : 'en',
-        'code'     : 'SAR',
-        'lang'     : 'SA',
-        'sign'     : 'ر.س',
+        'name': 'Saudi Arab Riyals',
+        'slug': 'en',
+        'code': 'SAR',
+        'lang': 'SA',
+        'sign': 'ر.س',
         'flag_link': '/images/languages/sar.png',
-        'active'   : false,
+        'active': true,
     }
 ];
 
@@ -37,22 +37,22 @@ var currencyFormatter = require('currency-formatter');
  *
  * @return string|null|object active currency data
  */
-export function activeCurrency ( printableLabel = '' ) {
-    if(process.browser) {
+export function activeCurrency(printableLabel = '') {
+    if (process.browser) {
         let activeLang = localStorage.getItem('lang') || 'en';
 
-        if ( typeof activeLang === 'undefined' || ( activeLang !== 'en' && activeLang !== 'sa' ) ) {
+        if (typeof activeLang === 'undefined' || (activeLang !== 'en' && activeLang !== 'sa')) {
             activeLang = 'en';
         }
 
-        let activeCurrency     = null;
+        let activeCurrency = null;
         const activeCurrencies = currencies.filter(cur => cur.slug === activeLang);
 
-        if ( typeof activeCurrencies !== 'undefined' && activeCurrencies !== null && activeCurrencies.length > 0 ) {
+        if (typeof activeCurrencies !== 'undefined' && activeCurrencies !== null && activeCurrencies.length > 0) {
             activeCurrency = activeCurrencies[0];
         }
 
-        if ( printableLabel === '' || printableLabel === null || activeCurrency === null ) return activeCurrency;
+        if (printableLabel === '' || printableLabel === null || activeCurrency === null) return activeCurrency;
 
         return activeCurrency[printableLabel] || '';
     }
@@ -60,7 +60,7 @@ export function activeCurrency ( printableLabel = '' ) {
     return '';
 }
 
-export function activeLang ( printableLabel = '' ) {
+export function activeLang(printableLabel = '') {
     return 'en';
 }
 
@@ -75,10 +75,10 @@ export function activeLang ( printableLabel = '' ) {
  *
  * @return string Currency format component with data
  */
-export function formatCurrency (amount: number, thousandSeparator = true, prefix = activeCurrency('sign')) {
+export function formatCurrency(amount: number, thousandSeparator = true, prefix = activeCurrency('sign')) {
     amount = isNumeric(amount) ? parseFloat(amount) : 0;
 
-    return currencyFormatter.format(amount, { code: 'USD' });
+    return currencyFormatter.format(amount, { code: 'SAR' });
 }
 
 /**

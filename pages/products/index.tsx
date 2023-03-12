@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import CategoryWiseProductContainer from "../../components/categorywiseproductlist/CategoryWiseProductContainer";
 import Layout from "../../components/layouts/Layout";
-import ProductList from "../../components/products/ProductList";
 
 const Products: NextPage = (props) => {
   const { isMainCategory, subCategories, mainCategoryBanner } = props;

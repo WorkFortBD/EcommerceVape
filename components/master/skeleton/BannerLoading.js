@@ -1,8 +1,5 @@
-export default function BannerLoading(props) {
+export default function BannerLoading() {
   return (
-    <>
-      <div class="bg-gray-300 animate-shimmer-banner h-64"></div>
-    </>
+    <div className="bg-gray-300 animate-shimmer-banner h-64"></div>
   );
-  //   );
 }
