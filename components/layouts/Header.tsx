@@ -37,7 +37,6 @@ export default function Header() {
     setSrollPosition(position);
   };
   useEffect(() => {
-    dispatch(getCategoriesAction());
     dispatch(isSignedIn());
     dispatch(getUserDataAction());
     dispatch(getCartsAction());
@@ -47,6 +46,13 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (categories.length === 0) {
+      dispatch(getCategoriesAction());
+    }
+  }, []);
+
   const handleLogOut = () => {
     dispatch(isSignedOut());
     window.location.replace("/");
