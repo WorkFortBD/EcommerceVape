@@ -15,7 +15,7 @@ import { getProductListAction } from "../../store/product/action";
 import ShimmerEffect from "../master/skeleton/ShimmerEffect";
 
 export default function HomeProductFilter() {
-  const dispatch                = useDispatch();
+  const dispatch = useDispatch();
   const { products, productsLoading, paginate } = useSelector(
     (state: IRootReducer) => state.products
   );
@@ -51,7 +51,7 @@ export default function HomeProductFilter() {
   return (
     <section className="product-section">
       <div className="container mx-auto">
-        <div className="mt-12 p-2 uppercase mx-4">
+        <div className="mt-12 p-2 uppercase mx-1 md:mx-4">
           <Tabs.Group aria-label="Full width tabs" style="underline">
             <Tabs.Item
               title={
@@ -102,14 +102,6 @@ export default function HomeProductFilter() {
               )}
             </Tabs.Item>
           </Tabs.Group>
-
-          {/* {
-            products.map((product, index) => (
-              <div key={index}>
-                <h2>{product.name}</h2>
-              </div>
-            ))
-          } */}
         </div>
         {showLoadMore ? (
           <div className="mt-3">

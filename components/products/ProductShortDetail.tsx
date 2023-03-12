@@ -17,27 +17,42 @@ interface Props {
 
 export default function ProductShortDetail({ product }: Props): ReactElement {
   return (
-    <div className="group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[230px]">
+    <div className="group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[135px] md:max-w-[230px]">
       <Link href={`/products/${product.sku}`}>
         <div className="">
           <div className="overflow-hidden">
             <img
-              src={`${process.env.NEXT_PUBLIC_URL}images/products/`+product.featured_image}
+              src={`${process.env.NEXT_PUBLIC_URL}images/products/` + product.featured_image}
               alt=""
               className="transition-all scale-100 group-hover:scale-110 cursor-pointer rounded rounded-b-none w-full h-60"
             />
           </div>
           <div className="mt-1 p-1 text-center">
-            <p className="cursor-pointer text-gray-800 hover:text-gray-600 overflow-hidden h-12 ">
+            <p className="cursor-pointer text-gray-800 hover:text-gray-600 overflow-hidden h-12 text-sm md:text-base">
               {product.name}
             </p>
           </div>
         </div>
       </Link>
       <div className="text-center mt-3">
-        <span className="block text-primary-light">
-          {formatCurrency(product.default_selling_price)}
-        </span>
+        {
+          !product.is_offer_enable
+            || (product.offer_selling_price == 0)
+            || !(product.offer_selling_price < product.default_selling_price) ?
+            <span className="block text-primary-light">
+              {formatCurrency(product.default_selling_price)}
+            </span> :
+            <span>
+              <span className="block text-primary-light">
+                {formatCurrency(product.offer_selling_price)}
+              </span>
+
+              <del className="block text-slate-300">
+                {formatCurrency(product.default_selling_price)}
+              </del>
+            </span>
+        }
+
         <p className="my-3">
           <CartButton product={product} />
         </p>
