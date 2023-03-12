@@ -10,6 +10,7 @@ const Product: NextPage = ({ product }) => {
       {product.meta_title &&(
       <Head>
       <meta property="og:title" content={product.meta_title} key="title" />
+      <meta property="og:description" content={product.meta_description} key="description" />
       </Head>
       )
       }
