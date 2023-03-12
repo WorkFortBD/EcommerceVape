@@ -1,10 +1,14 @@
 import type { NextPage } from "next";
+import { Head } from "next/document";
 import Layout from "../../components/layouts/Layout";
 import ProductDetails from "../../components/products/ProductDetails";
 
 const Product: NextPage = ({ product }) => {
   return (
-    <Layout title={"Product Deatails"}>
+    <Layout title={product.meta_title}>
+      <Head>
+        <meta property="og:title" content={product.meta_title} key="title" />
+      </Head>
       <ProductDetails product={product} />
     </Layout>
   );
