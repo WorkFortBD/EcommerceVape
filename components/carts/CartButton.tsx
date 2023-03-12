@@ -27,7 +27,7 @@ export function CartButton({ product }: ICartButtonProps) {
     };
 
     return (
-        <button onClick={addToCart} className="bg-primary hover:bg-gray-400 p-2 px-4 ml-2 rounded-md text-white">
+        <button onClick={addToCart} className="transition bg-primary hover:opacity-80 p-2 w-32 hover:w-36 px-4 ml-2 rounded-md text-white">
             Add to Cart
         </button>
     );
