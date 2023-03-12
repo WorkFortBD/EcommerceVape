@@ -2,7 +2,7 @@
  * External dependencies.
  */
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 /**
  * Internal dependencies.
@@ -17,7 +17,7 @@ interface Props {
 
 export default function ProductShortDetail({ product }: Props): ReactElement {
   return (
-    <div className="max-w-[285px] group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[230px]">
+    <div className="group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[230px]">
       <Link href={"/products/"+product.sku}>
         <div className="">
           <div className="overflow-hidden">

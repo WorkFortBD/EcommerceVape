@@ -78,7 +78,7 @@ export function activeLang(printableLabel = '') {
 export function formatCurrency(amount: number, thousandSeparator = true, prefix = activeCurrency('sign')) {
     amount = isNumeric(amount) ? parseFloat(amount) : 0;
 
-    return currencyFormatter.format(amount, { code: 'USD' });
+    return currencyFormatter.format(amount, { code: 'SAR' });
 }
 
 /**
