@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Head } from "next/document";
+import Head from 'next/head';
 import CategoryWiseProductContainer from "../../components/categorywiseproductlist/CategoryWiseProductContainer";
 import Layout from "../../components/layouts/Layout";
 
@@ -7,9 +7,9 @@ const Products: NextPage = (props) => {
   const { isMainCategory, subCategories, mainCategoryBanner } = props;
   return (
     <Layout title={"Products"}>
-      {/* <Head>
+      <Head>
         <link rel="canonical" href="https://vapeshopsa.com" />
-      </Head> */}
+      </Head>
       <div className="container mx-auto">
         <CategoryWiseProductContainer
           isMainCategory={isMainCategory}

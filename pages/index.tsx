@@ -3,7 +3,7 @@
  */
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
-import{ Html, Head, Main, NextScript } from 'next/document';
+import Head from 'next/head';
 import { CategoryComponent } from "../components/category/CategoryComponent";
 
 /**
@@ -22,9 +22,9 @@ const Home: NextPage = () => {
   return (
     <Layout title={content.name}>
       <Slider />
-      {/* <Head>
+      <Head>
         <link rel="canonical" href="https://vapeshopsa.com" />
-      </Head> */}
+      </Head>
       {/* <section className="store-section">
         <div className="container mx-auto mt-10">
           <div className="flex justify-center flex-wrap">

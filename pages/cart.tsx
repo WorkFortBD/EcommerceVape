@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Head } from "next/document";
+import Head from 'next/head';
 import CartComponents from "../components/carts/CartComponents";
 import Layout from "../components/layouts/Layout";
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import DOMPurify from "dompurify";
 import Layout from "../../components/layouts/Layout";
-import { Head } from "next/document";
+import Head from 'next/head';
 // import LoadingSpinner from "../../components/master/loading/LoadingSpinner";
 // import Notfound from '../404';
 
