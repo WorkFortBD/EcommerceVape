@@ -1,6 +1,11 @@
+import { useRouter } from "next/router";
+
 export const onClickWhatsAppButton = () => {
+    const router = useRouter();
+    const currentUrl = `${window.location.origin}${router.asPath}`;
+
     const phoneNumber = '9660558449919';
-    const message = encodeURIComponent('Hello, Please confirm your desired products...');
+    const message = encodeURIComponent(`Hello, I want to buy product. Page - ${currentUrl}`);
     window.open(`https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${message}`);
 };
 
