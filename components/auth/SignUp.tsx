@@ -64,9 +64,10 @@ export default function SignIn(history, props) {
         setStepOneFormData(formData);
 
         const data = await Axios.post(`auth/register`, formData);
+        console.log('otpResponse', data);
 
         if (data.data.status) {
-          toast.success("OTP is sent to your phone number",{theme: "colored",});
+          toast.success("OTP is sent to your email address",{theme: "colored",});
           setOtpExpireTime(data.data.data);
           setIsLoading(false);
           setValidationStep(1);
