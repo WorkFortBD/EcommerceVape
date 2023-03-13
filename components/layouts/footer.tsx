@@ -1,8 +1,13 @@
-import Link from "next/link";
 import { ReactElement } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 import WhatsAppButton, { onClickWhatsAppButton } from "../whatsapp-button";
 
 export default function Footer(): ReactElement {
+  const router = useRouter();
+  const currentUrl = `${window.location.origin}${router.asPath}`;
+
   return (
     <div className="footer-section">
       <footer className="mt-20">
@@ -84,10 +89,10 @@ export default function Footer(): ReactElement {
                   <Link href="mailto:contactvapeshopsa@gmail.com">Email Us</Link>
                 </li>
                 <li className="mt-3">
-                  <Link href="/" onClick={onClickWhatsAppButton}>Message Us</Link>
+                  <Link href="/" onClick={() => onClickWhatsAppButton(currentUrl)}>Message Us</Link>
                 </li>
                 <li className="mt-3">
-                  <Link href="/" onClick={onClickWhatsAppButton}>Message Us Vai Whatsapp</Link>
+                  <Link href="/" onClick={() => onClickWhatsAppButton(currentUrl)}>Message Us Vai Whatsapp</Link>
                 </li>
               </div>
             </div>
