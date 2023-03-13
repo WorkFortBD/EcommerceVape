@@ -2,6 +2,7 @@
  * External dependencies.
  */
 import type { NextPage } from "next";
+import { Head } from "next/document";
 
 /**
  * Internal dependenncies.
@@ -14,6 +15,9 @@ import content from '../content.json';
 const Home: NextPage = () => {
   return (
     <Layout title={content.name}>
+      <Head>
+        <link rel="canonical" href="https://vapeshopsa.com" />
+      </Head>
       <Slider />
 
       <section className="store-section">
