@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ReactElement } from "react";
-import WhatsAppButton from "../whatsapp-button";
+import WhatsAppButton, { onClickWhatsAppButton } from "../whatsapp-button";
 
 export default function Footer(): ReactElement {
   return (
@@ -17,13 +17,23 @@ export default function Footer(): ReactElement {
           <div className="container mx-auto">
             <div className="flex flex-wrap flex-col sm:flex-row justify-center items-center">
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                <Link href="">
-                  <img
-                    src="images/logos/logo.png"
-                    alt=""
-                    className="w-36"
-                  />
-                </Link>
+                <div>
+                  <Link href="">
+                    <img
+                      src="images/logos/logo.png"
+                      alt=""
+                      className="w-36"
+                    />
+                  </Link>
+                  <p className="text-gray-400 text-lg mt-3">
+                    Got Questions ? Call us 24/7
+                  </p>
+                  <p className="text-gray-400 text-lg mt-3">
+                    <a href="tel:+9660558449919">
+                      +966 0558449919
+                    </a>
+                  </p>
+                </div>
                 <div className="flex flex-auto mt-16 text-gray-400">
                   <Link href="" className="mx-2 sm:mx-3 md:mx-4">
                     <i className="fa-brands fa-tiktok"></i>
@@ -49,9 +59,9 @@ export default function Footer(): ReactElement {
                 </Link>
               </div>
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 text-gray-400 list-none">
-                <li className="mt-3">
+                {/* <li className="mt-3">
                   <Link href="/">Saudi Vape Shop Blog</Link>
-                </li>
+                </li> */}
                 <li className="mt-3">
                   <Link href="/terms-and-condition">Terms and Conditions</Link>
                 </li>
@@ -71,13 +81,13 @@ export default function Footer(): ReactElement {
                 </li>
 
                 <li className="mt-3">
-                  <Link href="/p/help-center">Email Us</Link>
+                  <Link href="mailto:contactvapeshopsa@gmail.com">Email Us</Link>
                 </li>
                 <li className="mt-3">
-                  <Link href="/">Message Us</Link>
+                  <Link href="/" onClick={onClickWhatsAppButton}>Message Us</Link>
                 </li>
                 <li className="mt-3">
-                  <Link href="/">Message Us Vai Whatsapp</Link>
+                  <Link href="/" onClick={onClickWhatsAppButton}>Message Us Vai Whatsapp</Link>
                 </li>
               </div>
             </div>

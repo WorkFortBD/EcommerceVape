@@ -185,7 +185,7 @@ export default function Header() {
                         inline={true}
                         label={
                           <span className="text-primary uppercase hover:text-primary-light text-navbar">
-                            {category.name}
+                            {category.name} Hello
                           </span>
                         }
                       >
@@ -228,7 +228,7 @@ export default function Header() {
                     trigger="click"
                     inline={true}
                     label={
-                      <span className="text-primary hover:text-primary-light text-navbar">
+                      <span className="text-primary uppercase hover:text-primary-light text-navbar">
                         {category.name}
                       </span>
                     }
