@@ -21,7 +21,6 @@ export default function HomeProductFilter() {
   const [tabValue, setTabValue] = useState("latest");
   const [showLoadMore, setShowLoadMore] = useState(true);
   useEffect(() => {
-    console.log("tabValue", tabValue);
     const args = {
       type: tabValue,
       limit: 20,
