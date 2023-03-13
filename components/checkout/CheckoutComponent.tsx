@@ -2,25 +2,24 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { Progress } from "flowbite-react";
-import Link from "next/link";
-import { formatCurrency } from "../../utils/currency";
-import { getCartsAction } from "../../store/cart/action";
-import { IRootReducer } from "../../interfaces/reducers";
-import CustomSelect from "../master/custom-select/CustomSelect";
-
-/**External Dependency */
+// import Link from "next/link";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { getLocationData } from "../../store/profileaccountsetting/action";
+
+/**External Dependency */
+// import { getLocationData } from "../../store/profileaccountsetting/action";
 import { createOrder } from "../../store/order/action";
 import { getUserDataAction } from "../../store/users/action";
 import { isSignedIn } from "../../store/auth/action";
+import { formatCurrency } from "../../utils/currency";
+import { getCartsAction } from "../../store/cart/action";
+import { IRootReducer } from "../../interfaces/reducers";
+// import CustomSelect from "../master/custom-select/CustomSelect";
 import Spinner from "../master/spinner/Spinner";
 
 type Props = {};
 
-export default function CheckoutComponent({}: Props) {
+export default function CheckoutComponent({ }: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { carts, totalPrice, totalQuantity } = useSelector(
@@ -42,15 +41,15 @@ export default function CheckoutComponent({}: Props) {
     if (userData == null) {
       router.replace("/sign-in");
     }
-    if (countryList.length === 0) {
-      dispatch(getLocationData("countries", null, null));
-    }
-    if (divisionList.length === 0) {
-      dispatch(getLocationData("divisions", null, null));
-    }
-    if (cityList.length === 0) {
-      dispatch(getLocationData("cities", null, null));
-    }
+    // if (countryList.length === 0) {
+    //   dispatch(getLocationData("countries", null, null));
+    // }
+    // if (divisionList.length === 0) {
+    //   dispatch(getLocationData("divisions", null, null));
+    // }
+    // if (cityList.length === 0) {
+    //   dispatch(getLocationData("cities", null, null));
+    // }
   }, []);
 
   const formik = useFormik({
@@ -58,14 +57,14 @@ export default function CheckoutComponent({}: Props) {
       first_name: "",
       last_name: "",
       phone_no: "",
-      country: "",
+      // country: "",
       country_id: "",
       address: "",
-      division: "",
-      division_id: "",
+      // division: "",
+      // division_id: "",
       city: "",
-      city_id: "",
-      postecode: "",
+      // city_id: "",
+      // postecode: "",
       email: "",
       ordernotes: "",
       payment: "",
@@ -81,26 +80,23 @@ export default function CheckoutComponent({}: Props) {
       last_name: yup
         .string()
         .required("Required")
-        .min(2, "Name should be at least 2 characters")
+        .min(2, "Last name should be at least 2 characters")
         .max(40, "Up to 40 characters"),
       address: yup
         .string()
         .required("Required")
         .min(5, "Address should be at least 5 characters")
         .max(40, "Up to 40 characters"),
-      division: yup.string().required("Required"),
-      country: yup.string().required("Required"),
+      email: yup
+        .string()
+        .email()
+        .required("Required"),
+      city: yup
+        .string()
+        .required("Required"),
       phone_no: yup
         .string()
-        .required("Required")
-        .test("phone_no", "required ex: 01712345678", (value) => {
-          const phoneRegex = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
-
-          let isValidPhone = phoneRegex.test(value);
-
-          if (!isValidPhone) return false;
-          return true;
-        }),
+        .required("Required"),
     }),
     onSubmit: (values) => {
       dispatch(
@@ -119,7 +115,7 @@ export default function CheckoutComponent({}: Props) {
   return (
     <section className="cart-section">
       <div className="container mx-auto mt-6">
-        <div className="flex p-4">
+        {/* <div className="flex p-4">
           <h2 className="font-bold">Returning customer?</h2>
           <Link href="">
             <u className="ml-2 text-primary">Click here to login</u>
@@ -130,7 +126,7 @@ export default function CheckoutComponent({}: Props) {
           <Link href="">
             <u className="ml-2 text-primary">Click here to login</u>
           </Link>
-        </div>
+        </div> */}
         <form onSubmit={formik.handleSubmit} className="mt-4">
           <div className="flex flex-col md:flex-row mt-7">
             <div className="basis-1/2 mt-3 p-4">
@@ -140,7 +136,7 @@ export default function CheckoutComponent({}: Props) {
                 <div className="basis-1/2">
                   <label htmlFor="first-name">
                     First name
-                    <sub className="text-2xl text-red-500">*</sub>
+                    <sub className="text-2xl text-red-500"> *</sub>
                   </label>
                   <br />
                   <input
@@ -160,7 +156,7 @@ export default function CheckoutComponent({}: Props) {
                 </div>
                 <div className="basis-1/2">
                   <label htmlFor="lastt-name" className="ml-1">
-                    Last name <sub className="text-2xl text-red-500">*</sub>
+                    Last name <sub className="text-2xl text-red-500"> *</sub>
                   </label>
                   <br />
                   <input
@@ -177,7 +173,7 @@ export default function CheckoutComponent({}: Props) {
                   )}
                 </div>
               </div>
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label htmlFor="country">
                   Country / Region
                   <sub className="text-2xl text-red-500">*</sub>
@@ -196,19 +192,19 @@ export default function CheckoutComponent({}: Props) {
                 {formik.errors.country && formik.touched.country && (
                   <ValidationError>{formik.errors.country}</ValidationError>
                 )}
-              </div>
+              </div> */}
 
               <div className="mt-4">
                 <label htmlFor="street-address">
                   Street Address
-                  <sub className="text-2xl text-red-500">*</sub>
+                  <sub className="text-2xl text-red-500"> *</sub>
                 </label>
                 <br />
                 <input
                   type="text"
                   name="address"
                   id="address"
-                  placeholder="House number and Street name"
+                  // placeholder="House number and Street name"
                   className="border w-full transition-all outline-none focus:outline-none focus:ring-0 focus:border-primary-light rounded-md p-2 mt-2 mr-2"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -219,7 +215,7 @@ export default function CheckoutComponent({}: Props) {
                 )}
               </div>
 
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label htmlFor="town">
                   State/County <sub className="text-2xl text-red-500">*</sub>
                 </label>
@@ -237,9 +233,9 @@ export default function CheckoutComponent({}: Props) {
                 {formik.errors.division && formik.touched.division && (
                   <ValidationError>{formik.errors.division}</ValidationError>
                 )}
-              </div>
+              </div> */}
 
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label htmlFor="state">
                   Town / City
                   <sub className="text-2xl text-red-500">*</sub>
@@ -255,9 +251,9 @@ export default function CheckoutComponent({}: Props) {
                   value={formik.values.city_id}
                   options={cityList}
                 />
-              </div>
+              </div> */}
 
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label htmlFor="postcode">Postcode / Zip(optional)</label>
                 <br />
                 <input
@@ -269,12 +265,28 @@ export default function CheckoutComponent({}: Props) {
                   onBlur={formik.handleBlur}
                   value={formik.values.postecode}
                 />
+              </div> */}
+
+              <div className="mt-4">
+                <label htmlFor="city">City
+                  <sub className="text-2xl text-red-500"> *</sub>
+                </label>
+                <br />
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  className="border w-full transition-all outline-none focus:outline-none focus:ring-0 focus:border-primary-light rounded-md p-2 mt-2 mr-2"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.city}
+                />
               </div>
 
               <div className="mt-4">
                 <label htmlFor="number">
-                  Billing Mobile Number
-                  <sub className="text-2xl text-red-500">*</sub>
+                  Phone Number
+                  <sub className="text-2xl text-red-500"> *</sub>
                 </label>
                 <br />
                 <input
@@ -292,7 +304,9 @@ export default function CheckoutComponent({}: Props) {
               </div>
 
               <div className="mt-5">
-                <label htmlFor="email">Billing Email(optional)</label>
+                <label htmlFor="email">Email
+                  <sub className="text-2xl text-red-500"> *</sub>
+                </label>
                 <br />
                 <input
                   type="text"
@@ -303,6 +317,9 @@ export default function CheckoutComponent({}: Props) {
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                 />
+                {formik.errors.email && formik.touched.email && (
+                  <ValidationError>{formik.errors.email}</ValidationError>
+                )}
               </div>
               <h2 className="mt-6 text-3xl">Additional Information</h2>
               <div className="mt-5">
@@ -311,8 +328,8 @@ export default function CheckoutComponent({}: Props) {
                 <textarea
                   name="ordernotes"
                   id="notes"
-                  cols="5"
-                  rows="6"
+                  cols={5}
+                  rows={6}
                   className="border w-full transition-all outline-none focus:outline-none focus:ring-0 focus:border-primary-light rounded-md p-2 mt-2 mr-2"
                   placeholder="Notes about your order, e.g. special notes for delivery"
                   onChange={formik.handleChange}
@@ -332,7 +349,7 @@ export default function CheckoutComponent({}: Props) {
                   <p>Subtotal</p>
                 </div>
                 {carts.map((cart, index) => (
-                  <div className="flex justify-between mt-3 border-b p-4 text-gray-400 ">
+                  <div key={index} className="flex justify-between mt-3 border-b p-4 text-gray-400 ">
                     <p>
                       {cart.productName}
                       <br />
@@ -368,12 +385,12 @@ export default function CheckoutComponent({}: Props) {
                     <input
                       type="radio"
                       name="payment"
-                      id="apple"
+                      id="stc"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.payment}
                     />
-                    <label htmlFor="apple"> STC Pay</label>
+                    <label htmlFor="stc"> STC Pay</label>
                   </div>
                 </div>
                 <div className="flex">
@@ -391,12 +408,12 @@ export default function CheckoutComponent({}: Props) {
                     <input
                       type="radio"
                       name="payment"
-                      id="apple"
+                      id="cod"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.payment}
                     />
-                    <label htmlFor="apple"> Cash On Delivery</label>
+                    <label htmlFor="cod"> Cash On Delivery</label>
                   </div>
                 </div>
                 <div className="flex">
