@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import "../styles/globals.css";
 import store from '../store';
 import axiosDefault from "../utils/axios-default";
-import 'jquery';
 
 axiosDefault();
 
