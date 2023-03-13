@@ -7,9 +7,9 @@ const Products: NextPage = (props) => {
   const { isMainCategory, subCategories, mainCategoryBanner } = props;
   return (
     <Layout title={"Products"}>
-      <Head>
+      {/* <Head>
         <link rel="canonical" href="https://vapeshopsa.com" />
-      </Head>
+      </Head> */}
       <div className="container mx-auto">
         <CategoryWiseProductContainer
           isMainCategory={isMainCategory}

@@ -6,9 +6,9 @@ import { Head } from "next/document";
 const Home: NextPage = () => {
   return (
     <Layout title={"Category"}>
-      <Head>
+      {/* <Head>
         <link rel="canonical" href="https://vapeshopsa.com" />
-      </Head>
+      </Head> */}
       <CategoryComponent />
     </Layout>
   );

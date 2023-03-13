@@ -2,7 +2,9 @@
  * External dependencies.
  */
 import type { NextPage } from "next";
-import { Head } from "next/document";
+import React, { useEffect, useState } from "react";
+import{ Html, Head, Main, NextScript } from 'next/document';
+import { CategoryComponent } from "../components/category/CategoryComponent";
 
 /**
  * Internal dependenncies.
@@ -11,16 +13,19 @@ import HomeProductFilter from "../components/home/HomeProductFilter";
 import Layout from "../components/layouts/Layout";
 import Slider from "../components/slider/Slider";
 import content from '../content.json';
+import MyCarousel from "../components/carousel/MyCarousel";
 
 const Home: NextPage = () => {
+
+  useEffect(() => {
+  }, []);
   return (
     <Layout title={content.name}>
-      <Head>
-        <link rel="canonical" href="https://vapeshopsa.com" />
-      </Head>
       <Slider />
-
-      <section className="store-section">
+      {/* <Head>
+        <link rel="canonical" href="https://vapeshopsa.com" />
+      </Head> */}
+      {/* <section className="store-section">
         <div className="container mx-auto mt-10">
           <div className="flex justify-center flex-wrap">
             <div className=" mt-3 ml-4">
@@ -43,10 +48,12 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-      </section>
-
+      </section> */}
+      <CategoryComponent/>
+      {/* <MyCarousel /> */}
       {/* Filter */}
       <HomeProductFilter />
+      
     </Layout>
   );
 };
