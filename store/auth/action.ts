@@ -92,11 +92,8 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
   try {
     await Axios.post(`auth/login/google`, postData, {})
       .then((res) => {
-        console.log('googleLoginReponse', res)
-        return false;
         const { data, message, status } = res.data;
         const { user, access_token } = data;
-
         loginResponse.data = user;
         loginResponse.tokenData = access_token;
         loginResponse.status = status;
@@ -135,7 +132,7 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
   }
 
   loginResponse.isLoading = false;
-  dispatch({ type: Types.POST_LOGIN_DATA, payload: loginResponse });
+  dispatch({ type: Types.SOCIAL_LOGIN, payload: loginResponse });
 
   // return axios.post(LOGIN_URL, { email, password });
 };
