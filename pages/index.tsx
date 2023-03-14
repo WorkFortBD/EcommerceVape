@@ -13,7 +13,7 @@ import HomeProductFilter from "../components/home/HomeProductFilter";
 import Layout from "../components/layouts/Layout";
 import Slider from "../components/slider/Slider";
 import content from '../content.json';
-import MyCarousel from "../components/carousel/MyCarousel";
+import ProductsCarousel from "../components/carousel/ProductsCarousel";
 import FlashDeals from "../components/products/FlashDeals";
 
 const Home: NextPage = () => {
@@ -50,12 +50,16 @@ const Home: NextPage = () => {
           </div>
         </div>
       </section> */}
-      <CategoryComponent/>
+      <CategoryComponent />
       <FlashDeals />
-      {/* <MyCarousel /> */}
+
+      {/* <div className="container mx-auto">
+        <ProductsCarousel />
+      </div> */}
+
       {/* Filter */}
       <HomeProductFilter />
-      
+
     </Layout>
   );
 };
