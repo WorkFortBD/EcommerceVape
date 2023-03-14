@@ -65,8 +65,7 @@ export const getDealFlashListAction = () => (dispatch) => {
     }
     dispatch({type: Types.GET_FLASH_DEAL_DATA, payload: responseData});
     
-    // Axios.get(`get-items?type=deals-of-day&paginate_no=10`)
-    Axios.get(`get-items?paginate_no=20`)
+    Axios.get(`get-items?type=deals-of-day&paginate_no=10`)
         .then(res => {
             responseData.data = res.data.data.data;
             responseData.isLoading = false;
