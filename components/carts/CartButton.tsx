@@ -27,7 +27,7 @@ export function CartButton({ product }: ICartButtonProps) {
     };
 
     return (
-        <button onClick={addToCart} className="transition bg-primary hover:opacity-80 p-2 w-32 hover:w-36 px-4 ml-2 rounded-md text-white">
+        <button onClick={addToCart} className="transition-all bg-primary hover:opacity-80 p-2 scale-90 hover:scale-100 w-32 px-4 ml-2 rounded-md text-white">
             Add to Cart
         </button>
     );

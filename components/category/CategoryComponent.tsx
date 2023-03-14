@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAction } from "../../store/layouts/action";
 import { IRootReducer } from "../../interfaces/reducers";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface Props { }
 
@@ -51,37 +52,45 @@ export const CategoryComponent = ({ }: Props) => {
       <div className="container mx-auto mt-12">
         <div className="flex justify-center md:justify-start flex-wrap mx-2 md:mx-4">
           {categories.map((category, index) => (
-            <div className="mt-6 flex group px-2 max-w-[400px]" key={index}>
-              {
-                index % 2 !== 0 &&
-                <div>
-                  {getCategoryImage(category, index)}
-                </div>
-              }
-              <div className="mt-4 p-4 text-center">
-                <h1 className="text-gray-700 text-lg mb-3 mx-4">
-                  <span className="text-primary border-b-2 pb-2 border-dotted cursor-pointer hover:text-primary-light"
+            <div className="basis-1/3" key={index}>
+              <div className="mt-6 flex group px-2 max-w-[500px]">
+                {
+                  index % 2 !== 0 &&
+                  <div>
+                    {getCategoryImage(category, index)}
+                  </div>
+                }
+                <div className="mt-4 p-4 text-center">
+                  <h1 className="text-gray-700 text-lg mb-3 mx-4 min-w-[150px]">
+                    <span className="text-primary border-b-2 pb-2 border-dotted cursor-pointer hover:text-primary-light"
+                      onClick={() =>
+                        clickMenuLink(category, true)}>
+                      {category.name}
+                    </span>
+                  </h1>
+                  {category.childs.map((cl, index2) => (
+                    <p key={index2}>
+                      <span className="cursor-pointer text-slate-600 hover:text-primary-light text-navbar"
+                        onClick={() =>
+                          clickMenuLink(cl, false)}>
+                        {cl.name}
+                      </span>
+                    </p>
+                  ))}
+
+                  <button className="mt-3 transition-all scale-100 hover:scale-120 text-sm rounded-full bg-slate-700 hover:opacity-80 px-3 py-1 cursor-pointer text-white"
                     onClick={() =>
                       clickMenuLink(category, true)}>
-                    {category.name}
-                  </span>
-                </h1>
-                {category.childs.map((cl, index2) => (
-                  <p key={index2}>
-                    <span className="cursor-pointer text-slate-600 hover:text-primary-light text-navbar"
-                      onClick={() =>
-                        clickMenuLink(cl, false)}>
-                      {cl.name}
-                    </span>
-                  </p>
-                ))}
-              </div>
-              {
-                index % 2 === 0 &&
-                <div>
-                  {getCategoryImage(category, index)}
+                    View details
+                  </button>
                 </div>
-              }
+                {
+                  index % 2 === 0 &&
+                  <div>
+                    {getCategoryImage(category, index)}
+                  </div>
+                }
+              </div>
             </div>
           ))}
         </div>
