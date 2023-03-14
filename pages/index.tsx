@@ -15,6 +15,7 @@ import Slider from "../components/slider/Slider";
 import content from '../content.json';
 import ProductsCarousel from "../components/carousel/ProductsCarousel";
 import FlashDeals from "../components/products/FlashDeals";
+import HomeStaticBanner from "../components/home/HomeStaticBanner";
 
 const Home: NextPage = () => {
 
@@ -52,6 +53,7 @@ const Home: NextPage = () => {
       </section> */}
       <CategoryComponent />
       <FlashDeals />
+      <HomeStaticBanner pageSlug="homepage-banner" />
 
       {/* <div className="container mx-auto">
         <ProductsCarousel />
