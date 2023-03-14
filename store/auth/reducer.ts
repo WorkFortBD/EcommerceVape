@@ -27,6 +27,21 @@ const AuthReducer = (state = initialState, action: IAction) => {
         userData: action.payload.data,
         isLoading: action.payload.isLoading,
       };
+
+      case Types.SOCIAL_LOGIN:
+        if (action.payload.status) {
+          localStorage.setItem("userData", JSON.stringify(action.payload.data));
+          localStorage.setItem("access_token", action.payload.tokenData);
+          // localStorage.setItem("isLoggedIn", action.payload.status);
+        }
+        return {
+          ...state,
+          authToken: action.payload.tokenData,
+          message: action.payload.message,
+          status: action.payload.status,
+          userData: action.payload.data,
+          isLoading: action.payload.isLoading,
+        };
       case Types.IS_SIGNED_IN:
         return{
           ...state,
