@@ -147,6 +147,20 @@ export const getCategoryRelatedBrands = (categoryId) => async (dispatch) => {
   }
 };
 
+
+export const getBrandsAction = () => async (dispatch) => {
+  const url = `brands?paginate_no=30`;
+  try {
+    const res = await Axios.get(url);
+    dispatch({
+      type: Types.GET_BRANDS,
+      payload: res.data && res.data.data,
+    });
+  } catch (error) {
+    // console.log('err => ', error)
+  }
+};
+
 /**
  * Get Categories.
  *

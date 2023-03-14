@@ -17,6 +17,7 @@ import ProductsCarousel from "../components/carousel/ProductsCarousel";
 import FlashDeals from "../components/products/FlashDeals";
 import HomeStaticBanner from "../components/home/HomeStaticBanner";
 import HomeCategoryProduct from "../components/home/HomeCategoryProduct";
+import BrandList from "../components/brands";
 
 const Home: NextPage = () => {
 
@@ -57,13 +58,8 @@ const Home: NextPage = () => {
       <HomeStaticBanner pageSlug="homepage-banner" />
       <HomeCategoryProduct categorySlug='vape' />
       <HomeCategoryProduct categorySlug='e-juice' />
-
-      {/* <div className="container mx-auto">
-        <ProductsCarousel />
-      </div> */}
-
-      {/* Filter */}
       <HomeProductFilter />
+      <BrandList />
 
     </Layout>
   );

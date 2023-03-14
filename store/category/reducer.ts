@@ -154,6 +154,12 @@ const CategoryReducer = (state = initialState, { type, payload }) => {
         brands: payload ? payload : []
       }
 
+    case Types.GET_BRANDS:
+      return {
+        ...state,
+        brands: payload ? payload : []
+      }
+
     default:
       return state;
   }
