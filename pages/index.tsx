@@ -13,8 +13,9 @@ import HomeProductFilter from "../components/home/HomeProductFilter";
 import Layout from "../components/layouts/Layout";
 import Slider from "../components/slider/Slider";
 import content from '../content.json';
-import MyCarousel from "../components/carousel/MyCarousel";
+import ProductsCarousel from "../components/carousel/ProductsCarousel";
 import FlashDeals from "../components/products/FlashDeals";
+import HomeStaticBanner from "../components/home/HomeStaticBanner";
 
 const Home: NextPage = () => {
 
@@ -50,12 +51,17 @@ const Home: NextPage = () => {
           </div>
         </div>
       </section> */}
-      <CategoryComponent/>
+      <CategoryComponent />
       <FlashDeals />
-      {/* <MyCarousel /> */}
+      <HomeStaticBanner pageSlug="homepage-banner" />
+
+      {/* <div className="container mx-auto">
+        <ProductsCarousel />
+      </div> */}
+
       {/* Filter */}
       <HomeProductFilter />
-      
+
     </Layout>
   );
 };
