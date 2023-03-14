@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAction } from "../../store/layouts/action";
 import { IRootReducer } from "../../interfaces/reducers";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 interface Props { }
 
@@ -32,7 +31,7 @@ export const CategoryComponent = ({ }: Props) => {
 
   const getCategoryImage = (category, index: number) => {
     return <img
-      src={category.image !== null ? category.image : "/images/products/5.jpeg"}
+      src={category.image !== null ? `${process.env.NEXT_PUBLIC_URL}images/categories/${category.image}` : "/images/products/5.jpeg"}
       alt=""
       className={`
       transition-all 
