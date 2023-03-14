@@ -58,30 +58,29 @@ export default function SignIn(history, props) {
     loginPost(values);
   };
 
-  // const handleSuccess = (response) => {
-  //   console.log("response", response);
-  //   return false;
-  //   fetch("/api/auth/google", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ token }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // handle successful login
-  //     })
-  //     .catch((error) => {
-  //       setError(error.message);
-  //     });
-  // };
+  const responseGoogle = (response) => {
+    let token=response.credential;
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}login/google`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('googleLoginReponse', data)
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
 
   // const handleFailure = (error) => {
   //   setError(error.message);
   // };
 
-  const responseGoogle = (response) => {
-    console.log('response',response);
-  };
+  // const responseGoogle = (response) => {
+  //   console.log('response',response);
+  // };
   const errorMessage = (error) => {
     console.log('error',error);
   };
