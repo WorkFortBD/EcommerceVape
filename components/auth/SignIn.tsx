@@ -11,9 +11,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 /**
  * Internal Dependencies
  */
-import { isSignedIn, postLoginData } from "../../store/auth/action";
+import {
+  isSignedIn,
+  postLoginData,
+  socialLogin,
+} from "../../store/auth/action";
 import { getUserDataAction } from "../../store/users/action";
 import Spinner from "../master/spinner/Spinner";
+// import GoogleLogin from "react-google-login";
+import GoogleLoginButton from "./GoogleLoginButton";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 export default function SignIn(history, props) {
   const router = useRouter();
@@ -24,6 +31,7 @@ export default function SignIn(history, props) {
   const message = useSelector((state) => state.auth.message);
   const isLoading = useSelector((state) => state.auth.isLoading);
   const { userData } = useSelector((state) => state.user);
+  const [error, setError] = useState(null);
   const initialValues = {
     email: "",
     password: "",
@@ -38,15 +46,44 @@ export default function SignIn(history, props) {
     }
   }, [status, message, dispatch, history]);
 
-  const handleSocialLogin=()=>{
-    dispatch(socialLogin());
-  }
+  // const handleSocialLogin = () => {
+  //   console.log('first')
+  //   dispatch(socialLogin());
+  // };
   const loginPost = async (values) => {
     dispatch(postLoginData(values));
   };
 
   const onSubmit = (values) => {
     loginPost(values);
+  };
+
+  // const handleSuccess = (response) => {
+  //   console.log("response", response);
+  //   return false;
+  //   fetch("/api/auth/google", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ token }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // handle successful login
+  //     })
+  //     .catch((error) => {
+  //       setError(error.message);
+  //     });
+  // };
+
+  // const handleFailure = (error) => {
+  //   setError(error.message);
+  // };
+
+  const responseGoogle = (response) => {
+    console.log('response',response);
+  };
+  const errorMessage = (error) => {
+    console.log('error',error);
   };
 
   const validationSchema = yup.object().shape({
@@ -104,7 +141,6 @@ export default function SignIn(history, props) {
                     />
                   </a>
                 </div>
-
                 <div className="mt-3">
                   <label
                     htmlFor="number"
@@ -153,7 +189,6 @@ export default function SignIn(history, props) {
                   </div>
                   {/* <ErrorMessage name="password" component={ ValidationError } /> */}
                 </div>
-
                 <div className="mt-1">
                   <Field
                     className="mr-2"
@@ -180,27 +215,31 @@ export default function SignIn(history, props) {
                     Sign in
                   </button>
                 )}
-                {/* <a href={'/social'}> */}
-                {/* <button
-                  className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="button"
-                  onClick={()=>handleSocialLogin()}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    className="text-center"
-                    width="30"
-                    height="30"
+                <div className="mt-2">
+                  {/* <GoogleLogin
+                    clientId="780685125249-66b413040g0okik5du7kfp26vhs0vkdc.apps.googleusercontent.com"
+                    buttonText="Login  with  Google"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={"single_host_origin"}
+                    isSignedIn={true}
+                    className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                    scope={'profile'}
+                  /> */}
+                  <GoogleOAuthProvider clientId="780685125249-66b413040g0okik5du7kfp26vhs0vkdc.apps.googleusercontent.com" >
+                    {/* <button
+                    className="shadow-md w-full mt-3 py-2 uppercase bg-primary hover:bg-primary-light text-white font-bold px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                    onClick={()=>handleSocialLogin()}
                   >
-                    <path
-                      fill="#ffffff"
-                      d="M19.938 10.986h-9.353v2.471h6.782c-.298 1.717-1.884 2.984-3.871 2.984-2.305 0-4.179-1.876-4.179-4.18s1.874-4.179 4.179-4.179c1.057 0 1.991.387 2.716 1.017l1.938-1.938c-1.26-1.12-2.933-1.802-4.79-1.802-3.96 0-7.171 3.21-7.171 7.171s3.211 7.171 7.171 7.171c4.322 0 7.063-3.264 7.063-7.062 0-.474-.049-.852-.096-1.123z"
+                    Google Login
+                  </button> */}
+                    <GoogleLogin
+                      onSuccess={responseGoogle}
+                      onError={errorMessage}
                     />
-                  </svg>
-                  Sign in with Google
-                </button> */}
-                {/* </a> */}
+                  </GoogleOAuthProvider>
+                </div>
                 <div className="text-center">
                   <a
                     className="inline-block align-baseline font-bold px-2 py-1 rounded-md text-primary hover:text-primary-light"
