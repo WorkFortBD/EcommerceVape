@@ -16,6 +16,7 @@ import content from '../content.json';
 import ProductsCarousel from "../components/carousel/ProductsCarousel";
 import FlashDeals from "../components/products/FlashDeals";
 import HomeStaticBanner from "../components/home/HomeStaticBanner";
+import HomeCategoryProduct from "../components/home/HomeCategoryProduct";
 
 const Home: NextPage = () => {
 
@@ -54,6 +55,8 @@ const Home: NextPage = () => {
       <CategoryComponent />
       <FlashDeals />
       <HomeStaticBanner pageSlug="homepage-banner" />
+      <HomeCategoryProduct categorySlug='vape' />
+      <HomeCategoryProduct categorySlug='e-juice' />
 
       {/* <div className="container mx-auto">
         <ProductsCarousel />
