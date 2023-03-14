@@ -9,7 +9,8 @@ const initialState: IAuthReducer = {
     message: "",
     isLoading: false,
     isSignedIn:false,
-    isSignedOut:false
+    isSignedOut:false,
+    socialLogin:false
 };
 const AuthReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
@@ -41,6 +42,7 @@ const AuthReducer = (state = initialState, action: IAction) => {
           status: action.payload.status,
           userData: action.payload.data,
           isLoading: action.payload.isLoading,
+          socialLogin: action.payload.socialLogin,
         };
       case Types.IS_SIGNED_IN:
         return{

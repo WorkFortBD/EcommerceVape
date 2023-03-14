@@ -30,6 +30,7 @@ export default function Header() {
   const { categories } = useSelector((state: IRootReducer) => state.layout);
   const { totalQuantity } = useSelector((state: IRootReducer) => state.carts);
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
+  const socialLogin = useSelector((state: IRootReducer) => state.auth.socialLogin);
   const { userData } = useSelector((state) => state.user);
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -101,7 +102,7 @@ export default function Header() {
                 label={
                   <Avatar
                     alt="User settings"
-                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    img={socialLogin==true?userData.avatar:"https://flowbite.com/docs/images/people/profile-picture-5.jpg"}
                     rounded={true}
                   />
                 }
