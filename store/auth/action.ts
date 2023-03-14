@@ -79,7 +79,7 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
  * Social Login
  */
 
- export const socialLogin = () => async (dispatch) => {
+ export const socialLogin = (token) => async (dispatch) => {
   let loginResponse = {
     status: false,
     message: "",
@@ -88,11 +88,11 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
     data: null,
   };
   dispatch({ type: Types.SOCIAL_LOGIN, payload: loginResponse });
-
+  let postData= JSON.stringify({ token })
   try {
-    await Axios.get(`auth/login/google/callback`)
+    await Axios.post(`login/google`, postData, {})
       .then((res) => {
-        console.log('LoginResponse', res)
+        console.log('googleLoginReponse', res)
         return false;
         const { data, message, status } = res.data;
         const { user, access_token } = data;
