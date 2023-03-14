@@ -14,6 +14,7 @@ import Layout from "../components/layouts/Layout";
 import Slider from "../components/slider/Slider";
 import content from '../content.json';
 import MyCarousel from "../components/carousel/MyCarousel";
+import FlashDeals from "../components/products/FlashDeals";
 
 const Home: NextPage = () => {
 
@@ -50,6 +51,7 @@ const Home: NextPage = () => {
         </div>
       </section> */}
       <CategoryComponent/>
+      <FlashDeals />
       {/* <MyCarousel /> */}
       {/* Filter */}
       <HomeProductFilter />

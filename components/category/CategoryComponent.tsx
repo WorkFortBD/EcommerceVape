@@ -52,8 +52,8 @@ export const CategoryComponent = ({ }: Props) => {
       <div className="container mx-auto mt-12">
         <div className="flex justify-center md:justify-start flex-wrap mx-2 md:mx-4">
           {categories.map((category, index) => (
-            <div className="basis-1/3">
-              <div className="mt-6 flex group px-2 max-w-[500px]" key={index}>
+            <div className="basis-1/3" key={index}>
+              <div className="mt-6 flex group px-2 max-w-[500px]">
                 {
                   index % 2 !== 0 &&
                   <div>

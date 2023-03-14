@@ -13,8 +13,9 @@ const initialState: IProductReducer = {
         image:''
     },
     paginate:{},
+    flashDealList: [],
     isModalOpen: false,
-    isDetailLoading: false
+    isDetailLoading: false,
 };
 
 
@@ -22,10 +23,16 @@ const ProductReducer = (state = initialState, action: IAction) => {
 
     switch (action.type) {
         case Types.GET_PRODUCT_LIST_MAIN:
-            console.log('action.payload',action.payload);
             return {
                 ...state,
                 products: action.payload.data,
+                productsLoading: action.payload.loading,
+                paginate: action.payload.paginate
+            };
+        case Types.GET_FLASH_DEAL_DATA:
+            return {
+                ...state,
+                flashDealList: action.payload.data,
                 productsLoading: action.payload.loading,
                 paginate: action.payload.paginate
             };
