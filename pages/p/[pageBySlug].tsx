@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import DOMPurify from "dompurify";
 import Layout from "../../components/layouts/Layout";
 import Head from 'next/head';
-// import LoadingSpinner from "../../components/master/loading/LoadingSpinner";
-// import Notfound from '../404';
 
 export default function PageBySlug() {
   const [parsedHtml, setParsedHtml] = useState();
@@ -31,7 +29,7 @@ export default function PageBySlug() {
 
   useEffect(() => {
     if (pageData !== null) {
-      const parsedHtml = DOMPurify.sanitize(pageData.description, {
+      const parsedHtml = DOMPurify.sanitize(pageData?.description, {
         USE_PROFILES: { html: true },
       });
       setParsedHtml(parsedHtml);
@@ -39,40 +37,37 @@ export default function PageBySlug() {
   }, [pageData]);
 
   return (
-    <Layout title={pageData.title}>
-      {pageData.meta_title &&(
-      <Head>
-      <meta property="og:title" content={pageData.meta_title} key="title" />
-      <meta property="og:description" content={pageData.meta_description} key="description" />
-      </Head>
+    <Layout title={pageData?.title}>
+      {pageData?.meta_title && (
+        <Head>
+          <meta property="og:title" content={pageData?.meta_title} key="title" />
+          <meta property="og:description" content={pageData?.meta_description} key="description" />
+        </Head>
       )
       }
-      <div className="container mx-auto">
-        <div className="text-2xl mt-10 ml-5 mb-4">
-          {/* {
+      <div className="container mx-auto p-3">
+        {/* {
                     pageDataLoading && <LoadingSpinner text="Page Loading..." />
                 }
 
                 {!pageData && !pageDataLoading && <Notfound />} */}
 
-          {pageData && !pageDataLoading && (
-            <div className="col-lg-12 px-0">
-              <div className="card rounded">
-                <div className="card-header">
-                  <h1 className="website-info-title">{pageData.title}</h1>
-                </div>
-                <div className="card-body">
-                  <div
-                    className="website-info-content"
-                    dangerouslySetInnerHTML={{ __html: parsedHtml }}
-                  ></div>
-                </div>
+        {pageData && (
+          <div className="col-lg-12 px-0">
+            <div className="">
+              <div className="">
+                <h2 className="text-4xl mt-10 mb-4 text-primary">{pageData?.title}</h2>
+                <hr />
               </div>
+              <div
+                className="website-info-content"
+                dangerouslySetInnerHTML={{ __html: parsedHtml }}
+              ></div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </Layout>
+    </Layout >
   );
 }
 

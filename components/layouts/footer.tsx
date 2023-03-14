@@ -82,7 +82,7 @@ export default function Footer(): ReactElement {
               </div>
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 text-gray-400 list-none">
                 <li className="mt-3">
-                  <Link href="/p/contact">Contact Us</Link>
+                  <Link href="/p/[pageBySlug]" as="/p/contact">Contact Us</Link>
                 </li>
 
                 <li className="mt-3">
