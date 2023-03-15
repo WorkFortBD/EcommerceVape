@@ -30,7 +30,6 @@ const AuthReducer = (state = initialState, action: IAction) => {
       };
 
       case Types.SOCIAL_LOGIN:
-        console.log('action.payload social', action.payload)
         if (action.payload.status) {
           localStorage.setItem("userData", JSON.stringify(action.payload.data));
           localStorage.setItem("access_token", action.payload.tokenData);
