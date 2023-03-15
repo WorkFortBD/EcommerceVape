@@ -3,11 +3,11 @@ import { Transition } from "@headlessui/react";
 
 const Sidebar = (value) => {
   console.log('value', value.value)
-  const [isOpen, setIsOpen] = useState(value.value);
+  const [isOpen, setIsOpen] = useState(false);
   
-  // useEffect(() => {
-  //   setIsOpen(value.value)
-  // }, [value.value]);
+  useEffect(() => {
+    setIsOpen(value.value)
+  }, [value.value]);
   console.log('isOpen', isOpen)
   return (
     <div className="flex">
