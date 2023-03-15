@@ -32,6 +32,7 @@ export default function Header() {
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
   const socialLogin = useSelector((state: IRootReducer) => state.auth.socialLogin);
   const { userData } = useSelector((state) => state.user);
+  console.log('socialLogin', socialLogin)
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
