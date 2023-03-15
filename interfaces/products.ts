@@ -11,6 +11,7 @@ export interface IProduct {
     offer_selling_price: number
     images: Array<IProductImage>
     description: string
+    brand:IBrand
 }
 export interface IProductImage {
     image: string
@@ -27,4 +28,8 @@ export interface IProductReducer {
     isModalOpen: boolean,
     isDetailLoading: boolean
     paginate: object
+}
+
+export interface IBrand {
+    name: string
 }
