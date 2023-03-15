@@ -100,6 +100,7 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
         loginResponse.tokenData = access_token;
         loginResponse.status = status;
         loginResponse.socialLogin = true;
+        console.log('loginReponse1', loginResponse)
         if(loginResponse.status == true){
           toast.success(message,{
             position: "top-right",
@@ -135,6 +136,7 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
   }
 
   loginResponse.isLoading = false;
+  console.log('loginResponse2', loginResponse)
   dispatch({ type: Types.SOCIAL_LOGIN, payload: loginResponse });
 
   // return axios.post(LOGIN_URL, { email, password });
