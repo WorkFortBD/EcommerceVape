@@ -55,7 +55,7 @@ export default function ProductDetails({ product }: Props) {
                 مجموعة السفر قطن + ملقط + مقص صغير
               </p>
               <h3 className="mt-2 text-gray-500">
-                <strong>Brand:</strong> <span>{product.brand.name ??'No Brand'}</span>
+                <strong>Brand:</strong> <span>{product.brand && product.brand.name }</span>
               </h3>
               <p className="mt-2 text-base border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4">
                 <strong>Price: </strong>
