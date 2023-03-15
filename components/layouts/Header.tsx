@@ -32,7 +32,6 @@ export default function Header() {
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
   const socialLogin = useSelector((state: IRootReducer) => state.auth.socialLogin);
   const { userData } = useSelector((state) => state.user);
-  console.log('socialLogin', socialLogin)
   const handleScroll = () => {
     const position = window.pageYOffset;
     position >= 120 ? setBarVisibility(true) : setBarVisibility(false);
@@ -103,7 +102,7 @@ export default function Header() {
                 label={
                   <Avatar
                     alt="User settings"
-                    img={socialLogin==true?userData.avatar:"https://flowbite.com/docs/images/people/profile-picture-5.jpg"}
+                    img={userData.avatar != null ? userData.avatar:"https://flowbite.com/docs/images/people/profile-picture-5.jpg"}
                     rounded={true}
                   />
                 }

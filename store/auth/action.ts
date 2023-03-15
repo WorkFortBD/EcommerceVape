@@ -86,21 +86,19 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
     isLoading: true,
     tokenData: "",
     data: null,
-    socialLogin:false
+    socialLogin:true
   };
   dispatch({ type: Types.SOCIAL_LOGIN, payload: loginResponse });
   let postData= JSON.stringify({ token })
   try {
     await Axios.post(`auth/login/google`, postData, {})
       .then((res) => {
-        console.log('googleLoginResponse', res)
         const { data, message, status,access_token } = res.data;
         // const { user, access_token } = data;
         loginResponse.data = data;
         loginResponse.tokenData = access_token;
         loginResponse.status = status;
         loginResponse.socialLogin = true;
-        console.log('loginReponse1', loginResponse)
         if(loginResponse.status == true){
           toast.success(message,{
             position: "top-right",
@@ -136,7 +134,6 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
   }
 
   loginResponse.isLoading = false;
-  console.log('loginResponse2', loginResponse)
   dispatch({ type: Types.SOCIAL_LOGIN, payload: loginResponse });
 
   // return axios.post(LOGIN_URL, { email, password });
