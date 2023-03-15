@@ -11,11 +11,9 @@ interface Props {
 }
 
 export default function ProductDetailImages({ productImage }: Props): ReactElement {
-  console.log('productImage', productImage)
   const [images, setImages] = useState(productImage);
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-console.log('images', images)
   const selectPreviousImage = () => {
     if (activeImageIndex === 0) {
       setActiveImageIndex(images.length - 1);

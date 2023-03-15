@@ -11,9 +11,12 @@ export default function HomeStaticBanner({
     async function fetchData() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}page/${pageSlug}`);
       const responseData = await response.json();
-      setBanner(
-        `${process.env.NEXT_PUBLIC_URL}/images/pages/${responseData.data.image}`
-      );
+      {responseData.data && 
+        setBanner(
+          `${process.env.NEXT_PUBLIC_URL}/images/pages/${responseData.data.image}`
+        );
+      }
+        
     }
 
     fetchData();
