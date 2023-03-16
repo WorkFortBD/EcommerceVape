@@ -38,7 +38,6 @@ const CategoryWiseProductContainer = ({
   const { paginate, categoryBrandDetails, isLoading } = useSelector(
     (state) => state.category
   );
-console.log('showFilter', showFilter)
   const paginateHandler = (page) => {
     if (!page) return;
 

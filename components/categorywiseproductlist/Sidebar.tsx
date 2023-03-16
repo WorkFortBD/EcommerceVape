@@ -1,37 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { Transition } from "@headlessui/react";
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import { getFilteredProducts } from "../../store/category/action";
+import { useDispatch } from "react-redux";
 
-const Sidebar = (value) => {
-  console.log('value', value.value)
-  const [isOpen, setIsOpen] = useState(false);
-  
+const Sidebar = (filterParams) => {
+  filterParams=filterParams.filterParams;
+  const dispatch = useDispatch();
+  const [priceRange, setPriceRange] = useState([100, 500]);
+
   useEffect(() => {
-    setIsOpen(value.value)
-  }, [value.value]);
-  console.log('isOpen', isOpen)
+    return () => {
+      dispatch(getFilteredProducts(filterParams));
+    };
+  }, []);
+
+  function handlePriceRangeChange(value) {
+    filterParams["max_price"]=value[1]
+    filterParams["min_price"]=value[0]
+    setPriceRange(value);
+  }
+
   return (
-    <div className="flex">
-      <Transition
-        show={isOpen}
-        enter="transform transition duration-500 ease-in-out"
-        enterFrom="-translate-x-full"
-        enterTo="translate-x-0"
-        leave="transform transition duration-500 ease-in-out"
-        leaveFrom="translate-x-30"
-        leaveTo="-translate-x-full"
-        className="fixed top-0 right-0 h-screen w-1/2 z-40"
-      >
-        <div className="h-full bg-blue-500">
-          <button
-            className="absolute top-5 right-5"
-            onClick={() => setIsOpen(false)}
-          >
-            Close
-          </button>
-          Sidebar
-        </div>
-      </Transition>
+    <div className="flex h-screen">
+  <div className="bg-red-600 text-white w-64 p-4">
+    <h1 className="text-xl font-bold mb-4">Filter</h1>
+    <div className="mb-4">
+      <label for="price-range" className="block text-sm font-bold text-lg">Price Range</label>
+      <div className="flex items-center">
+      <span className="mr-2">${priceRange[0]}</span>
+          <Slider
+            min={0}
+            max={1000}
+            range={true}
+            defaultValue={[100, 500]}
+            value={priceRange}
+            onChange={handlePriceRangeChange}
+          />
+          <span className="ml-2">${priceRange[1]}</span>
+      </div>
     </div>
+  </div>
+  <div className="flex-1">
+  </div>
+</div>
+
   );
 };
 
