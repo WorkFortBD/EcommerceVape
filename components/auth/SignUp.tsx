@@ -250,13 +250,14 @@ export default function SignIn(history, props) {
                 {validationStep === 0 ? (
                   <>
                     <div className="flex justify-center items-center cursor-pointer py-2">
-                      <a href="/">
+                      {/* <a href="/">
                         <img
                           src="/images/logos/logo.svg"
                           className="mr-3 h-12 md:h-16"
                           alt=""
                         />
-                      </a>
+                      </a> */}
+                      <h1 className="font-bold text-4xl text-primary uppercase">Sign Up</h1>
                     </div>
 
                     <div className="mt-3">
