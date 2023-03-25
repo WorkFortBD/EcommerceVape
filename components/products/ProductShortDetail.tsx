@@ -2,14 +2,17 @@
  * External dependencies.
  */
 import Link from "next/link";
-import { ReactElement, useState } from "react";
+import { ReactElement, useState,useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 /**
  * Internal dependencies.
  */
-import { IProduct } from "../../interfaces/products";
+import { IProduct, IProductReducer } from "../../interfaces/products";
+import { modalStatus } from "../../store/product/action";
 import { formatCurrency } from "../../utils/currency";
 import { CartButton } from "../carts/CartButton";
+import ProductDetailsModal from "./ProductDetailsModal";
 
 interface Props {
   product: IProduct;
@@ -17,14 +20,19 @@ interface Props {
 
 export default function ProductShortDetail({ product }: Props): ReactElement {
 
-  const[modalOpen,setModalOpen]=useState(false);
-console.log('modalOpen', modalOpen)
+ const dispatch= useDispatch();
+//  const { isOpenStatus } = useSelector(state => state.products);
+ const {isOpen } = useSelector(state => state.products);
+ console.log('isOpen', isOpen)
   const openModal=()=>{
-    setModalOpen(true);
+    dispatch(modalStatus(true))
   }
-  
   return (
     <div className=" relative group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[135px] md:max-w-[230px]">
+      {isOpen &&
+      <ProductDetailsModal slug={product.sku} />
+      }
+      
       <Link href={`/products/${product.sku}`}>
         <div className="">
           <div className="overflow-hidden">
