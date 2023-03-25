@@ -1,51 +1,46 @@
-import React from "react";
-import Link from "next/link";
+
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductModalDetails, modalStatus } from "../../store/product/action";
+import { CartButton } from "../carts/CartButton";
+import ProductDetails from "./ProductDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { Accordion, Progress } from "flowbite-react";
-import ProductList from "./ProductList";
 import ProductDetailImages from "./ProductDetailImages";
 import { formatCurrency } from "../../utils/currency";
-import { IProduct } from "../../interfaces/products";
-import { CartButton } from "../carts/CartButton";
-import DOMPurify from "dompurify";
+import { Progress } from "flowbite-react";
+import { faCheck, faPhone } from "@fortawesome/free-solid-svg-icons";
 
-type Props = {
-  product: IProduct;
-};
 
-export default function ProductDetails({ product }: Props) {
+export default function ProductDetailsModal(slug) {
+  const dispatch = useDispatch();
+  const {productModalDetails,isOpen } = useSelector(state => state.products);
+  console.log('productModalDetails', productModalDetails)
+  let product=productModalDetails;
+   useEffect(() => {
+    dispatch(getProductModalDetails(slug.slug));
+  }, []);
+  const closeModal =()=>{
+    dispatch(modalStatus(false))
+  }
+    // let open=isOpen.isOpen;
   return (
-    <section className="product-deatails-section">
-      <div className="container mx-auto mt-2 p-5">
-        <div className="flex justify-between">
-          <div className="p-2 text-base inline-block">
-            <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/">Home /</Link>
-            </p>
-            <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Shop /</Link>
-            </p>
-            <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Vape /</Link>
-            </p>
-            <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Juices /</Link>
-            </p>
-            <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Salt Nicotine</Link>
-            </p>
-          </div>
-          {/* <div>
-            <Link href="/">
-              <FontAwesomeIcon icon={faTable} style={{ width: 22 }} />
-            </Link>
-          </div> */}
-        </div>
-
-        <div className="flex mt-6 flex-col md:flex-row mx-2 flex-wrap">
+          <div
+          className={`${
+            isOpen ? '' : 'hidden'
+          } fixed z-10 inset-0 overflow-y-auto max-h-full`}
+        >
+           {/* <div
+          className= "fixed z-10 inset-0 overflow-y-auto max-h-full"
+        > */}
+          <div className="flex items-center justify-center min-h-screen pt-8 px-8 pb-32 text-center sm:block sm:p-0 modal">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+  
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+            <div className="flex mt-6 flex-col md:flex-row mx-2 flex-wrap">
           <div className="basis-2/4 p-2">
-            <ProductDetailImages productImage={product.images} />
+            {/* <ProductDetailImages productImage={product.images} /> */}
           </div>
           <div className="basis-2/4 border shadow-md rounded-3xl mt-5 p-6">
             <div className="text-center">
@@ -174,82 +169,20 @@ export default function ProductDetails({ product }: Props) {
             </div>
           </div>
         </div>
-
-        <Accordion flush={true} alwaysOpen={true}>
-          <Accordion.Panel>
-            <Accordion.Title>
-              <h2 className="uppercase text-2xl text-center mt-5">
-                Description
-              </h2>
-            </Accordion.Title>
-            <Accordion.Content>
-              <p className="">
-                <img src="/images/wishlist/description.png" alt="" />
-              </p>
-              <div className="mt-8">
-                {/* <h2 className="mt-6 text-3xl text-center uppercase">
-                  Description
-                </h2> */}
-                <p
-                  className="mt-3 text-center text-gray-400"
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(product.description),
-                  }}
-                >
-                  {/* {sanitizeHtml(product.description)} */}
-                </p>
-                <div className="text-center mt-5">
-                  <h2 className="text-3xl uppercase">What's Included</h2>
-                  <ol className="mt-3">
-                    <li className="text-gray-400">
-                      1 x Titan 3000 puffs Vape Pen Disposable
-                    </li>
-                  </ol>
-                </div>
-
-                <div className="text-center mt-5">
-                  <h2 className="uppercase text-3xl">Spaces & fetures</h2>
-                  <ol className="mt-3 text-gray-400">
-                    <li>E-liquid Capacity: 10ML</li>
-                    <li className="mt-1">Battery Capacity: 600mAh</li>
-                  </ol>
-                </div>
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <span className="flex w-full rounded-md shadow-sm sm:w-auto">
+                  <button
+                    type="button"
+                    onClick={closeModal}
+                    className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-base leading-6 font-medium text-white hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                    // onClick={toggleModal}
+                  >
+                    Close
+                  </button>
+                </span>
               </div>
-            </Accordion.Content>
-          </Accordion.Panel>
-          <Accordion.Panel>
-            <Accordion.Title>
-              <h2 className="text-center text-2xl">Reviews</h2>
-            </Accordion.Title>
-            <Accordion.Content>
-              <div className="flex justify-center">
-                <div>
-                  <h2 className="uppercase">Reviews</h2>
-                  <p className="mt-2 text-gray-500">
-                    There are no reviews yet.
-                  </p>
-                </div>
-                <div className="ml-6 text-gray-500">
-                  <p>
-                    Only logged in customers who have purchased this product may
-                    leave a review.
-                  </p>
-                </div>
-              </div>
-            </Accordion.Content>
-          </Accordion.Panel>
-        </Accordion>
-        <h2 className="mt-5 text-center uppercase text-3xl">
-          You May Also Like
-        </h2>
-        {/* <ProductList />
-        <div className="mt-5">
-          <h2 className="mt-8 text-center uppercase text-3xl">
-            Related Product
-          </h2>
-          <ProductList />
-        </div> */}
-      </div>
-    </section>
+            </div>
+          </div>
+        </div>
   );
 }

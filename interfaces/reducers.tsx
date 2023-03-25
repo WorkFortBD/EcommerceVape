@@ -16,6 +16,5 @@ export interface IRootReducer {
 
 export interface IAction {
     type: string;
-
     payload: any;
 }

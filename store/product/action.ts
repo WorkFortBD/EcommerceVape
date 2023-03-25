@@ -76,3 +76,32 @@ export const getDealFlashListAction = () => (dispatch) => {
             console.log('deals of the day err => ', err);
         })
 }
+
+export const getProductModalDetails = (slug) => (dispatch) => {
+  console.log('slug', slug)
+  const responseData = {
+      data: [],
+      status: true,
+      isLoading: true
+  }
+  dispatch({type: Types.GET_MODAL_DATA, payload: responseData});
+  
+  Axios.get(`get-item-detail/${slug}`)
+      .then(res => {
+        console.log('ProductModalResponse', res.data.data)
+          responseData.data = res.data.data;
+          responseData.isLoading = false;
+          
+          dispatch({type: Types.GET_MODAL_DATA, payload: responseData});
+      })
+      .catch(err => {
+          console.log('deals of the day err => ', err);
+      })
+}
+
+export const modalStatus = (status) => (dispatch) => {
+  const responseData = {
+    isOpen: status
+}
+  dispatch({type:Types.OPEN_MODAL, payload: responseData});
+}

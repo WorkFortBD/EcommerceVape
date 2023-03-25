@@ -21,12 +21,13 @@ export interface IProductImage {
 export interface IProductReducer {
     products: Array<IProduct>,
     productsLoading: boolean,
+    isOpen:boolean
 
     productSlug: string,
     product: IProduct | undefined | null,
     flashDealList: Array<object>,
     isModalOpen: boolean,
-    isDetailLoading: boolean
+    isDetailLoading: boolean,
     paginate: object
 }
 
