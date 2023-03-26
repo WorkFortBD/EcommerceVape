@@ -40,11 +40,12 @@ const ProductReducer = (state = initialState, action: IAction) => {
                 paginate: action.payload.paginate
             };
         case Types.GET_MODAL_DATA:
-            console.log('action.payload.data', action.payload.data)
+            console.log('action.payload', action.payload)
             return {
                 ...state,
                 productModalDetails: action.payload.data,
-                productsLoading: action.payload.loading,
+                productsLoading: action.payload.isLoading,
+                isOpen:action.payload.isOpen
                 // paginate: action.payload.paginate
             };
         case Types.OPEN_MODAL:
