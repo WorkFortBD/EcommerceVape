@@ -18,10 +18,15 @@ export interface IProductImage {
     image_url: string
 }
 
+export interface IProductSearchReducer{
+    productSearchData:Array<IProduct>
+}
+
 export interface IProductReducer {
     products: Array<IProduct>,
     productsLoading: boolean,
-    isOpen:boolean
+    isOpen:boolean,
+    isSearchModalOpen:boolean,
 
     productSlug: string,
     product: IProduct | undefined | null,
@@ -30,6 +35,7 @@ export interface IProductReducer {
     isDetailLoading: boolean,
     productModalDetails:object,
     paginate: object
+    productSearchData:IProductSearchReducer
 }
 
 export interface IBrand {

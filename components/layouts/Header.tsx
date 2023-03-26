@@ -20,6 +20,8 @@ import { isSignedIn, isSignedOut } from "../../store/auth/action";
 import { getUserDataAction } from "../../store/users/action";
 import { useRouter } from "next/router";
 import { getCartsAction } from "../../store/cart/action";
+import { searchProductAction } from "../../store/product/action";
+import ProductSearchModal from "../products/ProductSearchModal";
 
 
 export default function Header() {
@@ -30,7 +32,7 @@ export default function Header() {
   const { categories } = useSelector((state: IRootReducer) => state.layout);
   const { totalQuantity } = useSelector((state: IRootReducer) => state.carts);
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
-  const socialLogin = useSelector((state: IRootReducer) => state.auth.socialLogin);
+  const {isSearchModalOpen } = useSelector((state:IRootReducer) => state.products);
   const { userData } = useSelector((state) => state.user);
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -59,6 +61,10 @@ export default function Header() {
     window.location.replace("/");
   }
 
+  const openProductSearchModal = () => {
+    dispatch(searchProductAction('search',true));
+  }
+
   const clickMenuLink = (category, toggleBackdrop, isMainCategory = false) => {
     let categoryType = "";
 
@@ -79,6 +85,9 @@ export default function Header() {
 
   return (
     <header>
+      {isSearchModalOpen &&
+      <ProductSearchModal />
+      }
       <div
         className={`navbar-main-area bg-white shadow ${barVisibility ? "fixed-nav" : "not-fixed-nav"
           }`}
@@ -128,13 +137,13 @@ export default function Header() {
                 </Link>
 
               }
-              <Link href="/" className="">
+              <a onClick={openProductSearchModal} className="">
                 <FontAwesomeIcon
                   icon={faSearch}
                   className="text-black hover:text-primary cursor-pointer ml-3"
                   style={{ width: 22 }}
                 />
-              </Link>
+              </a>
               <Link href="/cart" className="">
                 <FontAwesomeIcon
                   icon={faHeart}
