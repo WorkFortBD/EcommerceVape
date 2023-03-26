@@ -22,11 +22,6 @@ export default function ProductShortDetail({ product }: IProductShortDetail): Re
  const dispatch= useDispatch();
 //  const { isOpenStatus } = useSelector(state => state.products);
  const {isOpen } = useSelector((state:IRootReducer) => state.products);
- console.log('isOpen', isOpen)
-
-  const openModal=()=>{
-    dispatch(modalStatus(true))
-  }
 
   const openProductDetailModal = () => {
     dispatch(getProductModalDetails(product.sku, true));
