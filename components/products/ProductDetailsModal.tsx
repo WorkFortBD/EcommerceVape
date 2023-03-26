@@ -27,7 +27,7 @@ export default function ProductDetailsModal() {
       <div
         className={`${
           isOpen ? "" : "hidden"
-        } fixed inset-0 z-10 overflow-y max-h-full mt-10`}
+        } fixed inset-0 z-10 h-90 max-h-auto mt-10`}
       >
         <div className="flex items-center justify-center min-h-screen mt-12 px-8 pb-32 text-center sm:mb-12 sm:block sm:p-0 modal">
           <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
@@ -121,16 +121,6 @@ export default function ProductDetailsModal() {
                   )}
                 </div>
               }
-                <div className="flex justify-between mt-4 p-4 border">
-                  <a href="" className="text-gray-400 text-xs">
-                    or 4 interest-free payments of
-                    <b>111.25 SAR.</b>
-                    <u>Learn more</u>
-                  </a>
-                  <a href="" className="bg-green-300 rounded">
-                    tabby
-                  </a>
-                </div>
                 <div className="text-center mt-6">
                   <CartButton product={product} />
                 </div>
