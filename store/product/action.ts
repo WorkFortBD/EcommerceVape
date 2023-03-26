@@ -1,3 +1,4 @@
+import { Dispatch } from "@reduxjs/toolkit";
 import Axios from "axios";
 import * as Types from "./type";
 
@@ -77,20 +78,24 @@ export const getDealFlashListAction = () => (dispatch) => {
         })
 }
 
-export const getProductModalDetails = (slug) => (dispatch) => {
-  console.log('slug', slug)
+export const getProductModalDetails = (slug: string, isModalVisible: boolean) => (dispatch) => {
   const responseData = {
       data: [],
       status: true,
-      isLoading: true
+      isLoading: isModalVisible ? true : false,
+      isOpen: isModalVisible
   }
   dispatch({type: Types.GET_MODAL_DATA, payload: responseData});
+  if (!isModalVisible) {
+    return;
+  }
   
   Axios.get(`get-item-detail/${slug}`)
       .then(res => {
         console.log('ProductModalResponse', res.data.data)
           responseData.data = res.data.data;
           responseData.isLoading = false;
+          // responseData.isOpen = true;
           
           dispatch({type: Types.GET_MODAL_DATA, payload: responseData});
       })
@@ -99,7 +104,7 @@ export const getProductModalDetails = (slug) => (dispatch) => {
       })
 }
 
-export const modalStatus = (status) => (dispatch) => {
+export const modalStatus = (status: string) => (dispatch: Dispatch) => {
   const responseData = {
     isOpen: status
 }

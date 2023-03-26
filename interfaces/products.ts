@@ -28,6 +28,7 @@ export interface IProductReducer {
     flashDealList: Array<object>,
     isModalOpen: boolean,
     isDetailLoading: boolean,
+    productModalDetails:object,
     paginate: object
 }
 

@@ -8,32 +8,37 @@ import { useDispatch, useSelector } from "react-redux";
 /**
  * Internal dependencies.
  */
-import { IProduct, IProductReducer } from "../../interfaces/products";
-import { modalStatus } from "../../store/product/action";
+import { IProductShortDetail } from "../../interfaces/products";
+import { IRootReducer } from "../../interfaces/reducers";
+import { getProductModalDetails, modalStatus } from "../../store/product/action";
 import { formatCurrency } from "../../utils/currency";
 import { CartButton } from "../carts/CartButton";
 import ProductDetailsModal from "./ProductDetailsModal";
 
-interface Props {
-  product: IProduct;
-}
 
-export default function ProductShortDetail({ product }: Props): ReactElement {
+
+export default function ProductShortDetail({ product }: IProductShortDetail): ReactElement {
 
  const dispatch= useDispatch();
 //  const { isOpenStatus } = useSelector(state => state.products);
- const {isOpen } = useSelector(state => state.products);
+ const {isOpen } = useSelector((state:IRootReducer) => state.products);
  console.log('isOpen', isOpen)
+
   const openModal=()=>{
     dispatch(modalStatus(true))
   }
+
+  const openProductDetailModal = () => {
+    dispatch(getProductModalDetails(product.sku, true));
+  }
+
   return (
     <div className=" relative group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[135px] md:max-w-[230px]">
       {isOpen &&
-      <ProductDetailsModal slug={product.sku} />
+      <ProductDetailsModal />
       }
       
-      <Link href={`/products/${product.sku}`}>
+      <a onClick={openProductDetailModal}>
         <div className="">
           <div className="overflow-hidden">
             <img
@@ -51,7 +56,7 @@ export default function ProductShortDetail({ product }: Props): ReactElement {
             </p>
           </div>
         </div>
-      </Link>
+      </a>
       <div className="text-center mt-3">
         {!product.is_offer_enable ||
         product.offer_selling_price == 0 ||
@@ -70,11 +75,9 @@ export default function ProductShortDetail({ product }: Props): ReactElement {
             </del>
           </span>
         )}
-        {/* <div class="px-6 py-4 bg-gray-100 group-hover:opacity-100 opacity-0 transition-opacity"> */}
-          <button onClick={openModal} className="transition-all bg-primary group-hover:opacity-100 p-2 scale-90 opacity-0 transition-opacity w-32 px-4 ml-2 rounded-md text-white">
+          {/* <button onClick={openProductDetailModal} className="transition-all bg-primary group-hover:opacity-100 p-2 scale-90 opacity-0 transition-opacity w-32 px-4 ml-2 rounded-md text-white">
             View Details
-          </button>
-        {/* </div> */}
+          </button> */}
         <p className="my-3">
           <CartButton product={product} />
         </p>

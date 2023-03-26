@@ -56,10 +56,13 @@ export default function ProductDetailImages({ productImage }: Props): ReactEleme
         </div>
 
         <div className="overflow-hidden">
+          {images &&
           <img
-            src={images[activeImageIndex] !==undefined?`${process.env.NEXT_PUBLIC_URL}images/products/`+images[activeImageIndex].image:`${process.env.NEXT_PUBLIC_URL}images/products/default.jpg`}
-            className="w-full transition-all mb-2 px-5"
-          />
+          src={images[activeImageIndex] !==undefined?`${process.env.NEXT_PUBLIC_URL}images/products/`+images[activeImageIndex].image:`${process.env.NEXT_PUBLIC_URL}images/products/default.jpg`}
+          className="w-full transition-all mb-2 px-5"
+        />
+          }
+          
         </div>
 
         <div className="absolute top-[45%] right-10">
