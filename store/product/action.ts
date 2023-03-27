@@ -11,20 +11,20 @@ import * as Types from "./type";
  *
  * @return void Dispatch `GET_PRODUCT_LIST_MAIN`
  */
- export const getProductListAction = (args = {}) =>async (dispatch) => {
-   let response = {
-     loading: true,
-     data: [],
-     paginate:{}
-   };
-   dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
+export const getProductListAction = (args = {}) => async (dispatch) => {
+  let response = {
+    loading: true,
+    data: [],
+    paginate: {}
+  };
+  dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
 
-   response.paginate = await getProductsData(args);
-   response.loading = false;
-   response.data=response.paginate.data;
+  response.paginate = await getProductsData(args);
+  response.loading = false;
+  response.data = response.paginate.data;
 
-   dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
- };
+  dispatch({ type: Types.GET_PRODUCT_LIST_MAIN, payload: response });
+};
 
 /**
 * Get Products Data
@@ -36,72 +36,72 @@ import * as Types from "./type";
 * @return array products array
 */
 export const getProductsData = async (args) => {
- try {
-   let url = `get-items?p=1`;
+  try {
+    let url = `get-items?p=1`;
 
-   if (args["type"]) {
-     url += `&type=${args["type"]}`;
-   }
+    if (args["type"]) {
+      url += `&type=${args["type"]}`;
+    }
 
-   if (args["category"]) {
-     url += `&category=${args["category"]}`;
-   }
+    if (args["category"]) {
+      url += `&category=${args["category"]}`;
+    }
 
-   if (typeof args["limit"] !== "undefined") {
-     url += `&paginate_no=${args["limit"]}`;
-   }
+    if (typeof args["limit"] !== "undefined") {
+      url += `&paginate_no=${args["limit"]}`;
+    }
 
-   const res = await Axios.get(url);
-   return res.data.data;
- } catch (error) {
-   //
- }
+    const res = await Axios.get(url);
+    return res.data.data;
+  } catch (error) {
+    //
+  }
 };
 
 export const getDealFlashListAction = () => (dispatch) => {
-    const responseData = {
-        data: [],
-        status: true,
-        isLoading: true,
-    }
-    dispatch({type: Types.GET_FLASH_DEAL_DATA, payload: responseData});
-    
-    Axios.get(`get-items?type=deals-of-day&paginate_no=10`)
-        .then(res => {
-            responseData.data = res.data.data.data;
-            responseData.isLoading = false;
-            
-            dispatch({type: Types.GET_FLASH_DEAL_DATA, payload: responseData});
-        })
-        .catch(err => {
-            console.log('deals of the day err => ', err);
-        })
+  const responseData = {
+    data: [],
+    status: true,
+    isLoading: true,
+  }
+  dispatch({ type: Types.GET_FLASH_DEAL_DATA, payload: responseData });
+
+  Axios.get(`get-items?type=deals-of-day&paginate_no=10`)
+    .then(res => {
+      responseData.data = res.data.data.data;
+      responseData.isLoading = false;
+
+      dispatch({ type: Types.GET_FLASH_DEAL_DATA, payload: responseData });
+    })
+    .catch(err => {
+      console.log('deals of the day err => ', err);
+    })
 }
 
 export const getProductModalDetails = (slug: string, isModalVisible: boolean) => (dispatch) => {
   const responseData = {
-      data: [],
-      status: true,
-      isLoading: isModalVisible ? true : false,
-      isOpen: isModalVisible
+    data: [],
+    status: true,
+    isLoading: isModalVisible ? true : false,
+    isOpen: isModalVisible
   }
-  dispatch({type: Types.GET_MODAL_DATA, payload: responseData});
+  dispatch({ type: Types.GET_MODAL_DATA, payload: responseData });
   if (!isModalVisible) {
     return;
   }
-  
+
   Axios.get(`get-item-detail/${slug}`)
-      .then(res => {
-        console.log('ProductModalResponse', res.data.data)
-          responseData.data = res.data.data;
-          responseData.isLoading = false;
-          // responseData.isOpen = true;
-          
-          dispatch({type: Types.GET_MODAL_DATA, payload: responseData});
-      })
-      .catch(err => {
-          console.log('deals of the day err => ', err);
-      })
+    .then(res => {
+      console.log('ProductModalResponse', res.data.data)
+      responseData.data = res.data.data;
+      responseData.isLoading = false;
+      // responseData.isOpen = true;
+
+      dispatch({ type: Types.GET_MODAL_DATA, payload: responseData });
+    })
+    .catch(err => {
+      console.log('deals of the day err => ', err);
+    })
 };
 
 
@@ -127,11 +127,11 @@ export const getProductModalDetails = (slug: string, isModalVisible: boolean) =>
 //         responseData.data = res.data.data;
 //         responseData.isLoading = false;
 //         // responseData.isOpen = true;
-        
+
 //         dispatch({type: Types.GET_MODAL_DATA, payload: responseData});
 //     })
 //     dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
-    
+
 //   } catch (error) {
 //     if(axios.isCancel(error)) {
 //       // console.log('from cancel token error handler')
@@ -143,28 +143,27 @@ export const getProductModalDetails = (slug: string, isModalVisible: boolean) =>
 //   }
 // };
 
-export const searchProductAction = (search: string, isModalVisible: boolean) => (dispatch) => {
+export const searchProductAction = (search: string, isModalVisible: boolean) => (dispatch: Dispatch) => {
   const responseData = {
-      data: [],
-      status: true,
-      isLoading: isModalVisible ? true : false,
-      isSearchModalOpen: isModalVisible
+    data: [],
+    status: true,
+    isLoading: isModalVisible ? true : false,
+    isSearchModalOpen: isModalVisible
   }
-  dispatch({type: Types.GET_SEARCHED_PRODUCT_LIST, payload: responseData});
+  dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: responseData });
   if (!isModalVisible) {
     return;
   }
-  
-  Axios.get(`get-items/search?search=${search}&type=''`)
-      .then(res => {
-        console.log('Response Search Product', res)
-          responseData.data = res.data.data;
-          responseData.isLoading = false;
-          // responseData.isOpen = true;
-          
-          dispatch({type: Types.GET_SEARCHED_PRODUCT_LIST, payload: responseData});
-      })
-      .catch(err => {
-          console.log('Search Error', err);
-      })
+
+  Axios.get(`get-items?search=${search}`)
+    .then(res => {
+      console.log('res.data.data', res.data.data.data);
+      
+      responseData.data = res.data.data.data;
+      responseData.isLoading = false;
+      dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: responseData });
+    })
+    .catch(err => {
+      console.log('Search Error', err);
+    })
 };
