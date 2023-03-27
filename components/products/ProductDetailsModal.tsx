@@ -29,7 +29,7 @@ export default function ProductDetailsModal() {
     <>
       <div
         className={`${isOpen ? "" : "hidden"
-          } fixed inset-0 z-10 h-90 max-h-auto top-4 md:top-[20%]`}
+          } fixed inset-0 z-10 h-90 max-h-auto top-4 md:top-[10%]`}
       >
         <div className="flex items-center justify-center min-h-screen mt-12 px-8 pb-32 text-center sm:mb-12 sm:block sm:p-0 modal">
           <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-md transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full">
