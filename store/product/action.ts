@@ -157,8 +157,6 @@ export const searchProductAction = (search: string, isModalVisible: boolean) => 
 
   Axios.get(`get-items?search=${search}`)
     .then(res => {
-      console.log('res.data.data', res.data.data.data);
-      
       responseData.data = res.data.data.data;
       responseData.isLoading = false;
       dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: responseData });

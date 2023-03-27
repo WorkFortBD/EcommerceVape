@@ -125,26 +125,26 @@ const CategoryWiseProductList = ({
     <>
       <div className="flex flex-col md:flex-row justify-content-between">
         <div>
-          <Sidebar filterParams={filterParams}/>
+          <Sidebar filterParams={filterParams} />
         </div>
         <section className="container mx-auto category_wise_product_list ">
           <div className="flex flex-col md:flex-row justify-content-between my-2 my-md-4">
             <div className="grid grid-cols-5 md:basis-1/2 ml-12 ">
               <div className="category_wise_product_list_heading">
-                <h5 className="category-search-title ml-10 font-bold">
+                <h5 className="category-search-title ml-10 font-bold text-lg">
                   {!isLoading && title && title.replace(/-/g, " ")}
                   {!isLoading && !title && "All products"}
                 </h5>
               </div>
-              <p className="font-bold">
+              <p className="font-light flex justify-center items-center md:ml-10">
                 {!isLoading &&
                   title &&
                   (paginate.total !== null ? paginate.total : "0") +
-                    ` products found in ${title.replace(/-/g, " ")}`}
+                  ` products found in ${title.replace(/-/g, " ")}`}
                 {!isLoading &&
                   !title &&
                   (paginate.total !== null ? paginate.total : "0") +
-                    " products found"}
+                  " products found"}
               </p>
             </div>
             <div className="md:basis-1/2 col-lg-6 col-sm-12 px-1 px-md-3">
@@ -156,8 +156,8 @@ const CategoryWiseProductList = ({
                   <div className="product-filter">
                     <button
                       onClick={sidebarModal}
-                      className="transition ml-20 mt-5 text-sm hover:text-primary-light font-bold border border-solid py-2 px-4 rounded"
-                      // style={{ marginRight: "5px" }}
+                      className="transition ml-20 mt-5 h-12 text-sm hover:text-primary-light font-bold border border-solid py-2 px-4 rounded"
+                    // style={{ marginRight: "5px" }}
                     >
                       Filter
                     </button>
@@ -172,7 +172,7 @@ const CategoryWiseProductList = ({
                     <Form>
                       <Form.Group controlId="exampleFormSelectCustom">
                         <Form.Control
-                          className="block w-full h-8 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                          className="block w-full h-12 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                           defaultValue={checkOptionValue(
                             filterParams,
                             "sort by"
@@ -210,7 +210,7 @@ const CategoryWiseProductList = ({
                     <Form>
                       <Form.Group controlId="exampleFormSelectCustom">
                         <Form.Control
-                          className="block w-20 h-8 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                          className="block w-20 h-12 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                           defaultValue={checkOptionValue(
                             filterParams,
                             "per page"
@@ -230,18 +230,15 @@ const CategoryWiseProductList = ({
               </div>
             </div>
           </div>
-          {/* <div className=" flex flex-row"> */}
-          <div className="flex flex-col">
-            {isLoading && (
-              // <div className={rowClasses}>
-              <ShimmerEffect />
-              // </div>
-            )}
-          </div>
-          {/* </div> */}
-
-          <div className={rowClasses}>
-            {!isLoading && <CategoryWiseMiniProduct columns="col-md-3" />}
+          <div className="mt-6">
+            <div className="flex flex-col">
+              {isLoading && (
+                <ShimmerEffect />
+              )}
+            </div>
+            <div className={rowClasses}>
+              {!isLoading && <CategoryWiseMiniProduct columns="col-md-3" />}
+            </div>
           </div>
         </section>
       </div>

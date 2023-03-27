@@ -2,51 +2,56 @@ import Axios from "axios";
 import * as Types from "./type";
 
 export const getFilteredProducts =
-  (filterParam, source = { token: "" }) =>
-  async (dispatch) => {
-    let filterParamObjClone;
+  (filterParamObj, source = { token: "" }) =>
+    async (dispatch) => {
+      let filterParamObjClone = {
+        ...filterParamObj
+      };
 
-    // if(filterParamObj.type || filterParamObj.search || filterParamObj.seller_id) {
-    //   filterParamObjClone = {
-    //     ...filterParamObj,
-    //     category: filterParamObj.category[filterParamObj.category.length -1],
-    //     brand: filterParamObj.brand.join(","),
-    //   };
-    // } else {
-    //   filterParamObjClone = {
-    //     ...filterParamObj,
-    //     category: filterParamObj.category.length > 1 ? filterParamObj.category.slice(1).join(",") : filterParamObj.category.join(","),
-    //     brand: filterParamObj.brand.join(","),
-    //   };
-    // }
+      // if (filterParamObj !== undefined && filterParamObj !== null) {
+      //   if (filterParamObj.type || filterParamObj.search || filterParamObj.seller_id) {
+      //     filterParamObjClone = {
+      //       ...filterParamObj,
+      //       category: filterParamObj.category[filterParamObj.category.length - 1],
+      //       brand: filterParamObj.brand.join(","),
+      //     };
+      //   } else {
+      //     filterParamObjClone = {
+      //       ...filterParamObj,
+      //       category: filterParamObj.category.length > 1 ? filterParamObj.category.slice(1).join(",") : filterParamObj.category.join(","),
+      //       brand: filterParamObj.brand.join(","),
+      //     };
+      //   }
+      // }
 
-    // const filterParam = Object.keys(filterParamObjClone)
-    //   .filter((item) => filterParamObjClone[item])
-    //   .map((item) =>{
-    //     return `${item}=${encodeURIComponent(filterParamObjClone[item])}`
-    //   })
-    //   .join("&");
 
-    const responseData = {
-      data: [],
-      isLoading: true,
-    };
+      const filterParam = Object.keys(filterParamObjClone)
+        .filter((item) => filterParamObjClone[item])
+        .map((item) => {
+          return `${item}=${encodeURIComponent(filterParamObjClone[item])}`
+        })
+        .join("&");
 
-    try {
-      dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
-      const res = await Axios.get(`get-items?${filterParam}`, {
-        cancelToken: source.token,
-      });
-      responseData.isLoading = false;
-      responseData.data = res.data.data;
-      dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
-    } catch (error) {
-      if (Axios.isCancel(error)) {
-      } else {
-        dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
+      const responseData = {
+        data: [],
+        isLoading: true,
+      };
+
+      try {
+        dispatch({ type: Types.INIT_FILTER_PRODUCT_LIST });
+        const res = await Axios.get(`get-items?${filterParam}`, {
+          cancelToken: source.token,
+        });
+        responseData.isLoading = false;
+        responseData.data = res.data.data;
+        dispatch({ type: Types.GET_FILTER_PRODUCT_LIST, payload: responseData });
+      } catch (error) {
+        if (Axios.isCancel(error)) {
+        } else {
+          dispatch({ type: Types.GET_FILTER_PRODUCT_LIST_FAILED });
+        }
       }
-    }
-  };
+    };
 
 export const getProductsBySellerId = (id) => async (dispatch) => {
   const responseData = {
@@ -170,40 +175,40 @@ export const getBrandsAction = () => async (dispatch) => {
  */
 export const getCategories =
   (parentID = null, limit = null, type = null) =>
-  async (dispatch) => {
-    let response = {
-      loading: true,
-      data: [],
-    };
+    async (dispatch) => {
+      let response = {
+        loading: true,
+        data: [],
+      };
 
-    parentID =
-      typeof parentID === "undefined" || parentID === null ? null : parentID;
-    let url = "";
+      parentID =
+        typeof parentID === "undefined" || parentID === null ? null : parentID;
+      let url = "";
 
-    if (type === "homepage") {
-      url = `frontend-categories?type=${type}&limit=${limit}`;
-    } else {
-      url = `categories`;
-    }
-
-    try {
-      dispatch({ type: Types.GET_CATEGORIES, payload: response });
-      const res = await Axios.get(url);
-      response.loading = false;
       if (type === "homepage") {
-        response.data = res.data.data;
+        url = `frontend-categories?type=${type}&limit=${limit}`;
       } else {
-        response.data =
-          parentID !== "all"
-            ? getCategoryByParentID(res.data.data, parentID, limit)
-            : res.data.data;
+        url = `categories`;
       }
-      dispatch({ type: Types.GET_CATEGORIES, payload: response });
-    } catch (error) {
-      response.loading = false;
-      dispatch({ type: Types.GET_CATEGORIES, payload: response });
-    }
-  };
+
+      try {
+        dispatch({ type: Types.GET_CATEGORIES, payload: response });
+        const res = await Axios.get(url);
+        response.loading = false;
+        if (type === "homepage") {
+          response.data = res.data.data;
+        } else {
+          response.data =
+            parentID !== "all"
+              ? getCategoryByParentID(res.data.data, parentID, limit)
+              : res.data.data;
+        }
+        dispatch({ type: Types.GET_CATEGORIES, payload: response });
+      } catch (error) {
+        response.loading = false;
+        dispatch({ type: Types.GET_CATEGORIES, payload: response });
+      }
+    };
 
 /**
  * Get category by parent ID

@@ -19,6 +19,10 @@ export default function Layout({
         <link rel="icon" href={'/favicon.ico'} />
       </Head>
 
+      <Head>
+        <link rel="canonical" href="https://vapeshopsa.com" />
+      </Head>
+
       <Header />
 
       {/* Main Content */}

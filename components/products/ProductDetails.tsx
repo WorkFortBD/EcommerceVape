@@ -3,37 +3,60 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { Accordion, Progress } from "flowbite-react";
-import ProductList from "./ProductList";
 import ProductDetailImages from "./ProductDetailImages";
 import { formatCurrency } from "../../utils/currency";
 import { IProduct } from "../../interfaces/products";
 import { CartButton } from "../carts/CartButton";
 import DOMPurify from "dompurify";
+import { useRouter } from "next/router";
+import { onClickWhatsAppButton } from "../whatsapp-button";
 
 type Props = {
   product: IProduct;
 };
 
 export default function ProductDetails({ product }: Props) {
+  const router = useRouter();
+  const currentUrl = `${window.location.origin}${router.asPath}`;
+
   return (
     <section className="product-deatails-section">
       <div className="container mx-auto mt-2 p-5">
         <div className="flex justify-between">
           <div className="p-2 text-base inline-block">
             <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/">Home /</Link>
+              <Link href="/">Home &nbsp; / &nbsp;</Link>
             </p>
             <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Shop /</Link>
+              <Link href="/products"> Shop &nbsp; / &nbsp;</Link>
             </p>
             <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Vape /</Link>
+              {typeof product.category !== "undefined" &&
+                product.category !== null && (
+                  <Link href={`/products?category=${encodeURIComponent(product.category.slug)}&name=${encodeURIComponent(product.category.name)}&filter=paginate_no__40`}>
+                    {product?.category.name}
+                  </Link>
+                )}
+              &nbsp; / &nbsp;
             </p>
+
             <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Juices /</Link>
+              {typeof product.sub_category !== "undefined" &&
+                product.sub_category !== null && (
+                  <Link href={`/products?category=${encodeURIComponent(product.sub_category.slug)}&name=${encodeURIComponent(product.sub_category.name)}&filter=paginate_no__40`}>
+                    {product.sub_category.name}
+                  </Link>
+                )}
+              &nbsp;
+              {typeof product.sub_category2 !== "undefined" && product.sub_category2 !== null && <>/ &nbsp;</>}
             </p>
+
             <p className="text-gray-500 hover:text-gray-700 inline">
-              <Link href="/"> Salt Nicotine</Link>
+              {typeof product.sub_category2 !== "undefined" && product.sub_category2 !== null && (
+                <Link href={`/products?category=${encodeURIComponent(product.sub_category2.slug)}&name=${encodeURIComponent(product.sub_category2.name)}&paginate_no__40`}>
+                  {product.sub_category2.name}
+                </Link>
+              )}
             </p>
           </div>
           {/* <div>
@@ -50,14 +73,30 @@ export default function ProductDetails({ product }: Props) {
           <div className="basis-2/4 border shadow-md rounded-3xl mt-5 p-6">
             <div className="text-center">
               <h1 className="text-3xl">{product.name}</h1>
-              <p className="text-primary mt-3 text-2xl">30</p>
-              <p className="text-gray-500 text-xs mt-2">
-                مجموعة السفر قطن + ملقط + مقص صغير
+              <p className="text-primary mt-3 text-2xl">
+                {product.is_offer_enable ? (
+                  <>
+                    <span className="text-primary line-through font-bold">
+                      {formatCurrency(product.default_selling_price)}
+                    </span>
+                    &nbsp;
+                    <span className="text-primary font-bold">
+                      {formatCurrency(product.offer_selling_price)}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-primary font-bold">
+                    {formatCurrency(product.default_selling_price)}
+                  </span>
+                )}
               </p>
+              {/* <p className="text-gray-500 text-xs mt-2">
+                مجموعة السفر قطن + ملقط + مقص صغير
+              </p> */}
               <h3 className="mt-2 text-gray-500">
-                <strong>Brand:</strong> <span>{product.brand && product.brand.name }</span>
+                <strong>Brand:</strong> <span>{product.brand && product.brand.name}</span>
               </h3>
-              <p className="mt-2 text-base border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4">
+              {/* <p className="mt-2 text-base border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4">
                 <strong>Price: </strong>
                 {product.is_offer_enable ? (
                   <>
@@ -80,7 +119,7 @@ export default function ProductDetails({ product }: Props) {
                 </span>{" "}
                 to cart and get free shipping!
                 <Progress progress={45} />
-              </p>
+              </p> */}
               {product.current_stock !== 0 ? (
                 <h3>
                   <span className="inline-block mt-4">
@@ -107,7 +146,7 @@ export default function ProductDetails({ product }: Props) {
                 </h3>
               )}
             </div>
-            <div className="flex justify-between mt-4 p-4 border">
+            {/* <div className="flex justify-between mt-4 p-4 border">
               <a href="" className="text-gray-400 text-xs">
                 or 4 interest-free payments of
                 <b>111.25 SAR.</b>
@@ -116,7 +155,7 @@ export default function ProductDetails({ product }: Props) {
               <a href="" className="bg-green-300 rounded">
                 tabby
               </a>
-            </div>
+            </div> */}
             <div className="text-center mt-6">
               {/* <p className="basis-1/2 font-size">
                 <button
@@ -137,7 +176,7 @@ export default function ProductDetails({ product }: Props) {
               <CartButton product={product} />
             </div>
             <div className="text-center">
-              <button className="bg-primary mt-6 rounded-md p-2 px-8 text-white">
+              <button className="bg-primary mt-6 rounded-md p-2 px-8 text-white" onClick={() => onClickWhatsAppButton(currentUrl)}>
                 Question?
                 <span className="inline-block ml-2">
                   <FontAwesomeIcon icon={faPhone} style={{ width: 14 }} />
@@ -146,29 +185,30 @@ export default function ProductDetails({ product }: Props) {
             </div>
             <span></span>
             <div className="text-center mt-5">
-              <h3>
+              {/* <h3>
                 <span className="inline-block mt-4">
                   <FontAwesomeIcon icon={faCheck} style={{ width: 14 }} />
                 </span>
                 <span> Browse List</span>
-              </h3>
-              <p>
+              </h3> */}
+              {/* <p>
                 <h3 className="bg-red-50 p-2 rounded-md mt-3 text-gray-400">
                   <b>1 </b>People watching this product
                 </h3>
-              </p>
+              </p> */}
               <p>
                 <h3 className="mt-3">
                   <b>SKU:</b> {product.sku_manual}
+                  <br />
                   <span className="ml-5">
-                    <b>Category: </b> {product.category !=null? product.category.name:null}
+                    <b>Category: </b> {product.category != null ? product.category.name : null}
                   </span>
                 </h3>
               </p>
               <h4 className="mt-3 text-gray-500">
-                Tags: 3000 puff, Award winning e-liquid, cool mint, Disposable,
+                {/* Tags: 3000 puff, Award winning e-liquid, cool mint, Disposable,
                 disposable pod system, E JUICE, evo disposable pod system, ICE,
-                mazaj, mint, pomegranate, Raspberry, Sweet, titan, Xtra
+                mazaj, mint, pomegranate, Raspberry, Sweet, titan, Xtra */}
               </h4>
               {/* <b>Share:</b> */}
             </div>
@@ -250,6 +290,6 @@ export default function ProductDetails({ product }: Props) {
           <ProductList />
         </div> */}
       </div>
-    </section>
+    </section >
   );
 }
