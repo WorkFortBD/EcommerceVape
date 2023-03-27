@@ -1,14 +1,16 @@
 import React from "react";
 import Link from "next/link";
+import DOMPurify from "dompurify";
+import { useRouter } from "next/router";
+import { Accordion } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { Accordion, Progress } from "flowbite-react";
+import { faCheck, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
+
 import ProductDetailImages from "./ProductDetailImages";
 import { formatCurrency } from "../../utils/currency";
 import { IProduct } from "../../interfaces/products";
 import { CartButton } from "../carts/CartButton";
-import DOMPurify from "dompurify";
-import { useRouter } from "next/router";
 import { onClickWhatsAppButton } from "../whatsapp-button";
 
 type Props = {
@@ -210,7 +212,19 @@ export default function ProductDetails({ product }: Props) {
                 disposable pod system, E JUICE, evo disposable pod system, ICE,
                 mazaj, mint, pomegranate, Raspberry, Sweet, titan, Xtra */}
               </h4>
-              {/* <b>Share:</b> */}
+              <h4 className="my-2">Share</h4>
+              <a rel="nofollow" href={`https://www.facebook.com/sharer/sharer.php?t=${product.name}&u=${currentUrl}`} target="_blank" className="mr-2">
+                <FontAwesomeIcon icon={faFacebook} width={30} />
+              </a>
+              <a rel="nofollow" href={`https://www.linkedin.com/sharing/share-offsite?url=${currentUrl}`} target="_blank" className="mr-2">
+                <FontAwesomeIcon icon={faLinkedin} width={30} />
+              </a>
+              <a rel="nofollow" href={`https://twitter.com/intent/tweet?text=${product.name}&url=${currentUrl}`} target="_blank" className="mr-2">
+                <FontAwesomeIcon icon={faTwitter} width={30} />
+              </a>
+              <a rel="nofollow" href={`mailto:?body=${currentUrl}&subject=${product.name}`} target="_blank" className="mr-2">
+                <FontAwesomeIcon icon={faEnvelope} width={30} />
+              </a>
             </div>
           </div>
         </div>
