@@ -83,7 +83,6 @@ export default function ProductDetailsModal() {
                 </h3>)
               )
             }
-
           </div>
         </div>
       </div>

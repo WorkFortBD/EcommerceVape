@@ -10,6 +10,7 @@ import ProductDetailImages from "./ProductDetailImages";
 import { formatCurrency } from "../../utils/currency";
 import { IRootReducer } from "../../interfaces/reducers";
 import ProductSpinner from "../master/spinner/ProductSpinner";
+import Link from "next/link";
 
 export default function ProductDetailsModal() {
   const dispatch = useDispatch();
@@ -59,12 +60,12 @@ export default function ProductDetailsModal() {
                     <ProductDetailImages productImage={product.images} />
                     <div className="flex justify-center w-full items-center mt-10">
                       <p>
-                        <a
+                        <Link
                           href={`/products/${product.sku}`}
                           className="transition-all bg-primary py-3 px-5 scale-90 hover:scale-100 rounded-md text-white"
                         >
                           View Details
-                        </a>
+                        </Link>
                       </p>
                     </div>
                   </div>
