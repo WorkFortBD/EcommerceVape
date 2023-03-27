@@ -22,16 +22,11 @@ export default function ProductDetailsModal() {
   };
 
   const [searchText, setSearchText] = useState('');
-  // const searchProduct = (e) => {
-  //   let search = e.target.value;
-  //   debouncedDispatch(search);
-  // };
-
 
   const debouncedDispatch = useCallback(
     debounce(() => {
       dispatch(searchProductAction(searchText, true));
-    }, 1000),
+    }, 500),
     [searchText]
   );
 
@@ -39,8 +34,6 @@ export default function ProductDetailsModal() {
     debouncedDispatch();
     return debouncedDispatch.cancel;
   }, [searchText]);
-
-  console.log(products);
 
   return (
     <>
