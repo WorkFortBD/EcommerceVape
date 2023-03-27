@@ -1,13 +1,34 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import WhatsAppButton, { onClickWhatsAppButton } from "../whatsapp-button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faInstagramSquare,
+  faLinkedin,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { getWebsiteInfoAction, subscribeNewsletter } from "../../store/global/actioin";
+import { IRootReducer } from "../../interfaces/reducers";
 
 export default function Footer(): ReactElement {
   const router = useRouter();
+  const dispatch = useDispatch();
   const currentUrl = `${window.location.origin}${router.asPath}`;
+  const { websiteInfo } = useSelector((state) => state.global);
+  const [email,setEmail]=useState('');
 
+  useEffect(() => {
+    dispatch(getWebsiteInfoAction());
+  }, []);
+
+  const onSubmit=()=>{
+    dispatch(subscribeNewsletter(email))
+  }
   return (
     <div className="footer-section">
       <footer className="mt-20">
@@ -24,20 +45,68 @@ export default function Footer(): ReactElement {
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                 <div>
                   <Link href="">
-                    <img
-                      src="images/logos/logo.png"
-                      alt=""
-                      className="w-36"
-                    />
+                    <img src="images/logos/logo.png" alt="" className="w-36" />
                   </Link>
                   <p className="text-gray-400 text-lg mt-3">
                     Got Questions ? Call us 24/7
                   </p>
                   <p className="text-gray-400 text-lg mt-3">
-                    <a href="tel:+9660558449919">
-                      +966 0558449919
-                    </a>
+                    <a href="tel:+9660558449919">+966 0558449919</a>
                   </p>
+                  <div className="mt-2">
+                    <a
+                      rel="nofollow"
+                      href={websiteInfo?.facebook_link}
+                      target="_blank"
+                      className="mr-2 text-white"
+                    >
+                      <FontAwesomeIcon icon={faFacebook} width={30} />
+                    </a>
+                    <a
+                      rel="nofollow"
+                      href={websiteInfo?.linkedin_link}
+                      target="_blank"
+                      className="mr-2 text-white"
+                    >
+                      <FontAwesomeIcon icon={faLinkedin} width={30} />
+                    </a>
+                    <a
+                      rel="nofollow"
+                      href={websiteInfo?.twitter_link}
+                      target="_blank"
+                      className="mr-2 text-white"
+                    >
+                      <FontAwesomeIcon icon={faTwitter} width={30} />
+                    </a>
+                    <a
+                      rel="nofollow"
+                      href={websiteInfo?.youtube_link}
+                      target="_blank"
+                      className="mr-2 text-white"
+                    >
+                      <FontAwesomeIcon icon={faEnvelope} width={30} />
+                    </a>
+                    <a
+                      rel="nofollow"
+                      href={websiteInfo?.instagram_link}
+                      target="_blank"
+                      className="mr-2 text-white"
+                    >
+                      <FontAwesomeIcon icon={faInstagramSquare} width={30} />
+                    </a>
+                  </div>
+                  <div className="flex mt-4 flex-col md:flex-row">
+                    <input
+                      className="w-3/4 border border-red-300 rounded-lg focus:outline-none focus:border-primary"
+                      type="text"
+                      onChange={(e) => setEmail(e.target.value)}
+                      // onKeyDown={(e) => onKeyDownHandler(e.key)}
+                      placeholder="Search..."
+                    />
+                    <button onClick={onSubmit} className="ml-2 px-5 py-3 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none">
+                      Subscribe
+                    </button>
+                  </div>
                 </div>
                 <div className="flex flex-auto mt-16 text-gray-400">
                   <Link href="" className="mx-2 sm:mx-3 md:mx-4">
@@ -82,17 +151,31 @@ export default function Footer(): ReactElement {
               </div>
               <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 text-gray-400 list-none">
                 <li className="mt-3">
-                  <Link href="/p/[pageBySlug]" as="/p/contact">Contact Us</Link>
+                  <Link href="/p/[pageBySlug]" as="/p/contact">
+                    Contact Us
+                  </Link>
                 </li>
 
                 <li className="mt-3">
-                  <Link href="mailto:contactvapeshopsa@gmail.com">Email Us</Link>
+                  <Link href="mailto:contactvapeshopsa@gmail.com">
+                    Email Us
+                  </Link>
                 </li>
                 <li className="mt-3">
-                  <Link href="/" onClick={() => onClickWhatsAppButton(currentUrl)}>Message Us</Link>
+                  <Link
+                    href="/"
+                    onClick={() => onClickWhatsAppButton(currentUrl)}
+                  >
+                    Message Us
+                  </Link>
                 </li>
                 <li className="mt-3">
-                  <Link href="/" onClick={() => onClickWhatsAppButton(currentUrl)}>Message Us Vai Whatsapp</Link>
+                  <Link
+                    href="/"
+                    onClick={() => onClickWhatsAppButton(currentUrl)}
+                  >
+                    Message Us Vai Whatsapp
+                  </Link>
                 </li>
               </div>
             </div>
@@ -102,10 +185,18 @@ export default function Footer(): ReactElement {
 
             <div className="mt-7 flex justify-center items-center">
               <Link href="">
-                <img src="images/common/footer-brand.png" alt="" className="w-15" />
+                <img
+                  src="images/common/footer-brand.png"
+                  alt=""
+                  className="w-15"
+                />
               </Link>
               <Link href="">
-                <img src="images/common/vat-icon.png" alt="" className="w-10 ml-12" />
+                <img
+                  src="images/common/vat-icon.png"
+                  alt=""
+                  className="w-10 ml-12"
+                />
               </Link>
             </div>
           </div>

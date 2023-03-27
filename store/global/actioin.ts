@@ -3,6 +3,7 @@ import * as types from "./type";
 import axios from 'axios';
 import Store from '../../Store';
 import { getUserDataAction } from "../users/action";
+import { toast } from "react-toastify";
 
 export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
   // const session = await getSession();
@@ -91,4 +92,46 @@ export const getWebsiteInfoAction = () => (dispatch) => {
     }).catch(err => {
       dispatch({ type: types.SET_WEBSITE_INFO_LOADING, payload: false });
     });
+}
+
+export const subscribeNewsletter = (email) => async dispatch => {
+  let response = {
+      loading: true
+  }
+
+  const url = "subscriber/subscribe";
+  const data = {
+      email: email
+  }
+  
+  try {
+      dispatch({type: types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
+      response.loading = false;
+      const res = await Axios.post(url, data);
+      dispatch({type: types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
+      toast.success('Subscribed Successfully',{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+  } catch (err) {
+      // const message = JSON.parse(err.request.response).message;
+      response.loading = false;
+      dispatch({type: types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
+      toast.error('Something Went Wrong',{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+  }
 }
