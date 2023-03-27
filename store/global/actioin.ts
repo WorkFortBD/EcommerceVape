@@ -1,7 +1,7 @@
 // import { getSession } from 'next-auth/client'
 import * as types from "./type";
 import axios from 'axios';
-import Store from '../../Store';
+import Store from '../../store';
 import { getUserDataAction } from "../users/action";
 import { toast } from "react-toastify";
 
@@ -23,42 +23,42 @@ export const isSignedIn = (isSignedIn, userData) => async (dispatch) => {
   }
 };
 
-export const toggleFloatingCart = (status = null) => {
-  if (typeof status === "undefined" || status === null) {
-    return { type: types.TOGGLE_FLOATING_CART };
-  }
+// export const toggleFloatingCart = (status = null) => {
+//   if (typeof status === "undefined" || status === null) {
+//     return { type: types.TOGGLE_FLOATING_CART };
+//   }
 
-  return {
-    type: types.TOGGLE_FLOATING_CART,
-    payload: status,
-  };
-};
+//   return {
+//     type: types.TOGGLE_FLOATING_CART,
+//     payload: status,
+//   };
+// };
 
-export const toggleModal = () => {
-  return {
-    type: types.TOGGLE_MODAL,
-  };
-};
+// export const toggleModal = () => {
+//   return {
+//     type: types.TOGGLE_MODAL,
+//   };
+// };
 
-export const toggleBackdrop = () => {
-  return {
-    type: types.TOGGLE_BACKDROP,
-  };
-};
+// export const toggleBackdrop = () => {
+//   return {
+//     type: types.TOGGLE_BACKDROP,
+//   };
+// };
 
-export const checkIsMobileDevice = (isMobile) => {
-  return {
-    type: types.GET_DEVICE_INFO,
-    payload: isMobile,
-  };
-};
+// export const checkIsMobileDevice = (isMobile) => {
+//   return {
+//     type: types.GET_DEVICE_INFO,
+//     payload: isMobile,
+//   };
+// };
 
-export const setWelcomePopup = (isVisible) => {
-  return {
-    type: types.SET_WELCOME_POPUP,
-    payload: isVisible,
-  };
-};
+// export const setWelcomePopup = (isVisible) => {
+//   return {
+//     type: types.SET_WELCOME_POPUP,
+//     payload: isVisible,
+//   };
+// };
 
 /**
  * Get website column data.
@@ -107,7 +107,8 @@ export const subscribeNewsletter = (email) => async dispatch => {
   try {
       dispatch({type: types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
       response.loading = false;
-      const res = await Axios.post(url, data);
+      const res = await axios.post(url, data);
+      console.log('newsLetterResponse', res)
       dispatch({type: types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
       toast.success('Subscribed Successfully',{
         position: "top-right",
@@ -120,10 +121,10 @@ export const subscribeNewsletter = (email) => async dispatch => {
         theme: "colored",
       });
   } catch (err) {
-      // const message = JSON.parse(err.request.response).message;
+      const message = err.response.data.message;
       response.loading = false;
       dispatch({type: types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
-      toast.error('Something Went Wrong',{
+      toast.error(message,{
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

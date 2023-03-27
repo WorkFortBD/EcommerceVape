@@ -9,7 +9,8 @@ export interface IGlobalReducer {
   isSignedIn: boolean;
   welcomePopup: boolean;
   websiteInfoLoading: boolean;
-//   websiteInfo: IWebsiteData | null
+  isLoading:boolean;
+  //   websiteInfo: IWebsiteData | null
 }
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   welcomePopup: false,
   websiteInfoLoading: true,
   websiteInfo: null,
+  isloading:false
 };
 
 const GlobalReducer = (state = initialState, { type, payload }) => {
@@ -41,6 +43,12 @@ const GlobalReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         websiteInfo: payload,
+      };
+
+    case types.POST_SUBSCRIBE_NEWSLETTER:
+      return {
+        ...state,
+        isLoading: payload.loading,
       };
 
     default:

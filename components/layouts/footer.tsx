@@ -12,23 +12,28 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getWebsiteInfoAction, subscribeNewsletter } from "../../store/global/actioin";
+import {
+  getWebsiteInfoAction,
+  subscribeNewsletter,
+} from "../../store/global/actioin";
 import { IRootReducer } from "../../interfaces/reducers";
+import Spinner from "../master/spinner/Spinner";
 
 export default function Footer(): ReactElement {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentUrl = `${window.location.origin}${router.asPath}`;
-  const { websiteInfo } = useSelector((state) => state.global);
-  const [email,setEmail]=useState('');
+  const { websiteInfo, isLoading } = useSelector((state) => state.global);
+  console.log("isLoading", isLoading);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     dispatch(getWebsiteInfoAction());
   }, []);
 
-  const onSubmit=()=>{
-    dispatch(subscribeNewsletter(email))
-  }
+  const onSubmit = () => {
+    dispatch(subscribeNewsletter(email));
+  };
   return (
     <div className="footer-section">
       <footer className="mt-20">
@@ -97,15 +102,28 @@ export default function Footer(): ReactElement {
                   </div>
                   <div className="flex mt-4 flex-col md:flex-row">
                     <input
-                      className="w-3/4 border border-red-300 rounded-lg focus:outline-none focus:border-primary"
+                      className="border border-red-300 rounded-lg focus:outline-none focus:border-primary"
                       type="text"
                       onChange={(e) => setEmail(e.target.value)}
                       // onKeyDown={(e) => onKeyDownHandler(e.key)}
-                      placeholder="Search..."
+                      placeholder="Subscribe for newsletter"
                     />
-                    <button onClick={onSubmit} className="ml-2 px-5 py-3 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none">
-                      Subscribe
-                    </button>
+                    {isLoading == true ? (
+                      <button
+                        onClick={onSubmit}
+                        className="ml-2 px-5 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
+                      >
+                        <Spinner />
+                        Subscribing...
+                      </button>
+                    ) : (
+                      <button
+                        onClick={onSubmit}
+                        className="ml-2 px-5 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
+                      >
+                        Subscribe
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-auto mt-16 text-gray-400">
