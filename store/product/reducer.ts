@@ -47,7 +47,6 @@ const ProductReducer = (state = initialState, action: IAction) => {
         // paginate: action.payload.paginate
       };
     case Types.GET_SEARCHED_PRODUCT_LIST:
-      console.log("action.payload", action.payload);
       return {
         ...state,
         productSearchData: action.payload.data,
