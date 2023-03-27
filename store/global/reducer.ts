@@ -25,47 +25,10 @@ const initialState = {
 
 const GlobalReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case types.TOGGLE_FLOATING_CART:
-      const isModalVisible =
-        typeof payload !== "undefined" && typeof payload === "boolean"
-          ? payload
-          : !state.floatingCartVisible;
-
-      return {
-        ...state,
-        backdrop: !state.backdrop,
-        floatingCartVisible: isModalVisible,
-      };
-
-    case types.TOGGLE_BACKDROP:
-      return {
-        ...state,
-        backdrop: !state.backdrop,
-      };
-
-    case types.TOGGLE_MODAL:
-      return {
-        ...state,
-        isModalActive: !state.isModalActive,
-        floatingCartVisible: false,
-      };
-
-    case types.GET_DEVICE_INFO:
-      return {
-        ...state,
-        isMobile: payload,
-      };
-
     case types.IS_SIGNED_IN:
       return {
         ...state,
         isSignedIn: payload,
-      };
-
-    case types.SET_WELCOME_POPUP:
-      return {
-        ...state,
-        welcomePopup: payload,
       };
 
     case types.SET_WEBSITE_INFO_LOADING:
