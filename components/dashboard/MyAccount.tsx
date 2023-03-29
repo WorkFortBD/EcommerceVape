@@ -18,8 +18,6 @@ import { isSignedOut } from '../../store/auth/action';
 export default function MyAccount() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
-  // console.log('userData', userData)
-  // const {first_name,last_name,email}=userData;
   useEffect(() => {
     dispatch(getUserDataAction());
   }, []);

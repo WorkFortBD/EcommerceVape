@@ -108,7 +108,6 @@ export const subscribeNewsletter = (email) => async dispatch => {
       dispatch({type: types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
       response.loading = false;
       const res = await axios.post(url, data);
-      console.log('newsLetterResponse', res)
       dispatch({type: types.POST_SUBSCRIBE_NEWSLETTER, payload: response})
       toast.success('Subscribed Successfully',{
         position: "top-right",

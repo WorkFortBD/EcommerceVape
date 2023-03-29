@@ -1,5 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import Axios from "axios";
+import { toast } from "react-toastify";
 import * as Types from "./type";
 
 /**
@@ -74,7 +75,6 @@ export const getDealFlashListAction = () => (dispatch) => {
       dispatch({ type: Types.GET_FLASH_DEAL_DATA, payload: responseData });
     })
     .catch(err => {
-      console.log('deals of the day err => ', err);
     })
 }
 
@@ -92,7 +92,6 @@ export const getProductModalDetails = (slug: string, isModalVisible: boolean) =>
 
   Axios.get(`get-item-detail/${slug}`)
     .then(res => {
-      console.log('ProductModalResponse', res.data.data)
       responseData.data = res.data.data;
       responseData.isLoading = false;
       // responseData.isOpen = true;
@@ -100,48 +99,19 @@ export const getProductModalDetails = (slug: string, isModalVisible: boolean) =>
       dispatch({ type: Types.GET_MODAL_DATA, payload: responseData });
     })
     .catch(err => {
-      console.log('deals of the day err => ', err);
+      toast.error('Soemthing Went Wrong',{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     })
 };
 
-
-// export const searchProductAction = (searchData:string,isModalVisible: boolean) => async (dispatch) => {
-//   // const {search} = searchData;
-//   const responseData = {
-//     data:[],
-//     status: true,
-//     isLoading: isModalVisible ? true : false,
-//     isOpen: isModalVisible
-// }
-
-//   const url = `get-items/search?search=${searchData}&type=''`;
-
-//   if(!searchData) return;
-
-//   try {
-//     dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
-//     // const res = await axios.get(url, {cancelToken: source.token});
-//     Axios.get(`get-item-detail/${slug}`)
-//     .then(res => {
-//       console.log('ProductModalResponse', res.data.data)
-//         responseData.data = res.data.data;
-//         responseData.isLoading = false;
-//         // responseData.isOpen = true;
-
-//         dispatch({type: Types.GET_MODAL_DATA, payload: responseData});
-//     })
-//     dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
-
-//   } catch (error) {
-//     if(axios.isCancel(error)) {
-//       // console.log('from cancel token error handler')
-//     } else {
-//       response.loading = false;
-//       dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: response });
-//       // console.log('from search catch handler => ', error)
-//     }
-//   }
-// };
 
 export const searchProductAction = (search: string, isModalVisible: boolean) => (dispatch: Dispatch) => {
   const responseData = {

@@ -24,7 +24,6 @@ export default function Footer(): ReactElement {
   const dispatch = useDispatch();
   const currentUrl = `${window.location.origin}${router.asPath}`;
   const { websiteInfo, isLoading } = useSelector((state) => state.global);
-  console.log("isLoading", isLoading);
   const [email, setEmail] = useState("");
 
   useEffect(() => {
