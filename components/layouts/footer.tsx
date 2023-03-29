@@ -111,7 +111,7 @@ export default function Footer(): ReactElement {
                     {isLoading == true ? (
                       <button
                         onClick={onSubmit}
-                        className="ml-2 px-5 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
+                        className="ml-2 px-2 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
                       >
                         <Spinner />
                         Subscribing...
