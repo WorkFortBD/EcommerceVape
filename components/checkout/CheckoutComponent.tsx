@@ -100,8 +100,6 @@ export default function CheckoutComponent({ }: Props) {
     },
   });
 
-  console.log('formik.values', formik.values);
-
   return (
     <section className="cart-section">
       <div className="container mx-auto mt-6">

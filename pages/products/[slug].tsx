@@ -4,7 +4,6 @@ import Layout from "../../components/layouts/Layout";
 import ProductDetails from "../../components/products/ProductDetails";
 
 const Product: NextPage = ({ product }) => {
-  console.log('product', product.meta_title)
   return (
     <Layout title={product.meta_title??'Product Details'}>
       {product.meta_title &&(

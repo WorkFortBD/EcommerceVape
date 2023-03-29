@@ -64,7 +64,6 @@ export default function SignIn(history, props) {
         setStepOneFormData(formData);
 
         const data = await Axios.post(`auth/register`, formData);
-        console.log('otpResponse', data);
 
         if (data.data.status) {
           toast.success("OTP is sent to your email address",{theme: "colored",});

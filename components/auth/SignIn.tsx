@@ -46,10 +46,7 @@ export default function SignIn(history, props) {
     }
   }, [status, message, dispatch, history]);
 
-  // const handleSocialLogin = () => {
-  //   console.log('first')
-  //   dispatch(socialLogin());
-  // };
+
   const loginPost = async (values) => {
     dispatch(postLoginData(values));
   };
@@ -64,13 +61,6 @@ export default function SignIn(history, props) {
     
   };
 
-  // const handleFailure = (error) => {
-  //   setError(error.message);
-  // };
-
-  // const responseGoogle = (response) => {
-  //   console.log('response',response);
-  // };
   const errorMessage = (error) => {
     console.log('error',error);
   };

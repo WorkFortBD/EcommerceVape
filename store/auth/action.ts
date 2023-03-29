@@ -27,7 +27,6 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
     };
     await Axios.post(`auth/login`, postData, {})
       .then((res) => {
-        console.log('res', res)
         const { data, message, status } = res.data;
         const { user, access_token } = data;
 
@@ -93,7 +92,6 @@ export const postLoginData = (values: ILogin) => async (dispatch) => {
   try {
     await Axios.post(`auth/login/google`, postData, {})
       .then((res) => {
-        console.log('googleloginresponse', res)
         const { data, message, status,access_token } = res.data;
         // const { user, access_token } = data;
         loginResponse.data = data;
