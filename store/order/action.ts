@@ -401,6 +401,8 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
 
   Axios.post('sales', orderPostedData)
       .then((res) => {
+        // console.log('res', res);
+        // return
           if (res.data.status) {
               response.status    = res.data.status;
               response.orderData = res.data.data;
