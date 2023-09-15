@@ -50,28 +50,24 @@ const FilterOrderList = () => {
         My Orders
       </h1>
       <div className="p-5 relative overflow-x-auto shadow-md sm:rounded-lg">
-        {/* <table className="w-full text-sm shadow-md text-left text-gray-500 dark:text-gray-400">
-          <tbody> */}
-            {isLoading && (
-                <TableShimmer count={4} />
-            )}
-            {!isLoading && orderList.length === 0 && (
-              <div className="shadow-sm mt-3">
-                <WarningMessage text="Sorry! Order list not found..." />
-              </div>
-            )}
+        {isLoading && (
+          <TableShimmer count={4} />
+        )}
+        {!isLoading && orderList.length === 0 && (
+          <div className="shadow-sm mt-3">
+            <WarningMessage text="Sorry! Order list not found..." />
+          </div>
+        )}
 
-            {!isLoading &&
-              orderList.length > 0 &&
-              orderList.map((item, index) => (
-                <SingleOrder
-                  item={item}
-                  isManageable={true}
-                  key={index + 1}
-                />
-              ))}
-          {/* </tbody>
-        </table> */}
+        {!isLoading &&
+          orderList.length > 0 &&
+          orderList.map((item, index) => (
+            <SingleOrder
+              item={item}
+              isManageable={true}
+              key={index + 1}
+            />
+          ))}
       </div>
     </>
   );
