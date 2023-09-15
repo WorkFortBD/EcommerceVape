@@ -8,23 +8,24 @@ const OrderStatus = ({ status }) => {
     switch (status) {
       case "cancelled":
       case "rejected":
-        badgeClass += "badge-danger";
+        badgeClass += "inline-block px-2 py-1 text-xs font-semibold leading-tight text-white bg-red-500 rounded-full";
         break;
 
       case "due":
       case "pending":
       case "refunded":
-        badgeClass += "badge-warning";
+      case "not_delivered":
+        badgeClass += "inline-block px-2 py-1 text-xs font-semibold leading-tight text-white bg-yellow-500 rounded-full";
         break;
 
       case "processing":
-        badgeClass += "badge-primary";
+        badgeClass += "inline-block px-2 py-1 text-xs font-semibold leading-tight text-white bg-blue-500 rounded-full";
         break;
 
       case "completed":
       case "paid":
       case "delivered":
-        badgeClass += "badge-success";
+        badgeClass += "inline-block px-2 py-1 text-xs font-semibold leading-tight text-white bg-green-500 rounded-full";
         break;
 
       default:

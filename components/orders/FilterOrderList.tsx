@@ -22,10 +22,10 @@ const FilterOrderList = () => {
   return (
     <>
       <div className="card shadow-sm p-2 mt-3">
-        <div className="d-flex align-items-center">
-          <h6>Orders</h6>
-          <h6>Show :</h6>
-          <div className="filter_selection ml-2">
+        <div className="flex flex-col md:flex-row items-center">
+          <h6 className="mb-2 md:mb-0">Orders</h6>
+          <h6 className="mr-2 md:mr-4">Show :</h6>
+          <div className="filter_selection w-full md:w-1/2"> {/* Adjust width here */}
             <Select
               className="basic-single"
               placeholder="Last 5 Orders"
@@ -69,6 +69,7 @@ const FilterOrderList = () => {
             />
           ))}
       </div>
+
     </>
   );
 };
