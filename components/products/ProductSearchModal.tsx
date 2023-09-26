@@ -10,13 +10,11 @@ import { IProduct } from "../../interfaces/products";
 
 export default function ProductDetailsModal() {
   const dispatch = useDispatch();
-
   const {
     productSearchData: products,
     isSearchModalOpen,
     productsLoading,
   } = useSelector((state: IRootReducer) => state.products);
-
   const closeProductDetailModal = () => {
     dispatch(searchProductAction("product?.sku", false));
   };

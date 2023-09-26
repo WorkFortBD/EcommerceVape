@@ -411,6 +411,10 @@ export default function CheckoutComponent({ }: Props) {
                       {cart.productName}
                       <br />
                       {cart.sku}
+                      <br />
+                      <p className="text-primary">
+                        {cart.attribute && cart.attribute?.value + " " + cart.attribute?.code}
+                      </p>
                     </p>
                     {cart.isOffer ? (
                       <p className="text-primary">

@@ -1,7 +1,7 @@
-import React from "react";
+import React,{ useState } from "react";
 import Link from "next/link";
 import DOMPurify from "dompurify";
-import { useRouter } from "next/router";
+import { useRouter} from "next/router";
 import { Accordion } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +20,25 @@ type Props = {
 export default function ProductDetails({ product }: Props) {
   const router = useRouter();
   const currentUrl = `${window.location.origin}${router.asPath}`;
+  const attributes = product.item_attributes_by_value[0]?.values.attribute_values_data;
+  const [clickedId, setClickedId] = useState(null);
 
+  const toggleClick = (attribute:object) => {
+    if (attribute.id === clickedId) {
+      setClickedId(null);
+    } else {
+      localStorage.setItem('attribute', JSON.stringify(attribute));
+      setClickedId(attribute.id);
+    }
+  };
+
+  // const attributeSelect = (value, code, id) => {
+  //   return (
+  //     <span className="bg-gray-500 text-white px-2 py-1 rounded-lg cursor-pointer">
+  //       {value + " " + code}
+  //     </span>
+  //   );
+  // }
   return (
     <section className="product-deatails-section">
       <div className="container mx-auto mt-2 p-5">
@@ -98,7 +116,7 @@ export default function ProductDetails({ product }: Props) {
               <h3 className="mt-2 text-gray-500">
                 <strong>Brand:</strong> <span>{product.brand && product.brand.name}</span>
               </h3>
-              {/* <p className="mt-2 text-base border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4">
+              <p className="mt-2 text-base border-dashed border-2 border-slate-400 text-slate-500 py-5 px-4">
                 <strong>Price: </strong>
                 {product.is_offer_enable ? (
                   <>
@@ -120,8 +138,8 @@ export default function ProductDetails({ product }: Props) {
                   {formatCurrency(54)}
                 </span>{" "}
                 to cart and get free shipping!
-                <Progress progress={45} />
-              </p> */}
+                {/* <Progress progress={45} /> */}
+              </p>
               {product.current_stock !== 0 ? (
                 <h3>
                   <span className="inline-block mt-4">
@@ -175,9 +193,33 @@ export default function ProductDetails({ product }: Props) {
                   +
                 </button>
               </p> */}
-              <CartButton product={product} />
+
+
+              <div className="p-4">
+                {attributes &&
+                  attributes.map((attribute:any, index:number) => (
+                    <>
+                      <span
+                      key={index} 
+                      onClick={() => toggleClick(attribute)} 
+                      className={`px-2 py-1 rounded-lg cursor-pointer ${
+                        clickedId === attribute.id
+                          ? 'bg-gray-500 text-white border-black transform scale-105'
+                          : 'bg-primary text-white'
+                      }`}>
+                        {attribute.value + " " + attribute.code}
+                      </span>
+                      &nbsp;&nbsp;&nbsp;
+                    </>
+                  ))}
+              </div>
+
+
+
             </div>
             <div className="text-center">
+              <CartButton product={product} />
+              &nbsp;&nbsp;&nbsp;&nbsp;
               <button className="bg-primary mt-6 rounded-md p-2 px-8 text-white" onClick={() => onClickWhatsAppButton(currentUrl)}>
                 Question?
                 <span className="inline-block ml-2">

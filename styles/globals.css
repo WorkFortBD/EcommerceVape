@@ -61,3 +61,7 @@
   background-repeat: no-repeat;
   animation: shimmer 1s linear infinite;
 }
+
+.selectable-text {
+  user-select: text;
+}

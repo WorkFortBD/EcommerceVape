@@ -63,6 +63,9 @@ export default function CartItem({ cart }: Props): ReactElement {
             +
           </button>
         </p>
+        <p className="basis-1/4 font-size text-primary">
+          {cart.attribute ?cart.attribute.value + ""+ cart.attribute.code: 'N/A'}
+        </p>
         <p className="basis-1/4 text-primary">
           {formatCurrency((cart.isOffer ? cart.offerPrice : cart.price) * cart.quantity)}
         </p>

@@ -346,6 +346,7 @@ export const createOrder = (customerInfo, carts, totalQuantity, shippingCost, to
           quantity          : parseInt(item.quantity),
           unit_price        : (item.offerPrice > 0 && item.isOffer) ? item.offerPrice : item.price,
           unit_price_inc_tax: (item.offerPrice > 0 && item.isOffer) ? item.offerPrice : item.price,
+          attribute_value_id: (item.attribute != undefined) ? item.attribute?.id : null,
           discount_amount   : 0,
           item_tax          : 0
       }

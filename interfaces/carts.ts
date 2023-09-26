@@ -14,6 +14,7 @@ export interface ICart {
     productName: string;
     sellerID: number;
     sku: string;
+    attribute:ICartAttribute;
 }
 
 export interface ICartReducer {
@@ -21,4 +22,10 @@ export interface ICartReducer {
     totalQuantity: number,
     totalPrice: number,
     checkedAllCarts: boolean,
+}
+
+export interface ICartAttribute {
+    value: number,
+    code: string,
+    id: number
 }
