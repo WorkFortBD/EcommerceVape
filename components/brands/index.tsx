@@ -70,9 +70,9 @@ export default function BrandList() {
                 swipeable
             >
                 {
-                    brands.map((brand, index: number) => (
+                    brands?.map((brand, index: number) => (
                         <div key={index}>
-                            <img src={`${process.env.NEXT_PUBLIC_URL}images/brands/${brand.image}`} className="w-32 h-20" />
+                            {brand.image=='undefined'?<img src={`${process.env.NEXT_PUBLIC_URL}images/dummy.png`} className="w-32 h-20" />:<img src={`${process.env.NEXT_PUBLIC_URL}images/brands/${brand?.image}`} className="w-32 h-20" />}
                         </div>
                     ))
                 }

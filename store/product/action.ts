@@ -129,6 +129,7 @@ export const searchProductAction = (search: string, isModalVisible: boolean) => 
     .then(res => {
       responseData.data = res.data.data.data;
       responseData.isLoading = false;
+      responseData.isSearchModalOpen = isModalVisible;
       dispatch({ type: Types.GET_SEARCHED_PRODUCT_LIST, payload: responseData });
     })
     .catch(err => {

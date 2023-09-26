@@ -32,7 +32,8 @@ export const getCartsAction = () => async (dispatch) => {
  */
 export const addToCartAction = (product, args = {}) => async (dispatch) => {
     const carts = getCartData();
-
+    const attribute = getAttributeData();
+    console.log('attribute', attribute)
     const quantity = typeof args['quantity'] !== 'undefined' ? args['quantity'] : 1;
 
     // Check first if product is already added in the cart, then just update the quantity
@@ -52,6 +53,7 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
             productName: product.name,
             quantity: quantity,
             isOffer: product.is_offer_enable,
+            attribute:attribute,
             price: product.default_selling_price,
             offerPrice: product.offer_selling_price,
             productImage: `${process.env.NEXT_PUBLIC_URL}images/products/${product.featured_image}`,
@@ -67,6 +69,7 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
     }
 
     localStorage.setItem('carts', JSON.stringify(carts));
+    localStorage.removeItem('attribute');
     toast.success('Product has been added to cart');
     dispatch(getCartsAction());
 };
@@ -208,6 +211,23 @@ const getCartData = () => {
     }
 
     return [];
+}
+
+/**
+ * Get Formatted carts data
+ * 
+ * @since 1.0.0
+ * 
+ * @returns array Formatted Carts data as array
+ */
+const getAttributeData = () => {
+    let attribute = localStorage.getItem("attribute") || '';
+
+    if (typeof attribute !== "undefined" && attribute !== null && attribute !== '') {
+        attribute = JSON.parse(attribute) || {};
+    }
+
+    return attribute;
 }
 
 /**
