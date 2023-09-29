@@ -7,7 +7,7 @@ const Cart: NextPage = () => {
   return (
     <Layout title={"Cart"}>
       <Head>
-        <link rel="canonical" href="https://vapeshopsa.com" />
+        <link rel="canonical" href="https://vapestoreksa.com" />
       </Head>
       <CartComponents />
     </Layout>
