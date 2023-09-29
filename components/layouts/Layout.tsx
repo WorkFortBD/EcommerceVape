@@ -20,7 +20,7 @@ export default function Layout({
       </Head>
 
       <Head>
-        <link rel="canonical" href="https://vapeshopsa.com" />
+        <link rel="canonical" href="https://vapestoreksa.com" />
       </Head>
 
       <Header />

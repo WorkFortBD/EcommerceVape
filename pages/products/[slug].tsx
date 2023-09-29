@@ -10,7 +10,7 @@ const Product: NextPage = ({ product }) => {
       <Head>
       <meta property="og:title" content={product.meta_title} key="title" />
       <meta property="og:description" content={product.meta_description} key="description" />
-      <link rel="canonical" href="https://vapeshopsa.com" />
+      <link rel="canonical" href="https://vapestoreksa.com" />
       </Head>
       )
       }

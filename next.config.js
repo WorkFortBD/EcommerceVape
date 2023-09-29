@@ -2,7 +2,7 @@
 module.exports = {
 
   images: {
-    domains: ['vapeshopsa.netlify.app', 'api.vapeshopsa.com'],
+    domains: ['vapeshopsa.netlify.app', 'api.vapestoreksa.com'],
   },
   webpack5: true,
   webpack(config) {
