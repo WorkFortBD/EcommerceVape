@@ -11,12 +11,13 @@ export default function HomeStaticBanner({
     async function fetchData() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}page/${pageSlug}`);
       const responseData = await response.json();
-      {responseData.data && 
+      {
+        responseData.data &&
         setBanner(
           `${process.env.NEXT_PUBLIC_URL}/images/pages/${responseData.data.image}`
         );
       }
-        
+
     }
 
     fetchData();
@@ -25,7 +26,7 @@ export default function HomeStaticBanner({
   return (
     <section className="homepage-section-banner">
       <div className="container mx-auto">
-        <img src={banner} className="w-full max-h-[150px]" />
+        <img src={banner} className="w-full max-h-[150px] md:max-h-[300px] lg:max-h-[400px]" alt="Banner Image" />
       </div>
     </section>
   );
