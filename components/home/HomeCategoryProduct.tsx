@@ -68,7 +68,7 @@ export default function HomeCategoryProduct({
                     </div>
                     <hr />
                     <div className="flex flex-col md:flex-row px-3">
-                        <div className="w-full md:w-1/6 pr-4 mb-4 md:mb-0">
+                        <div className="w-full md:w-1/2 lg:w-1/6 pr-4 mb-4 md:mb-0">
                             <img
                                 onClick={() => clickCategoryPage(category)}
                                 src={`${process.env.NEXT_PUBLIC_URL}images/categories/${category.image}`}
@@ -76,7 +76,7 @@ export default function HomeCategoryProduct({
                                 className="cursor-pointer w-full"
                             />
                         </div>
-                        <div className="w-full md:w-5/6">
+                        <div className="w-full md:w-1/2 lg:w-5/6">
                             <div className="flex flex-wrap pl-4">
                                 {products.map((product, index) => (
                                     <ProductShortDetail product={product} key={index} />
@@ -85,6 +85,7 @@ export default function HomeCategoryProduct({
                         </div>
                     </div>
                 </div>
+
             )}
         </>
 

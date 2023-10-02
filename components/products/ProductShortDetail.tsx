@@ -31,7 +31,7 @@ export default function ProductShortDetail({ product }: IProductShortDetail): Re
   }
 
   return (
-    <div className="relative group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[170px] md:max-w-[260px]">
+    <div className="relative group mb-6 border border-gray-100 shadow-sm rounded-lg mr-3 transition hover:shadow-md group-hover:opacity-75 max-w-[145px] lg:max-w-[260px]">
       {isOpen && <ProductDetailsModal />}
 
       <div className="">
