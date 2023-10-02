@@ -51,18 +51,19 @@ export default function CartComponents({ }: Props) {
             <div className="basis-8/12 md:w-8/12 mt-2 p-6">
               <div className="flex mt-2 uppercase py-2 bg-primary text-white">
                 <div className="basis-1/2">
-                  <p className="text-center">Product</p>
+                  <p className="text-center text-sm md:text-base lg:text-lg">Product</p>
                 </div>
                 <div className="basis-1/2">
                   <div className="flex">
-                    <p className="basis-1/4 mr-2">Price</p>
-                    <p className="basis-1/4">Quantity</p>
-                    <p className="basis-1/4">Attribute</p>
-                    <p className="basis-1/4">Subtotal</p>
-                    <p className="basis-1/4">Action</p>
+                    <p className="basis-1/4 mr-2 text-sm md:text-base lg:text-lg">Price</p>
+                    <p className="basis-1/4 mr-2 text-sm md:text-base lg:text-lg">Quantity</p>
+                    <p className="basis-1/4 mr-2 text-sm md:text-base lg:text-lg">Attribute</p>
+                    <p className="basis-1/4 mr-2 text-sm md:text-base lg:text-lg">Subtotal</p>
+                    <p className="basis-1/4 text-sm md:text-base lg:text-lg">Action</p>
                   </div>
                 </div>
               </div>
+
 
               {carts.length > 0 && (
                 <>
