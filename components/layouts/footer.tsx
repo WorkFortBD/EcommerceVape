@@ -46,13 +46,13 @@ export default function Footer(): ReactElement {
         <div className="bg-black px-5 py-16">
           <div className="container mx-auto">
             <div className="flex flex-wrap flex-col sm:flex-row justify-center items-center">
-              <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
                 <div>
                   <Link href="">
                     <img src="images/logos/logo.png" alt="" className="w-36" />
                   </Link>
                   <p className="text-gray-400 text-lg mt-3">
-                    Got Questions ? Call us 24/7
+                    Got Questions? Call us 24/7
                   </p>
                   <p className="text-gray-400 text-lg mt-3">
                     <a href="tel:+9660558449919">+966 0558449919</a>
@@ -99,31 +99,30 @@ export default function Footer(): ReactElement {
                       <FontAwesomeIcon icon={faInstagramSquare} width={30} />
                     </a>
                   </div>
-                  <div className="flex mt-4 flex-col md:flex-row">
+                  <div className="flex flex-col md:flex-row items-center">
                     <input
-                      className="border border-red-300 rounded-lg focus:outline-none focus:border-primary"
+                      className="w-full md:w-auto border border-red-300 rounded-lg focus:outline-none focus:border-primary px-3 py-2 mb-2 md:mb-0 md:mr-2"
                       type="text"
                       onChange={(e) => setEmail(e.target.value)}
-                      // onKeyDown={(e) => onKeyDownHandler(e.key)}
                       placeholder="Subscribe for newsletter"
                     />
-                    {isLoading == true ? (
+                    {isLoading ? (
                       <button
                         onClick={onSubmit}
-                        className="ml-2 px-2 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
+                        className="w-full md:w-auto px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
                       >
-                        <Spinner />
-                        Subscribing...
+                        {isLoading ? <Spinner /> : "Subscribing..."}
                       </button>
                     ) : (
                       <button
                         onClick={onSubmit}
-                        className="ml-2 px-5 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
+                        className="w-full md:w-auto px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none"
                       >
                         Subscribe
                       </button>
                     )}
                   </div>
+
                 </div>
                 <div className="flex flex-auto mt-16 text-gray-400">
                   <Link href="" className="mx-2 sm:mx-3 md:mx-4">
@@ -140,7 +139,7 @@ export default function Footer(): ReactElement {
                   </Link>
                 </div>
               </div>
-              <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
                 <Link href="">
                   <img
                     src="images/common/payments.svg"
@@ -149,7 +148,7 @@ export default function Footer(): ReactElement {
                   />
                 </Link>
               </div>
-              <div className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 text-gray-400 list-none">
+              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 text-gray-400 list-none">
                 {/* <li className="mt-3">
                   <Link href="/">Saudi Vape Shop Blog</Link>
                 </li> */}
@@ -195,11 +194,26 @@ export default function Footer(): ReactElement {
                   </Link>
                 </li>
               </div>
+              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 text-gray-400 list-none">
+                <Link href="">
+                  <img
+                    src="images/common/footer-brand.png"
+                    alt=""
+                    className="w-15"
+                  />
+                </Link>
+                <Link href="">
+                  <img
+                    src="images/common/vat-icon.png"
+                    alt=""
+                    className="w-10 ml-12"
+                  />
+                </Link>
+              </div>
             </div>
-            <div className="mt-16 text-gray-400 text-center  text-xs">
+            <div className="mt-16 text-gray-400 text-center text-xs">
               © 2023 Saudi Vape Shop
             </div>
-
             <div className="mt-7 flex justify-center items-center">
               <Link href="">
                 <img
@@ -218,9 +232,9 @@ export default function Footer(): ReactElement {
             </div>
           </div>
         </div>
-
         <WhatsAppButton />
       </footer>
     </div>
+
   );
 }

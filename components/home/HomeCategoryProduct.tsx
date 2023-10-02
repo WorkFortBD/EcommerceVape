@@ -54,7 +54,7 @@ export default function HomeCategoryProduct({
                             {category.name}
                         </h2>
                         <div className="md:ml-2 mt-2 md:mt-0 flex flex-wrap">
-                            {category.childs.map((child, index: number) => (
+                            {category.childs?.map((child, index: number) => (
                                 <Link
                                     onClick={() => clickCategoryPage(child)}
                                     href="#"
@@ -71,7 +71,7 @@ export default function HomeCategoryProduct({
                         <div className="w-full md:w-1/2 lg:w-1/6 pr-4 mb-4 md:mb-0">
                             <img
                                 onClick={() => clickCategoryPage(category)}
-                                src={`${process.env.NEXT_PUBLIC_URL}images/categories/${category.image}`}
+                                src={`${process.env.NEXT_PUBLIC_URL}images/categories/${category?.image}`}
                                 alt={category.name}
                                 className="cursor-pointer w-full"
                             />
