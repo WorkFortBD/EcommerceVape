@@ -25,15 +25,16 @@ const Home: NextPage = () => {
   }, []);
   return (
     <Layout title={content.name}>
-      <Slider />
       <Head>
         <link rel="canonical" href="https://vapestoreksa.com" />
       </Head>
+      <Slider />
       <CategoryComponent />
       <FlashDeals />
       <HomeStaticBanner pageSlug="homepage-banner" />
       <HomeCategoryProduct categorySlug='vape' />
       <HomeCategoryProduct categorySlug='e-juice' />
+      <HomeCategoryProduct categorySlug='accessories' />
       <HomeProductFilter />
       <BrandList />
 
