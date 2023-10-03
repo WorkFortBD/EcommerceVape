@@ -52,11 +52,11 @@ export const CategoryComponent = ({ }: Props) => {
             <div className="w-full md:w-1/2 lg:w-1/3 px-2" key={index}>
               <div className="flex max-w-sm mx-auto">
                 {/* Image */}
-                {index % 2 !== 0 && (
+                {/* {index % 2 !== 0 && ( */}
                   <div className="relative overflow-hidden w-1/2">
                     {getCategoryImage(category, index)}
                   </div>
-                )}
+                {/* )} */}
 
                 {/* Category Info */}
                 <div className="w-1/2 mt-4 p-4 text-center">
