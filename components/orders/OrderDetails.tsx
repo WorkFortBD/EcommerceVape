@@ -19,11 +19,6 @@ const OrderDetails = ({ orderID }) => {
     dispatch(getOrderDetails(manageOrder));
   }, []);
 
-  // const handleClick = (event) => {
-  //     setShowTooltip(!showTooltip);
-  //     setTarget(event.target);
-  // };
-  console.log('orderDetails', orderDetails)
   const getItemSubTotal = () => {
     let total = 0;
     if (orderDetails.sale_lines) {
@@ -58,7 +53,7 @@ const OrderDetails = ({ orderID }) => {
                       <h4 className="text-xl font-semibold mt-4">Discount</h4>
                       <p>{formatCurrency(orderDetails.discount_amount === null ? 0 : orderDetails.discount_amount)}</p>
                       <h4 className="text-xl font-semibold mt-4">Shipping Charge</h4>
-                      {/* You can add an input field for shipping charges here */}
+                      <p>{formatCurrency(orderDetails.shipping_charges)}</p>
                     </div>
 
                     <div className="bg-white p-4 rounded shadow-md">
@@ -82,7 +77,7 @@ const OrderDetails = ({ orderID }) => {
 
                     <div className="bg-white p-4 rounded shadow-md">
                       <div className='mb-4'>
-                        <a className='bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded inline-block' target="_blank" href={`${process.env.NEXT_PUBLIC_API_URL}invoice/${orderDetails.id}`}>
+                        <a className='bg-red-200 hover:bg-gray-300 text-red-700 py-2 px-4 rounded inline-block' target="_blank" href={`${process.env.NEXT_PUBLIC_API_URL}invoice/${orderDetails.id}`}>
                           Download Invoice
                         </a>
                       </div>

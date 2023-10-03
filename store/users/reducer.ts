@@ -4,9 +4,11 @@ import * as Types from "./type";
 
 const initialState = {
   userData    : null,
+  userAddress    : [],
   access_token: null,
   isLogOut    : false,
   isLoggedIn  : false,
+  isLoading:false
 };
 
 const UserDataReducer = (state = initialState, action:IAction) => {
@@ -17,6 +19,14 @@ const UserDataReducer = (state = initialState, action:IAction) => {
         userData    : action.payload.userData,
         access_token: action.payload.access_token,
         redirectTo  : action.payload.redirectTo,
+      };
+
+      case Types.GET_USER_ADDRESS_DATA:
+        console.log('action.payload', action.payload)
+      return {
+        ...state,
+        userAddress: action.payload.data,
+        isLoading: action.payload.isLoading
       };
     case Types.LOGOUT_USER:
       return {
