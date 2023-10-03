@@ -37,7 +37,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
               </h6>
               <p className="text-secondary">
                 Placed on{" "}
-                {dayjs(item.transaction_date).format("dddd, MMMM Do YYYY")}
+                {dayjs(item.transaction_date).format("dddd, MMMM DD YYYY")}
               </p>
             </>
           )}
@@ -113,7 +113,7 @@ const SingleOrder = ({ item, isManageable = true }) => {
                         <p className="text-success">
                           Estimated Delivery By{" "}
                           {dayjs(product.approx_delivery_date).format(
-                            "dddd, MMMM Do YYYY"
+                            "dddd, MMMM DD YYYY"
                           )}
                         </p>
                       </div>

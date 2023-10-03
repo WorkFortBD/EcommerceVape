@@ -140,6 +140,7 @@ export const getUserOrderList = (value = 5) => (dispatch) => {
 
   Axios.get(orderListURL)
   .then((res) => {
+    console.log('orderResponse', res)
     responseData.orderList = res.data.data.data;
     responseData.status    = true;
     responseData.isLoading = false;

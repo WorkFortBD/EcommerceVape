@@ -78,7 +78,7 @@ export default function Header() {
     router.push(
       `/products?${categoryType}=${encodeURIComponent(
         category.short_code
-      )}&name=${encodeURIComponent(category.name)}&filter=paginate_no__40`
+      )}`
     )
       .then(_ => window.scrollTo(0, 0)); // added "name" query param only for collect category name from url on product page
   };
@@ -238,7 +238,9 @@ export default function Header() {
                     trigger="click"
                     inline={true}
                     label={
-                      <span className="text-primary uppercase hover:text-primary-light text-navbar">
+                      <span className="text-primary uppercase hover:text-primary-light text-navbar"
+                      onClick={() =>
+                        clickMenuLink(category, false)}>
                         {category.name}
                       </span>
                     }

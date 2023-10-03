@@ -11,6 +11,7 @@ export default function MyOrder({}: Props) {
 
   const dispatch = useDispatch();
   const { orderList, isLoading } = useSelector((state) => state.order);
+  console.log('orderList', orderList)
   useEffect(() => {
     dispatch(getUserOrderList(5))
 }, [])

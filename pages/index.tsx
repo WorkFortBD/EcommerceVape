@@ -24,21 +24,26 @@ const Home: NextPage = () => {
   useEffect(() => {
   }, []);
   return (
-    <Layout title={content.name}>
+    <>
+      <Layout title={content.name}>
       <Head>
         <link rel="canonical" href="https://vapestoreksa.com" />
+        <meta property="og:title" content={content.name} />
+        <meta property="og:description" content={content.meta_description} />
+        <meta property="og:image" content={content.logo} />
       </Head>
-      <Slider />
-      <CategoryComponent />
-      <FlashDeals />
-      <HomeStaticBanner pageSlug="homepage-banner" />
-      <HomeCategoryProduct categorySlug='vape' />
-      <HomeCategoryProduct categorySlug='e-juice' />
-      <HomeCategoryProduct categorySlug='accessories' />
-      <HomeProductFilter />
-      <BrandList />
+        <Slider />
+        <CategoryComponent />
+        <FlashDeals />
+        <HomeStaticBanner pageSlug="homepage-banner" />
+        <HomeCategoryProduct categorySlug='vape' />
+        <HomeCategoryProduct categorySlug='e-juice' />
+        <HomeCategoryProduct categorySlug='accessories' />
+        <HomeProductFilter />
+        <BrandList />
 
-    </Layout>
+      </Layout>
+    </>
   );
 };
 
