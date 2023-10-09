@@ -105,7 +105,7 @@ const CategoryWiseProductList = ({
   };
 
   const rowClasses = classNames({
-    "flex flex-col md:flex-row flex-wrap p-px place-content-center": true,
+    "flex flex-col md:flex-row flex-wrap place-content-center": true,
     "no-gutters": isMobile,
   });
 
@@ -124,19 +124,19 @@ const CategoryWiseProductList = ({
   return (
     <>
       <div className="flex flex-col md:flex-row justify-content-between">
-        <div>
+        <div className="md:w-1/4">
           <Sidebar filterParams={filterParams} />
         </div>
         <section className="container mx-auto category_wise_product_list ">
-          <div className="flex flex-col md:flex-row justify-content-between my-2 my-md-4">
-            <div className="grid grid-cols-5 md:basis-1/2 ml-12 ">
-              <div className="category_wise_product_list_heading">
-                <h5 className="category-search-title ml-10 font-bold text-lg">
+          <div className="flex flex-col my-2 my-md-4">
+            <div className="md:w-1/2">
+              <div className="category_wise_product_list_heading ml-2">
+                <h5 className="category-search-title font-bold text-lg">
                   {!isLoading && title && title.replace(/-/g, " ")}
                   {!isLoading && !title && "All products"}
                 </h5>
               </div>
-              <p className="font-light flex justify-center items-center md:ml-10">
+              <p className="font-light text-center md:text-left">
                 {!isLoading &&
                   title &&
                   (paginate.total !== null ? paginate.total : "0") +
@@ -147,17 +147,16 @@ const CategoryWiseProductList = ({
                   " products found"}
               </p>
             </div>
-            <div className="md:basis-1/2 col-lg-6 col-sm-12 px-1 px-md-3">
-              <div className="grid grid-cols-3 p-0 d-flex justify-content-start justify-content-sm-end">
+            <div className="md:w-1/2 col-lg-6 col-sm-12 px-1 px-md-3">
+              <div className="grid grid-cols-3 p-0 justify-center md:justify-end">
                 <div
-                  className="filter_view mr-2 d-flex align-items-center"
+                  className="filter_view mr-2 md:mr-0 d-flex align-items-center"
                   onClick={() => showFilterHandler()}
                 >
                   <div className="product-filter">
                     <button
                       onClick={sidebarModal}
-                      className="transition ml-20 mt-5 h-12 text-sm hover:text-primary-light font-bold border border-solid py-2 px-4 rounded"
-                    // style={{ marginRight: "5px" }}
+                      className="ml-2 mt-5 md:mt-0 h-12 text-sm hover:text-primary-light font-bold border border-solid py-2 px-4 rounded"
                     >
                       Filter
                     </button>
@@ -173,10 +172,7 @@ const CategoryWiseProductList = ({
                       <Form.Group controlId="exampleFormSelectCustom">
                         <Form.Control
                           className="block w-full h-12 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-                          defaultValue={checkOptionValue(
-                            filterParams,
-                            "sort by"
-                          )}
+                          defaultValue={checkOptionValue(filterParams, "sort by")}
                           onChange={selectHandler}
                           as="select"
                           custom
@@ -211,10 +207,7 @@ const CategoryWiseProductList = ({
                       <Form.Group controlId="exampleFormSelectCustom">
                         <Form.Control
                           className="block w-20 h-12 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-                          defaultValue={checkOptionValue(
-                            filterParams,
-                            "per page"
-                          )}
+                          defaultValue={checkOptionValue(filterParams, "per page")}
                           onChange={perPageHandler}
                           as="select"
                           custom
@@ -230,18 +223,18 @@ const CategoryWiseProductList = ({
               </div>
             </div>
           </div>
+
           <div className="mt-6">
             <div className="flex flex-col">
-              {isLoading && (
-                <ShimmerEffect />
-              )}
+              {isLoading && <ShimmerEffect />}
             </div>
             <div className={rowClasses}>
-              {!isLoading && <CategoryWiseMiniProduct columns="col-md-3" />}
+              {!isLoading && <CategoryWiseMiniProduct columns="col-md-6" />}
             </div>
           </div>
         </section>
       </div>
+
     </>
   );
 };

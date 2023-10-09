@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getCategoriesAction } from "../../store/layouts/action";
+import {getCategoriesHomepageAction } from "../../store/layouts/action";
 import { IRootReducer } from "../../interfaces/reducers";
 import { useRouter } from "next/router";
 
@@ -10,11 +10,12 @@ interface Props { }
 export const CategoryComponent = ({ }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { categories } = useSelector((state: IRootReducer) => state.layout);
+  const { categoriesHome } = useSelector((state: IRootReducer) => state.layout);
+  let categories=categoriesHome;
 
   useEffect(() => {
     if (categories.length === 0) {
-      dispatch(getCategoriesAction());
+      dispatch(getCategoriesHomepageAction());
     }
   }, []);
 

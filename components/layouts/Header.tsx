@@ -32,7 +32,7 @@ export default function Header() {
   const { categories } = useSelector((state: IRootReducer) => state.layout);
   const { totalQuantity } = useSelector((state: IRootReducer) => state.carts);
   const signIn = useSelector((state: IRootReducer) => state.auth.isSignedIn);
-  const {isSearchModalOpen } = useSelector((state:IRootReducer) => state.products);
+  const { isSearchModalOpen } = useSelector((state: IRootReducer) => state.products);
   const { userData } = useSelector((state) => state.user);
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -62,7 +62,7 @@ export default function Header() {
   }
 
   const openProductSearchModal = () => {
-    dispatch(searchProductAction('search',true));
+    dispatch(searchProductAction('search', true));
   }
 
   const clickMenuLink = (category, toggleBackdrop, isMainCategory = false) => {
@@ -86,10 +86,10 @@ export default function Header() {
   return (
     <header>
       {isSearchModalOpen &&
-      <ProductSearchModal />
+        <ProductSearchModal />
       }
       <div
-        className={`navbar-main-area bg-white shadow ${barVisibility ? "fixed-nav" : "not-fixed-nav"
+        className={`navbar-main-area bg-white shadow ${barVisibility ? 'fixed-nav' : 'not-fixed-nav'
           }`}
       >
         <div className="container mx-auto">
@@ -111,7 +111,7 @@ export default function Header() {
                 label={
                   <Avatar
                     alt="User settings"
-                    img={userData.avatar != null ? userData.avatar:"https://flowbite.com/docs/images/people/profile-picture-5.jpg"}
+                    img={userData.avatar != null ? userData.avatar : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"}
                     rounded={true}
                   />
                 }
@@ -170,7 +170,7 @@ export default function Header() {
             <Navbar.Collapse>
               <Navbar.Link href="/" active={true}>
                 <Link href="/">
-                  <span className="transition uppercase text-primary hover:text-primary-light text-navbar">
+                  <span className="transition uppercase text-primary hover:text-primary-light text-lg font-bold">
                     HOME
                   </span>
                 </Link>
@@ -181,7 +181,7 @@ export default function Header() {
                 trigger="click"
                 inline={true}
                 label={
-                  <span className="text-primary hover:text-primary-light text-navbar">
+                  <span className="text-primary hover:text-primary-light text-lg font-bold ml-3">
                     SHOP
                   </span>
                 }
@@ -194,7 +194,7 @@ export default function Header() {
                         trigger="click"
                         inline={true}
                         label={
-                          <span className="text-primary uppercase hover:text-primary-light text-navbar">
+                          <span className="text-primary uppercase hover:text-primary-light text-lg">
                             {category.name} Hello
                           </span>
                         }
@@ -202,7 +202,7 @@ export default function Header() {
                         {category.childs.map((cl, index2: number) => (
                           <Dropdown.Item key={index2}>
                             <Link href="#">
-                              <span className="text-primary hover:text-primary-light text-navbar"
+                              <span className="text-primary hover:text-primary-light text-lg font-bold"
                                 onClick={() =>
                                   clickMenuLink(cl, false)}>
                                 {cl.name}
@@ -218,7 +218,7 @@ export default function Header() {
 
               <Navbar.Link href="/">
                 <Link href="/products" className="uppercase">
-                  <span className="transition uppercase text-primary hover:text-primary-light text-navbar">
+                  <span className="text-primary text-lg hover:text-primary-light font-bold">
                     PRODUCTS
                   </span>
                 </Link>
@@ -226,7 +226,7 @@ export default function Header() {
 
               <Navbar.Link href="/">
                 <Link href="/categories" className="uppercase">
-                  <span className="transition uppercase text-primary hover:text-primary-light text-navbar">
+                  <span className="transition uppercase text-primary hover:text-primary-light text-lg font-bold">
                     SHOP PACKAGES
                   </span>
                 </Link>
@@ -238,9 +238,9 @@ export default function Header() {
                     trigger="click"
                     inline={true}
                     label={
-                      <span className="text-primary uppercase hover:text-primary-light text-navbar"
-                      onClick={() =>
-                        clickMenuLink(category, false)}>
+                      <span className="transition uppercase text-primary uppercase hover:text-primary-light text-lg font-bold"
+                        onClick={() =>
+                          clickMenuLink(category, false)}>
                         {category.name}
                       </span>
                     }
@@ -248,7 +248,7 @@ export default function Header() {
                     {category.childs.map((cl, index) => (
                       <Dropdown.Item>
                         <Link href="#">
-                          <span className="text-primary hover:text-primary-light text-navbar"
+                          <span className="text-primary hover:text-primary-light text-navbar font-bold"
                             onClick={() =>
                               clickMenuLink(cl, false)}>
                             {cl.name}
