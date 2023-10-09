@@ -11,4 +11,5 @@ export interface ILayoutReducer {
     categories: Array<ICategory>,
     category:ICategory,
     categoryLoading:boolean
+    categoriesHome:Array<ICategory>
 }

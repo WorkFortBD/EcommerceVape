@@ -28,8 +28,9 @@ const Sidebar = (filterParams) => {
   }
 
   return (
-    <div className="flex h-screen">
-      <div className="bg-slate-50 w-64 p-4">
+    <div className="flex flex-col md:flex-row h-screen">
+      {/* Sidebar */}
+      <div className="bg-slate-50 w-full md:w-64 p-2">
         <h1 className="text-xl font-bold mb-4">Filter</h1>
         <div className="my-4">
           <label className="block text-sm font-bold text-lg">Price Range</label>
@@ -47,9 +48,9 @@ const Sidebar = (filterParams) => {
           </div>
         </div>
       </div>
-      <div className="flex-1">
-      </div>
     </div>
+
+
   );
 };
 

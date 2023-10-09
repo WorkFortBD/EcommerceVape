@@ -5,14 +5,15 @@ import * as Types from "./type";
 
 const initialState: ILayoutReducer = {
     categories: [],
+    categoriesHome:[],
     category: {
         name: '',
         banner: '',
-        parent_id:0,
-        short_code:'',
-        image:'',
+        parent_id: 0,
+        short_code: '',
+        image: '',
     },
-    categoryLoading:false
+    categoryLoading: false
 };
 
 
@@ -23,6 +24,13 @@ const LayoutReducer = (state = initialState, action: IAction) => {
             return {
                 ...state,
                 categories: action.payload.data,
+                categoryLoading: action.payload.loading
+            };
+
+        case Types.GET_CATEGORIES_HOMEPAGE:
+            return {
+                ...state,
+                categoriesHome: action.payload.data,
                 categoryLoading: action.payload.loading
             };
 
