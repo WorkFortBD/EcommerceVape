@@ -3,6 +3,7 @@ import Link from "next/link";
 import DOMPurify from "dompurify";
 import { useRouter} from "next/router";
 import { Accordion } from "flowbite-react";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
@@ -12,6 +13,8 @@ import { formatCurrency } from "../../utils/currency";
 import { IProduct } from "../../interfaces/products";
 import { CartButton } from "../carts/CartButton";
 import { onClickWhatsAppButton } from "../whatsapp-button";
+import { updateCartQtyAction } from "../../store/cart/action";
+import { toast } from 'react-toastify';
 
 type Props = {
   product: IProduct;
@@ -19,9 +22,11 @@ type Props = {
 
 export default function ProductDetails({ product }: Props) {
   const router = useRouter();
+  const dispatch = useDispatch();
   const currentUrl = `${window.location.origin}${router.asPath}`;
   const attributes = product.item_attributes_by_value[0]?.values.attribute_values_data;
   const [clickedId, setClickedId] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   const toggleClick = (attribute:object) => {
     if (attribute.id === clickedId) {
@@ -39,6 +44,15 @@ export default function ProductDetails({ product }: Props) {
   //     </span>
   //   );
   // }
+
+  const updateQuantity = (quantity: number) => {
+    if(quantity >= product.current_stock){
+      toast.error('Product Out Stock');
+    }else{
+      setQuantity(quantity);
+    }
+    
+  }
   return (
     <section className="product-deatails-section">
       <div className="container mx-auto mt-2 p-5">
@@ -177,22 +191,23 @@ export default function ProductDetails({ product }: Props) {
               </a>
             </div> */}
             <div className="text-center mt-6">
-              {/* <p className="basis-1/2 font-size">
+              <p className="basis-1/2 font-size">
                 <button
                   className="border px-2 py-1 hover:bg-primary hover:text-white"
-                  disabled={cart.quantity <= 1 ? true : false}
-                  onClick={() => updateQuantity(cart.quantity - 1)}
+                  disabled={quantity <= 1 ? true : false}
+                  onClick={() => updateQuantity(quantity - 1)}
                 >
                   -
                 </button>
-                <span className="border px-2 py-1">{cart.quantity}</span>
+                <span className="border px-2 py-1">{quantity}</span>
                 <button
                   className="border px-2 py-1 hover:bg-primary hover:text-white"
-                  onClick={() => updateQuantity(cart.quantity + 1)}
+                  disabled={quantity >=product.current_stock?true:false}
+                  onClick={() => updateQuantity(quantity + 1)}
                 >
                   +
                 </button>
-              </p> */}
+              </p>
 
 
               <div className="p-4">
@@ -213,12 +228,9 @@ export default function ProductDetails({ product }: Props) {
                     </>
                   ))}
               </div>
-
-
-
             </div>
             <div className="text-center">
-              <CartButton product={product} />
+              <CartButton product={product} quantity={quantity} />
               &nbsp;&nbsp;&nbsp;&nbsp;
               <button className="bg-primary mt-6 rounded-md p-2 px-8 text-white" onClick={() => onClickWhatsAppButton(currentUrl)}>
                 Question?

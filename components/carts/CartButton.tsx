@@ -12,17 +12,18 @@ import { addToCartAction } from "../../store/cart/action";
 
 
 export interface ICartButtonProps {
-    product: IProduct
+    product: IProduct,
+    quantity:number
 }
 
-export function CartButton({ product }: ICartButtonProps) {
+export function CartButton({ product,quantity }: ICartButtonProps) {
     const dispatch = useDispatch();
 
     const addToCart = () => {
         if (parseInt(product.current_stock) === 0) {
             toast.error("Product is out of stock.");
         } else {
-            dispatch(addToCartAction(product));
+            dispatch(addToCartAction(product,quantity));
         }
     };
 
