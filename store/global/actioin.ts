@@ -135,3 +135,9 @@ export const subscribeNewsletter = (email) => async dispatch => {
       });
   }
 }
+
+
+export const showWhatAppButton = (data:any) => (dispatch) => {
+  let status =data;
+  dispatch({ type: types.SHOW_WHATSAPP_BUTTON, payload: status });
+}
