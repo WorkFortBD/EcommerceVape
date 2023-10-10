@@ -10,6 +10,7 @@ export interface IGlobalReducer {
   welcomePopup: boolean;
   websiteInfoLoading: boolean;
   isLoading:boolean;
+  isShowing:boolean;
   //   websiteInfo: IWebsiteData | null
 }
 
@@ -22,7 +23,8 @@ const initialState = {
   welcomePopup: false,
   websiteInfoLoading: true,
   websiteInfo: null,
-  isloading:false
+  isloading:false,
+  isShowing:false
 };
 
 const GlobalReducer = (state = initialState, { type, payload }) => {
@@ -49,6 +51,12 @@ const GlobalReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoading: payload.loading,
+      };
+
+      case types.SHOW_WHATSAPP_BUTTON:
+      return {
+        ...state,
+        isShowing: payload,
       };
 
     default:
