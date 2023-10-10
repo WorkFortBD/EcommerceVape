@@ -30,11 +30,10 @@ export const getCartsAction = () => async (dispatch) => {
  * 
  * @returns void Dispatch event `ADD_CART_DATA`
  */
-export const addToCartAction = (product, args = {}) => async (dispatch) => {
+export const addToCartAction = (product:any, detailsQuantity:number) => async (dispatch) => {
     const carts = getCartData();
     const attribute = getAttributeData();
-    console.log('attribute', attribute)
-    const quantity = typeof args['quantity'] !== 'undefined' ? args['quantity'] : 1;
+    const quantity = typeof detailsQuantity !== 'undefined' ? detailsQuantity: 1;
 
     // Check first if product is already added in the cart, then just update the quantity
     let isUpdateToProduct = false;
@@ -64,7 +63,6 @@ export const addToCartAction = (product, args = {}) => async (dispatch) => {
             isChecked: true, // By default item price will be added as checked
             additional: {}
         }
-
         carts.push(cartData);
     }
 
