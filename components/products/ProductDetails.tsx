@@ -15,6 +15,7 @@ import { CartButton } from "../carts/CartButton";
 import { onClickWhatsAppButton } from "../whatsapp-button";
 import { updateCartQtyAction } from "../../store/cart/action";
 import { toast } from 'react-toastify';
+import { Form } from "react-bootstrap";
 
 type Props = {
   product: IProduct;
@@ -28,15 +29,9 @@ export default function ProductDetails({ product }: Props) {
   const [clickedId, setClickedId] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
-  const toggleClick = (attribute: object) => {
-    if (attribute.id === clickedId) {
-      setClickedId(null);
-    } else {
+  const toggleClick = (attribute:object) => {
       localStorage.setItem('attribute', JSON.stringify(attribute));
-      setClickedId(attribute.id);
-    }
   };
-
   // const attributeSelect = (value, code, id) => {
   //   return (
   //     <span className="bg-gray-500 text-white px-2 py-1 rounded-lg cursor-pointer">
@@ -180,33 +175,26 @@ export default function ProductDetails({ product }: Props) {
                 </h3>
               )}
             </div>
-            {/* <div className="flex justify-between mt-4 p-4 border">
-              <a href="" className="text-gray-400 text-xs">
-                or 4 interest-free payments of
-                <b>111.25 SAR.</b>
-                <u>Learn more</u>
-              </a>
-              <a href="" className="bg-green-300 rounded">
-                tabby
-              </a>
-            </div> */}
             <div className="flex flex-col justify-center items-center">
               <div className="p-4">
-                {attributes &&
-                  attributes.map((attribute: any, index: number) => (
-                    <>
-                      <span
-                        key={index}
-                        onClick={() => toggleClick(attribute)}
-                        className={`px-2 py-1 rounded-lg cursor-pointer ${clickedId === attribute.id
-                          ? 'bg-gray-500 text-white border-black transform scale-105'
-                          : 'bg-primary text-white'
-                          }`}>
-                        {attribute.value + " " + attribute.code}
-                      </span>
-                      &nbsp;&nbsp;&nbsp;
-                    </>
-                  ))}
+                <>
+                  <Form>
+                      <Form.Control
+                        className="block w-full h-12 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                        // defaultValue={checkOptionValue(filterParams, "sort by")}
+                        as="select"
+                        custom
+                      >
+                        {attributes &&
+                          attributes.map((attribute: any, index: number) => (
+                            <option value={attribute.id} className="pb-4"  onClick={()=>toggleClick(attribute)}>
+                              {attribute.value}{" "}{attribute.code}
+                            </option>
+                          ))}
+                      </Form.Control>
+                  </Form>
+                </>
+
               </div>
               <div>
                 <div className="flex w-full items-center">
