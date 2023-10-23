@@ -7,7 +7,7 @@ import React, { ReactElement, useState } from "react";
 import { IProductImage } from "../../interfaces/products";
 
 interface Props {
-  productImage:IProductImage
+  productImage: IProductImage
 }
 
 export default function ProductDetailImages({ productImage }: Props): ReactElement {
@@ -31,21 +31,10 @@ export default function ProductDetailImages({ productImage }: Props): ReactEleme
   };
 
   return (
-    <div className="flex flex-wrap flex-1 group ">
-      <div className="basis-1/5">
-        {images && images.map((image, index) =>
-          <img
-            src={`${process.env.NEXT_PUBLIC_URL}images/products/`+image.image}
-            className="w-full h-[4.5rem] md:h-28 mb-2 cursor-pointer"
-            key={index}
-            onClick={() => setActiveImageIndex(index)}
-          />
-        )}
-      </div>
-
-      <div className="basis-4/5 relative">
-        <div className="absolute top-[45%] left-10">
-          <div className="bg-white  rounded-full w-10 h-10">
+    <div className="flex flex-wrap flex-1 group">
+      <div className="w-full md:w-4/5 relative">
+        <div className="absolute top-1/2 transform -translate-y-1/2 left-3 md:left-10">
+          <div className="bg-white rounded-full w-10 h-10">
             <FontAwesomeIcon
               icon={faChevronLeft}
               width={16}
@@ -57,15 +46,15 @@ export default function ProductDetailImages({ productImage }: Props): ReactEleme
 
         <div className="overflow-hidden">
           {images &&
-          <img
-          src={images[activeImageIndex] !==undefined?`${process.env.NEXT_PUBLIC_URL}images/products/`+images[activeImageIndex].image:`${process.env.NEXT_PUBLIC_URL}images/products/default.jpg`}
-          className="w-full transition-all mb-2 px-5"
-        />
+            <img
+              src={images[activeImageIndex] !== undefined ? `${process.env.NEXT_PUBLIC_URL}images/products/` + images[activeImageIndex].image : `${process.env.NEXT_PUBLIC_URL}images/products/default.jpg`}
+              className="w-full transition-all mb-2 px-5"
+            />
           }
-          
+
         </div>
 
-        <div className="absolute top-[45%] right-10">
+        <div className="absolute top-1/2 transform -translate-y-1/2 right-3 md:right-10">
           <div className="bg-white rounded-full w-10 h-10">
             <FontAwesomeIcon
               icon={faChevronRight}
@@ -76,6 +65,18 @@ export default function ProductDetailImages({ productImage }: Props): ReactEleme
           </div>
         </div>
       </div>
+
+      <div className="md:w-1/5 ml-5">
+        {images && images.map((image, index) =>
+          <img
+            src={`${process.env.NEXT_PUBLIC_URL}images/products/` + image.image}
+            className="w-full h-[4.5rem] md:h-28 mb-2 cursor-pointer"
+            key={index}
+            onClick={() => setActiveImageIndex(index)}
+          />
+        )}
+      </div>
     </div>
+
   );
 }

@@ -116,14 +116,6 @@ const CategoryWiseProductContainer = ({
 
   return (
     <>
-      {/* <Modal
-        visible={showFilter}
-        closeModalHandler={() => setShowFilter((preState) => !true)}
-        sideModal={true}
-      >
-        <ProductFilter show={true} />
-      </Modal> */}
-
       <section className="pt-2 pt-md-4">
         {(categoryBrandDetails.banner_url ||
           typeQuery === "masher-bazaar" ||

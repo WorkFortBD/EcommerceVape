@@ -27,28 +27,13 @@ export default function ProductDetailsModal() {
 
   return (
     <>
-      <div
-        className={`${isOpen ? "" : "hidden"
-          } fixed inset-0 z-10 h-full top-0 left-0 flex items-center justify-center overflow-y-auto bg-opacity-50 bg-transparent`}
-      >
+      <div className={`${isOpen ? "" : "hidden"} fixed inset-0 z-10 h-full top-0 left-0 flex items-center justify-center overflow-y-auto bg-opacity-50 bg-transparent`}>
         <div className="bg-white rounded-lg max-w-full overflow-hidden shadow-lg text-center sm:max-w-3xl sm:w-full relative">
-          <button
-            onClick={closeProductDetailModal}
-            className="absolute top-2 right-2 p-2 hover:bg-red-200 rounded-full"
-          >
-            <svg
-              className="h-6 w-6 text-red-700"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+          <button onClick={closeProductDetailModal} className="absolute top-2 right-2 p-2 hover:bg-red-200 rounded-full">
+            <svg className="h-6 w-6 text-red-700" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
               <path d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
-
           {productsLoading ? (
             <ProductSpinner />
           ) : (
@@ -57,34 +42,24 @@ export default function ProductDetailsModal() {
                 <ProductDetailImages productImage={product.images} />
                 <div className="flex justify-center w-full items-center mt-10">
                   <p>
-                    <Link
-                      href={`/products/${product.sku}`}
-                      className="transition-all bg-primary py-3 px-5 scale-90 hover:scale-100 rounded-md text-white"
-                    >
+                    <Link href={`/products/${product.sku}`} className="transition-all bg-primary py-3 px-5 scale-90 hover:scale-100 rounded-md text-white">
                       View Details
                     </Link>
                   </p>
                 </div>
               </div>
-
               <div className="w-full md:w-1/2 border shadow-md rounded-3xl my-5 p-6">
                 <div className="text-center">
                   <h1 className="text-3xl">{product.name}</h1>
                   <p className="text-primary mt-3 text-2xl">
                     {product.is_offer_enable ? (
                       <>
-                        <span className="text-primary line-through font-bold">
-                          {formatCurrency(product.default_selling_price)}
-                        </span>
+                        <span className="text-primary line-through font-bold">{formatCurrency(product.default_selling_price)}</span>
                         &nbsp;
-                        <span className="text-primary font-bold">
-                          {formatCurrency(product.offer_selling_price)}
-                        </span>
+                        <span className="text-primary font-bold">{formatCurrency(product.offer_selling_price)}</span>
                       </>
                     ) : (
-                      <span className="text-primary font-bold">
-                        {formatCurrency(product.default_selling_price)}
-                      </span>
+                      <span className="text-primary font-bold">{formatCurrency(product.default_selling_price)}</span>
                     )}
                   </p>
                   <h3 className="mt-2 text-gray-500 mt-3">
@@ -106,7 +81,6 @@ export default function ProductDetailsModal() {
                     </h3>
                   )}
                 </div>
-
                 <div className="text-center mt-6">
                   <CartButton product={product} />
                 </div>
@@ -127,6 +101,7 @@ export default function ProductDetailsModal() {
           )}
         </div>
       </div>
+
     </>
 
   );

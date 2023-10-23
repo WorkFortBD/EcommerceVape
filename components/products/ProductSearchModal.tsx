@@ -57,18 +57,18 @@ export default function ProductDetailsModal() {
                 <path d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
-            <div className="flex mt-0 flex-col md:flex-row mx-2 flex-wrap p-10 mb-10">
+            <div className="flex flex-col md:flex-row mx-2 md:mx-0 flex-wrap p-5 md:p-10 mb-5 md:mb-10">
               <input
-                className="w-3/4 border border-red-300 rounded-lg focus:outline-none focus:border-primary"
+                className="w-full md:w-3/4 border border-red-300 rounded-lg focus:outline-none focus:border-primary p-3"
                 type="text"
                 onChange={(e) => setSearchText(e.target.value)}
-                // onKeyDown={(e) => onKeyDownHandler(e.key)}
                 placeholder="Search..."
               />
-              <button className="ml-2 px-5 py-3 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none">
+              <button className="mt-2 md:mt-0 ml-0 md:ml-2 px-5 py-3 bg-primary text-white rounded-lg hover:bg-indigo-600 focus:outline-none">
                 Search
               </button>
             </div>
+
             {productsLoading == true ? <ProductSpinner />
               :
               (products.length > 0 ? (<div className="flex flex-row justify-center items-center flex-wrap">

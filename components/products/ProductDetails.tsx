@@ -1,7 +1,7 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import DOMPurify from "dompurify";
-import { useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { Accordion } from "flowbite-react";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,7 +28,7 @@ export default function ProductDetails({ product }: Props) {
   const [clickedId, setClickedId] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
-  const toggleClick = (attribute:object) => {
+  const toggleClick = (attribute: object) => {
     if (attribute.id === clickedId) {
       setClickedId(null);
     } else {
@@ -46,12 +46,12 @@ export default function ProductDetails({ product }: Props) {
   // }
 
   const updateQuantity = (quantity: number) => {
-    if(quantity >= product.current_stock){
+    if (quantity >= product.current_stock) {
       toast.error('Product Out Stock');
-    }else{
+    } else {
       setQuantity(quantity);
     }
-    
+
   }
   return (
     <section className="product-deatails-section">
@@ -190,55 +190,57 @@ export default function ProductDetails({ product }: Props) {
                 tabby
               </a>
             </div> */}
-            <div className="text-center mt-6">
-              <p className="basis-1/2 font-size">
-                <button
-                  className="border px-2 py-1 hover:bg-primary hover:text-white"
-                  disabled={quantity <= 1 ? true : false}
-                  onClick={() => updateQuantity(quantity - 1)}
-                >
-                  -
-                </button>
-                <span className="border px-2 py-1">{quantity}</span>
-                <button
-                  className="border px-2 py-1 hover:bg-primary hover:text-white"
-                  disabled={quantity >=product.current_stock?true:false}
-                  onClick={() => updateQuantity(quantity + 1)}
-                >
-                  +
-                </button>
-              </p>
-
-
+            <div className="flex flex-col justify-center items-center">
               <div className="p-4">
                 {attributes &&
-                  attributes.map((attribute:any, index:number) => (
+                  attributes.map((attribute: any, index: number) => (
                     <>
                       <span
-                      key={index} 
-                      onClick={() => toggleClick(attribute)} 
-                      className={`px-2 py-1 rounded-lg cursor-pointer ${
-                        clickedId === attribute.id
+                        key={index}
+                        onClick={() => toggleClick(attribute)}
+                        className={`px-2 py-1 rounded-lg cursor-pointer ${clickedId === attribute.id
                           ? 'bg-gray-500 text-white border-black transform scale-105'
                           : 'bg-primary text-white'
-                      }`}>
+                          }`}>
                         {attribute.value + " " + attribute.code}
                       </span>
                       &nbsp;&nbsp;&nbsp;
                     </>
                   ))}
               </div>
+              <div>
+                <div className="flex w-full items-center">
+                  <div className="flex sm:mb-0">
+                    <button
+                      className="border px-2 py-1 hover:bg-primary hover:text-white"
+                      disabled={quantity <= 1}
+                      onClick={() => updateQuantity(quantity - 1)}
+                    >
+                      -
+                    </button>
+                    <span className="border px-2 py-1">{quantity}</span>
+                    <button
+                      className="border px-2 py-1 hover:bg-primary hover:text-white"
+                      disabled={quantity >= product.current_stock}
+                      onClick={() => updateQuantity(quantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <CartButton product={product} quantity={quantity} />
+                </div>
+              </div>
+
+
+              <div className="mt-6">
+                <button className="bg-primary rounded-md p-2 px-8 text-white" onClick={() => onClickWhatsAppButton(currentUrl)}>
+                  Question? <FontAwesomeIcon icon={faPhone} style={{ width: 14 }} />
+                </button>
+              </div>
             </div>
-            <div className="text-center">
-              <CartButton product={product} quantity={quantity} />
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <button className="bg-primary mt-6 rounded-md p-2 px-8 text-white" onClick={() => onClickWhatsAppButton(currentUrl)}>
-                Question?
-                <span className="inline-block ml-2">
-                  <FontAwesomeIcon icon={faPhone} style={{ width: 14 }} />
-                </span>
-              </button>
-            </div>
+
+
+
             <span></span>
             <div className="text-center mt-5">
               {/* <h3>
